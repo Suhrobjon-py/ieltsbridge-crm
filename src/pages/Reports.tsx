@@ -24,6 +24,8 @@ export default function Reports() {
   const [expenses, setExpenses] = useState<any[]>([]);
   const [students, setStudents] = useState<any[]>([]);
   const [teachers, setTeachers] = useState<any[]>([]);
+  const [leads, setLeads] = useState<any[]>([]);
+  const [levents, setLevents] = useState<any[]>([]);
   const [yuklandi, setYuklandi] = useState(false);
   const [kalkTeacher, setKalkTeacher] = useState('');
   const [kalkCount, setKalkCount] = useState<number | null>(null);
@@ -42,6 +44,12 @@ export default function Reports() {
     setExpenses(e.data ?? []);
     setStudents(st.data ?? []);
     setTeachers(t.data ?? []);
+    const [l, lev] = await Promise.all([
+      supabase.from('leads').select('id, manager, status, created_at, next_followup_at'),
+      supabase.from('lead_events').select('lead_id, event_type, created_at').in('event_type', ['qongiroq', 'sms']),
+    ]);
+    setLeads(l.data ?? []);
+    setLevents(lev.data ?? []);
     setYuklandi(true);
   }
   useEffect(() => { load(); }, []);
@@ -199,6 +207,8 @@ export default function Reports() {
           </div>
         </div>
 
+        <ManagerPanel leads={leads} levents={levents} />
+
         <div className="card">
           <h2>Oyma-oy jadval</h2>
           <table>
@@ -272,6 +282,70 @@ export default function Reports() {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+// ==================== MENEJER SAMARADORLIGI ====================
+
+const IDX = ['yangi', 'birinchi_aloqa', 'boglanib_bolmadi', 'aloqa_ornatildi', 'qiziqish_bildirdi', 'sinovga_yozildi', 'sinovga_keldi', 'taklif_berildi', 'qaror_kutilmoqda', 'sotuv_yopildi'];
+
+function ManagerPanel({ leads, levents }: { leads: any[]; levents: any[] }) {
+  const managers = [...new Set(leads.map((l) => l.manager).filter(Boolean))].sort() as string[];
+  if (managers.length === 0) return null;
+
+  const birinchiAloqa: Record<string, number[]> = {};
+  for (const ev of levents) {
+    const lead = leads.find((l) => l.id === ev.lead_id);
+    if (!lead?.manager) continue;
+    const soat = (new Date(ev.created_at).getTime() - new Date(lead.created_at).getTime()) / 3600000;
+    if (soat >= 0) {
+      birinchiAloqa[lead.id] = birinchiAloqa[lead.id] ?? [];
+      birinchiAloqa[lead.id].push(soat);
+    }
+  }
+
+  const qatorlar = managers.map((m) => {
+    const ml = leads.filter((l) => l.manager === m);
+    const aloqa = ml.filter((l) => IDX.indexOf(l.status) >= 1 || l.status === 'rad_etdi').length;
+    const trial = ml.filter((l) => IDX.indexOf(l.status) >= 5).length;
+    const keldi = ml.filter((l) => IDX.indexOf(l.status) >= 6).length;
+    const sotuv = ml.filter((l) => l.status === 'sotuv_yopildi').length;
+    const lost = ml.filter((l) => l.status === 'rad_etdi').length;
+    const javoblar = ml.map((l) => Math.min(...(birinchiAloqa[l.id] ?? [Infinity]))).filter((x) => Number.isFinite(x));
+    const avgJavob = javoblar.length ? javoblar.reduce((s, x) => s + x, 0) / javoblar.length : null;
+    return { m, jami: ml.length, aloqa, trial, keldi, sotuv, lost, avgJavob, conv: ml.length ? Math.round((100 * sotuv) / ml.length) : 0 };
+  });
+
+  function insight(q: (typeof qatorlar)[0]): string {
+    if (q.jami < 3) return "Ma'lumot hali kam";
+    const trialConv = q.aloqa ? q.trial / q.aloqa : 0;
+    const saleConv = q.keldi ? q.sotuv / q.keldi : 0;
+    if (q.avgJavob !== null && q.avgJavob <= 6 && trialConv < 0.4) return "Tez bog'lanadi, lekin sinovga yozish konversiyasi past — suhbat skriptini kuchaytirish kerak";
+    if (trialConv >= 0.5 && saleConv < 0.5) return "Sinovga ko'p olib kelmoqda, lekin sotuvni yopish past — taklif/follow-up bosqichida yordam kerak";
+    if (q.avgJavob !== null && q.avgJavob > 24) return 'Birinchi javob juda kech (24+ soat) — yangi lidlar sovub qolmoqda';
+    if (q.conv >= 25) return "Kuchli ko'rsatkich — tajribasini boshqalarga ulashish mumkin";
+    return 'Barqaror ishlayapti';
+  }
+
+  return (
+    <div className="card">
+      <h2>Menejerlar samaradorligi</h2>
+      <table>
+        <thead><tr><th>Menejer</th><th>Lidlar</th><th>Aloqa</th><th>Trial</th><th>Keldi</th><th>Sotuv</th><th>Yo'qotilgan</th><th>Konv.</th><th>O'rt. 1-javob</th><th>Insight</th></tr></thead>
+        <tbody>
+          {qatorlar.map((q) => (
+            <tr key={q.m}>
+              <td><b>{q.m}</b></td>
+              <td>{q.jami}</td><td>{q.aloqa}</td><td>{q.trial}</td><td>{q.keldi}</td>
+              <td><b>{q.sotuv}</b></td><td className="red">{q.lost}</td>
+              <td><b>{q.conv}%</b></td>
+              <td>{q.avgJavob === null ? '—' : q.avgJavob < 1 ? `${Math.round(q.avgJavob * 60)} daq` : `${Math.round(q.avgJavob)} soat`}</td>
+              <td className="small muted">{insight(q)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

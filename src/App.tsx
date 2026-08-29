@@ -16,6 +16,8 @@ import Payments from './pages/Payments';
 import Expenses from './pages/Expenses';
 import Reports from './pages/Reports';
 import Rooms from './pages/Rooms';
+import Trials from './pages/Trials';
+import Problems from './pages/Problems';
 
 export default function App() {
   if (!configured) return <Setup />;
@@ -49,13 +51,18 @@ function AuthedApp() {
         <aside className="sidebar">
           <div className="logo">IELTS<span>Bridge</span><small>CRM</small></div>
           <nav>
+            <span className="nav-sec">SOTUV</span>
             <NavLink to="/" end>Boshqaruv</NavLink>
             <NavLink to="/lidlar">Lidlar</NavLink>
+            <NavLink to="/sinovlar">Sinov darslari</NavLink>
+            <NavLink to="/muammolar">Muammolar</NavLink>
+            <span className="nav-sec">O'QUV</span>
             <NavLink to="/oquvchilar">O'quvchilar</NavLink>
             <NavLink to="/guruhlar">Guruhlar</NavLink>
             <NavLink to="/xonalar">Xonalar</NavLink>
-            <NavLink to="/tolovlar">To'lovlar</NavLink>
             <NavLink to="/oqituvchilar">O'qituvchilar</NavLink>
+            <span className="nav-sec">MOLIYA</span>
+            <NavLink to="/tolovlar">To'lovlar</NavLink>
             <NavLink to="/xarajatlar">Xarajatlar</NavLink>
             <NavLink to="/hisobotlar">Hisobotlar</NavLink>
           </nav>
@@ -75,6 +82,8 @@ function AuthedApp() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/lidlar" element={<Leads />} />
+            <Route path="/sinovlar" element={<Trials />} />
+            <Route path="/muammolar" element={<Problems />} />
             <Route path="/oquvchilar" element={<Students />} />
             <Route path="/oquvchilar/:id" element={<StudentDetail />} />
             <Route path="/guruhlar" element={<Groups />} />

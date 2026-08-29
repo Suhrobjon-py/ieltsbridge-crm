@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { som, sana, holat } from '../lib/format';
+import { som, sana, holat, riskHolat, CHURN_SABABLAR } from '../lib/format';
 import Modal from '../components/Modal';
 import Badge from '../components/Badge';
 import Confirm from '../components/Confirm';
@@ -26,6 +26,9 @@ export default function StudentDetail() {
   const [tanlanganGuruh, setTanlanganGuruh] = useState('');
   const [chegirma, setChegirma] = useState(0);
   const [gXato, setGXato] = useState('');
+  const [churnModal, setChurnModal] = useState(false);
+  const [churnSabab, setChurnSabab] = useState('');
+  const [riskRows, setRiskRows] = useState<any[]>([]);
 
   async function load() {
     const [st, en, pay, pr, ar, lv] = await Promise.all([
@@ -42,12 +45,30 @@ export default function StudentDetail() {
     setProgress(pr.data ?? []);
     setNatijalar(ar.data ?? []);
     setLevels(lv.data ?? []);
+    supabase.from('v_student_risk').select('*').eq('student_id', id).then(({ data }) => setRiskRows(data ?? []));
   }
   useEffect(() => { load(); }, [id]);
 
   async function holatOzgar(status: string) {
+    if (status === 'ketgan') {
+      setChurnSabab('');
+      setChurnModal(true);
+      return;
+    }
     await supabase.from('students').update({ status }).eq('id', id);
     setS({ ...s, status });
+  }
+
+  async function churnSaqla(e: React.FormEvent) {
+    e.preventDefault();
+    if (!churnSabab) return;
+    const { error } = await supabase.from('students').update({
+      status: 'ketgan', churn_reason: churnSabab,
+      churned_at: new Date().toISOString().slice(0, 10),
+    }).eq('id', id);
+    if (error) return alert('Xato: ' + error.message);
+    setChurnModal(false);
+    load();
   }
 
   function tahrirOch() {
@@ -144,6 +165,19 @@ export default function StudentDetail() {
           <div className="kv"><span>Joriy bosqich</span><b>{s.current_level_code ?? '—'}</b></div>
           <div className="kv"><span>Kelgan sana</span><b>{sana(s.joined_at)}</b></div>
           {s.note && <div className="kv"><span>Izoh</span><b>{s.note}</b></div>}
+          {riskRows.length > 0 && (() => {
+            const r = riskRows.reduce((m, x) => (x.score < m.score ? x : m), riskRows[0]);
+            const h = riskHolat(r.score);
+            return (
+              <div className="kv"><span>Risk Score</span>
+                <b><span className={'badge badge-' + h.rang}>{r.score} · {h.label}</span>
+                {r.score < 70 && <span className="muted small"> ({r.kelmagan_14} qoldirish/14k{r.qarz_bor ? ' · qarz bor' : ''}{r.ketma_ket ? ` · ${r.ketma_ket} ketma-ket` : ''})</span>}</b>
+              </div>
+            );
+          })()}
+          {s.status === 'ketgan' && (
+            <div className="kv"><span>Churn</span><b className="red">{s.churn_reason ? holat(s.churn_reason) : '—'} · {sana(s.churned_at)}{s.winback ? ` · Win-back: ${holat(s.winback)}` : ''}</b></div>
+          )}
         </div>
 
         <div className="card">
@@ -257,6 +291,21 @@ export default function StudentDetail() {
             </label>
             {tXato && <div className="err span2">{tXato}</div>}
             <button className="btn span2">Saqlash</button>
+          </form>
+        </Modal>
+      )}
+
+      {churnModal && (
+        <Modal title={`O'quvchi ketmoqda — ${s.first_name} ${s.last_name}`} onClose={() => setChurnModal(false)}>
+          <form onSubmit={churnSaqla} className="form-grid">
+            <label className="span2">Ketish sababi (majburiy)
+              <select value={churnSabab} onChange={(e) => setChurnSabab(e.target.value)} required>
+                <option value="">— Tanlang —</option>
+                {CHURN_SABABLAR.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+              </select>
+            </label>
+            <p className="muted small span2">Sabab churn analitikasiga saqlanadi; o'quvchi "Ketganlar / Win-back" ro'yxatiga tushadi — u yerdan qaytarish jarayonini yuritasiz.</p>
+            <button className="btn span2" disabled={!churnSabab}>Saqlash</button>
           </form>
         </Modal>
       )}

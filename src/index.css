@@ -1,17 +1,18 @@
 :root {
-  --navy: #1f3864;
-  --navy-dark: #14243f;
-  --navy-light: #2c4d85;
+  --navy: #0f172a;
+  --navy-dark: #0f172a;
+  --navy-light: #2563eb;
   --gold: #e8b84b;
-  --bg: #f4f6fa;
+  --bg: #f8fafc;
   --card: #ffffff;
   --line: #e2e8f0;
-  --text: #1a2333;
+  --text: #0f172a;
   --muted: #64748b;
-  --green: #16a34a;
-  --amber: #d97706;
-  --red: #dc2626;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
   --blue: #2563eb;
+  --primary: #2563eb;
 }
 
 * { box-sizing: border-box; margin: 0; }
@@ -94,10 +95,10 @@ input:focus, select:focus { outline: 2px solid rgba(44,77,133,.35); border-color
 
 /* ---------- tugmalar ---------- */
 .btn {
-  background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 9px 16px;
+  background: var(--primary); color: #fff; border: none; border-radius: 10px; padding: 9px 16px;
   font: inherit; font-weight: 600; cursor: pointer;
 }
-.btn:hover { background: var(--navy-light); }
+.btn:hover { background: #1d4ed8; }
 .btn:disabled { opacity: .6; cursor: default; }
 .btn-sm {
   background: #eef2f9; color: var(--navy); border: 1px solid #c9d6ec; border-radius: 7px;
@@ -162,6 +163,88 @@ input:focus, select:focus { outline: 2px solid rgba(44,77,133,.35); border-color
 }
 .kalk-total { font-size: 18px; font-weight: 800; color: var(--navy); }
 .logout { display: inline-flex; align-items: center; gap: 7px; }
+
+/* ---------- KANBAN PIPELINE ---------- */
+.filter-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.nav-sec { font-size: 10px; letter-spacing: 2px; color: #64748b; padding: 12px 12px 4px; font-weight: 700; }
+.kanban { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 14px; align-items: flex-start; }
+.kcol {
+  min-width: 240px; width: 240px; flex-shrink: 0; background: #eef2f7;
+  border: 1px solid var(--line); border-radius: 12px;
+}
+.kcol-win { background: #ecfdf5; border-color: #bbf7d0; }
+.kcol-lost { background: #fef2f2; border-color: #fecaca; }
+.kcol-head {
+  padding: 9px 12px; font-size: 12px; font-weight: 700; letter-spacing: .3px;
+  color: #334155; display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid var(--line);
+}
+.kcol-n { margin-left: auto; background: #fff; border-radius: 10px; padding: 1px 8px; font-size: 11px; color: var(--muted); }
+.kcol-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; min-height: 60px; max-height: 62vh; overflow-y: auto; }
+.kcol-bosh { color: #94a3b8; font-size: 12px; text-align: center; padding: 14px 0; border: 1px dashed #cbd5e1; border-radius: 8px; }
+.kcard {
+  background: #fff; border-radius: 10px; padding: 10px 11px; cursor: grab;
+  box-shadow: 0 1px 2px rgba(15,23,42,.07); border-left: 4px solid #22c55e;
+  font-size: 12.5px;
+}
+.kcard:hover { box-shadow: 0 3px 10px rgba(15,23,42,.13); }
+.kcard.sig-green { border-left-color: #22c55e; }
+.kcard.sig-yellow { border-left-color: #eab308; }
+.kcard.sig-orange { border-left-color: #f59e0b; }
+.kcard.sig-red { border-left-color: #ef4444; }
+.kcard-top { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.avatar {
+  width: 26px; height: 26px; border-radius: 50%; background: #e0e9fb; color: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; flex-shrink: 0; text-transform: uppercase;
+}
+.pri { width: 9px; height: 9px; border-radius: 50%; margin-left: auto; flex-shrink: 0; }
+.pri-yuqori { background: #ef4444; }
+.pri-orta { background: #f59e0b; }
+.pri-past { background: #cbd5e1; }
+.kcard-line { margin: 3px 0; display: flex; gap: 5px; flex-wrap: wrap; }
+.chip { background: #f1f5f9; border-radius: 6px; padding: 1px 7px; font-size: 11px; color: #475569; font-weight: 600; }
+.chip-src { background: #e0e9fb; color: #1d4ed8; }
+.kcard-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; margin-top: 5px; }
+.kcard-fup { margin-top: 5px; font-size: 11px; color: #475569; }
+.kcard-fup.kech { color: #b91c1c; font-weight: 700; }
+
+/* ---------- timeline / detal ---------- */
+.detal-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; }
+@media (max-width: 900px) { .detal-grid { grid-template-columns: 1fr; } }
+.timeline { border-left: 1px solid var(--line); padding-left: 16px; max-height: 65vh; overflow-y: auto; }
+.tl-item { display: flex; gap: 9px; padding: 7px 0; border-bottom: 1px dashed #eef2f7; }
+.tl-icon { flex-shrink: 0; }
+
+/* ---------- insight / alert / muammo ---------- */
+.insight {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 10px 14px; font-size: 13px; margin-bottom: 14px;
+}
+.hbar-row { display: flex; align-items: center; gap: 10px; padding: 3px 0; }
+.hbar-label { width: 150px; flex-shrink: 0; font-size: 12.5px; color: #334155; }
+.hbar { flex: 1; background: #f1f5f9; border-radius: 6px; height: 18px; overflow: hidden; }
+.hbar-fill { height: 100%; background: var(--primary); border-radius: 6px; min-width: 2px; transition: width .3s; }
+.fun-conv { font-size: 11px; color: var(--muted); padding: 1px 0 1px 160px; }
+.fun-worst { color: #b91c1c; font-weight: 700; }
+.alert-line {
+  display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 9px;
+  margin-bottom: 6px; font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text);
+}
+.al-critical { background: #fef2f2; border: 1px solid #fecaca; }
+.al-warning { background: #fff7ed; border: 1px solid #fed7aa; }
+.al-attention { background: #fefce8; border: 1px solid #fde68a; }
+.muammo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+.muammo { border-top: 4px solid #cbd5e1; margin-bottom: 0; }
+.mu-critical { border-top-color: #ef4444; }
+.mu-warning { border-top-color: #f59e0b; }
+.mu-attention { border-top-color: #eab308; }
+.tavsiya { background: #f0fdf4; border-radius: 8px; padding: 7px 10px; font-size: 12.5px; margin-top: 8px; }
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+@media (max-width: 1100px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+.kpi-delta { font-size: 12px; font-weight: 700; margin-left: 8px; }
+.kpi-delta.up { color: #16a34a; }
+.kpi-delta.down { color: #dc2626; }
 
 /* ---------- xonalar 2D xaritasi ---------- */
 .xmap { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 10px; }

@@ -50,6 +50,116 @@ export const HOLAT_UZ: Record<string, string> = {
   instagram: 'Instagram', telegram: 'Telegram', tavsiya: 'Tavsiya', dostlar: "Do'stlar", otib_ketgan: "O'tib ketgan", boshqa: 'Boshqa',
 };
 
+// ==================== PIPELINE LUG'ATLARI ====================
+
+export const LEAD_BOSQICHLAR: [string, string][] = [
+  ['yangi', 'Yangi lid'],
+  ['birinchi_aloqa', 'Birinchi aloqa'],
+  ['boglanib_bolmadi', "Bog'lanib bo'lmadi"],
+  ['aloqa_ornatildi', "Aloqa o'rnatildi"],
+  ['qiziqish_bildirdi', 'Qiziqish bildirdi'],
+  ['sinovga_yozildi', 'Sinovga yozildi'],
+  ['sinovga_keldi', 'Sinovga keldi'],
+  ['taklif_berildi', 'Taklif berildi'],
+  ['qaror_kutilmoqda', 'Qaror kutilmoqda'],
+  ['sotuv_yopildi', 'Sotuv yopildi'],
+  ['rad_etdi', 'Rad etdi'],
+];
+
+export const MANBALAR: [string, string][] = [
+  ['instagram_ads', 'Instagram Ads'],
+  ['instagram_organic', 'Instagram Organic'],
+  ['telegram', 'Telegram'],
+  ['facebook_ads', 'Facebook Ads'],
+  ['google_ads', 'Google Ads'],
+  ['website', 'Vebsayt'],
+  ['telefon', 'Telefon'],
+  ['tavsiya', 'Tavsiya'],
+  ['offline', 'Offline'],
+  ['hamkor', 'Hamkor'],
+  ['boshqa', 'Boshqa'],
+];
+
+export const NOSHOW_SABABLAR: [string, string][] = [
+  ['unutgan', 'Unutib qoldi'],
+  ['vaqt_mos_kelmadi', 'Vaqti mos kelmadi'],
+  ['transport', 'Transport muammosi'],
+  ['qiziqish_kamaydi', 'Qiziqishi kamaydi'],
+  ['ota_ona_ruxsat_bermadi', 'Ota-ona ruxsat bermadi'],
+  ['narx_qimmat', 'Narx qimmat'],
+  ['boshqa_markaz', 'Boshqa markazni tanladi'],
+  ['aloqa_bolmadi', "Aloqa qilish imkoni bo'lmadi"],
+  ['nomalum', "Sabab noma'lum"],
+  ['boshqa', 'Boshqa'],
+];
+
+export const RAD_SABABLAR: [string, string][] = [
+  ['narx_qimmat', 'Narx qimmat'],
+  ['ota_ona_maslahat', 'Ota-ona bilan maslahatlashadi'],
+  ['vaqt_mos_emas', 'Vaqt mos emas'],
+  ['oqituvchi_yoqmadi', "O'qituvchi yoqmadi"],
+  ['kurs_yoqmadi', 'Kurs yoqmadi'],
+  ['boshqa_markaz', 'Boshqa markaz tanlandi'],
+  ['moliyaviy', 'Moliyaviy sabab'],
+  ['keyinroq', 'Keyinroq boshlaydi'],
+  ['aloqa_yoqolgan', "Aloqa yo'qolgan"],
+  ['boshqa', 'Boshqa'],
+];
+
+export const CHURN_SABABLAR: [string, string][] = [
+  ['narx', 'Narx'],
+  ['oqituvchi', "O'qituvchi"],
+  ['davomat', 'Davomat muammosi'],
+  ['natija_yoq', "Natija yo'q"],
+  ['vaqt_mos_emas', 'Vaqt mos emas'],
+  ['kochib_ketdi', "Ko'chib ketdi"],
+  ['boshqa_markaz', 'Boshqa markaz'],
+  ['moliyaviy', 'Moliyaviy muammo'],
+  ['shaxsiy', 'Shaxsiy sabab'],
+  ['boshqa', 'Boshqa'],
+];
+
+export const TRIAL_HOLATLAR: [string, string][] = [
+  ['yozildi', 'Yozildi'],
+  ['tasdiqlandi', 'Tasdiqlandi'],
+  ['eslatma_yuborildi', 'Eslatma yuborildi'],
+  ['keldi', 'Keldi'],
+  ['kelmadi', 'Kelmadi'],
+  ['qayta_yozildi', 'Qayta yozildi'],
+  ['muvaffaqiyatli', 'Muvaffaqiyatli'],
+  ['sotuvga_otkazildi', "Sotuvga o'tkazildi"],
+];
+
+export const WINBACK_BOSQICHLAR: [string, string][] = [
+  ['aloqa_qilindi', 'Aloqa qilindi'],
+  ['qiziqdi', 'Qiziqdi'],
+  ['taklif_berildi', 'Maxsus taklif berildi'],
+  ['qaytdi', 'Qaytdi'],
+];
+
+const LUGAT_QOSHIMCHA: Record<string, string> = {};
+// tartib muhim: keyingisi ustun — lead bosqichlari eng oxirida (umumiy holat() uchun ular g'olib)
+for (const juft of [...WINBACK_BOSQICHLAR, ...NOSHOW_SABABLAR, ...CHURN_SABABLAR, ...RAD_SABABLAR, ...MANBALAR, ...TRIAL_HOLATLAR, ...LEAD_BOSQICHLAR]) {
+  LUGAT_QOSHIMCHA[juft[0]] = juft[1];
+}
+Object.assign(HOLAT_UZ, LUGAT_QOSHIMCHA, {
+  past: 'Past', orta: "O'rta", yuqori: 'Yuqori',
+});
+
+export function riskHolat(score: number): { label: string; rang: string } {
+  if (score >= 70) return { label: 'Faol', rang: 'green' };
+  if (score >= 40) return { label: "E'tibor kerak", rang: 'amber' };
+  return { label: 'Xavf ostida', rang: 'red' };
+}
+
+export function nechaKunOldin(ts: string | null | undefined): string {
+  if (!ts) return '—';
+  const diff = Math.floor((Date.now() - new Date(ts).getTime()) / 86400000);
+  if (diff <= 0) return 'bugun';
+  if (diff === 1) return 'kecha';
+  return `${diff} kun oldin`;
+}
+
 export function qisqaSom(n: number): string {
   const abs = Math.abs(n);
   if (abs >= 1_000_000) return (n / 1_000_000).toFixed(1).replace('.0', '') + ' mln';
