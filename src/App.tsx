@@ -18,6 +18,7 @@ import Reports from './pages/Reports';
 import Rooms from './pages/Rooms';
 import Trials from './pages/Trials';
 import Problems from './pages/Problems';
+import Settings from './pages/Settings';
 
 export default function App() {
   if (!configured) return <Setup />;
@@ -65,6 +66,7 @@ function AuthedApp() {
             <NavLink to="/tolovlar">To'lovlar</NavLink>
             <NavLink to="/xarajatlar">Xarajatlar</NavLink>
             <NavLink to="/hisobotlar">Hisobotlar</NavLink>
+            <NavLink to="/sozlamalar">Sozlamalar</NavLink>
           </nav>
           <div className="sidebar-foot">
             <div className="muted small">{session.user?.email} · {role === 'superadmin' ? 'Superadmin' : 'Admin'}</div>
@@ -94,6 +96,7 @@ function AuthedApp() {
             <Route path="/oqituvchilar/:id" element={<TeacherDetail />} />
             <Route path="/xarajatlar" element={<Expenses />} />
             <Route path="/hisobotlar" element={<Reports />} />
+            <Route path="/sozlamalar" element={<Settings />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

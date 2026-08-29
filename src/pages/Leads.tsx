@@ -56,11 +56,17 @@ export default function Leads() {
 
   const [tortilayotgan, setTortilayotgan] = useState<string | null>(null);
 
+  const [fanlar, setFanlar] = useState<string[]>(['General', 'IELTS']);
+
   async function load() {
     const { data } = await supabase.from('leads').select('*').order('created_at', { ascending: false });
     setRows(data ?? []);
   }
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    supabase.from('subjects').select('name').eq('faol', true).order('id')
+      .then(({ data }) => { if (data?.length) setFanlar(data.map((x) => x.name)); });
+  }, []);
 
   const managerlar = useMemo(() => [...new Set(rows.map((r) => r.manager).filter(Boolean))].sort(), [rows]);
 
@@ -220,7 +226,7 @@ export default function Leads() {
         <h1>Lidlar <span className="muted small">({filtrlangan.length})</span></h1>
         <div className="row-gap">
           <div className="tabs" style={{ margin: 0 }}>
-            <button className={korinish === 'kanban' ? 'tab on' : 'tab'} onClick={() => setKorinish('kanban')}>Kanban</button>
+            <button className={korinish === 'kanban' ? 'tab on' : 'tab'} onClick={() => setKorinish('kanban')}>Doska</button>
             <button className={korinish === 'jadval' ? 'tab on' : 'tab'} onClick={() => setKorinish('jadval')}>Jadval</button>
           </div>
           <button className="btn" onClick={() => { setF(BOSH); setXato(''); setModal(true); }}>+ Yangi lid</button>
@@ -238,7 +244,7 @@ export default function Leads() {
           {managerlar.map((m) => <option key={m} value={m}>{m}</option>)}
         </select>
         <select value={fPriority} onChange={(e) => setFPriority(e.target.value)}>
-          <option value="">Barcha prioritetlar</option>
+          <option value="">Barcha muhimliklar</option>
           <option value="yuqori">Yuqori</option><option value="orta">O'rta</option><option value="past">Past</option>
         </select>
         <span className="legend" style={{ marginLeft: 'auto' }}>
@@ -278,7 +284,7 @@ export default function Leads() {
                       <div className="kcard-top">
                         <span className="avatar">{(l.first_name[0] ?? '') + (l.last_name?.[0] ?? '')}</span>
                         <b>{l.first_name} {l.last_name}</b>
-                        <span className={'pri pri-' + l.priority} title={'Priority: ' + holat(l.priority)} />
+                        <span className={'pri pri-' + l.priority} title={'Muhimlik: ' + holat(l.priority)} />
                       </div>
                       <div className="kcard-line mono">{l.phone}</div>
                       <div className="kcard-line">
@@ -291,7 +297,7 @@ export default function Leads() {
                       </div>
                       {l.next_followup_at && (
                         <div className={'kcard-fup' + (l.next_followup_at < bugunISO() ? ' kech' : '')}>
-                          ⏰ Follow-up: {sana(l.next_followup_at)}{l.next_followup_at < bugunISO() ? " — MUDDATI O'TGAN" : ''}
+                          ⏰ Keyingi aloqa: {sana(l.next_followup_at)}{l.next_followup_at < bugunISO() ? " — MUDDATI O'TGAN" : ''}
                         </div>
                       )}
                     </div>
@@ -305,7 +311,7 @@ export default function Leads() {
       ) : (
         <div className="card">
           <table>
-            <thead><tr><th>ID</th><th>Ism</th><th>Telefon</th><th>Fan</th><th>Manba</th><th>Menejer</th><th>Bosqich</th><th>Priority</th><th>Follow-up</th><th>Oxirgi aloqa</th><th></th></tr></thead>
+            <thead><tr><th>ID</th><th>Ism</th><th>Telefon</th><th>Fan</th><th>Manba</th><th>Menejer</th><th>Bosqich</th><th>Muhimlik</th><th>Keyingi aloqa</th><th>Oxirgi aloqa</th><th></th></tr></thead>
             <tbody>
               {filtrlangan.map((l) => (
                 <tr key={l.id} className="clickable" onClick={() => detalOch(l)}>
@@ -347,14 +353,14 @@ export default function Leads() {
             </label>
             <label>Fan
               <select value={f.subject} onChange={(e) => setF({ ...f, subject: e.target.value })}>
-                <option value="General">General (ingliz tili)</option><option value="IELTS">IELTS</option>
+                {fanlar.map((fn) => <option key={fn} value={fn}>{fn}</option>)}
               </select>
             </label>
             <label>Mas'ul menejer
               <input value={f.manager} onChange={(e) => setF({ ...f, manager: e.target.value })} list="managerlar" placeholder="ism" />
               <datalist id="managerlar">{managerlar.map((m) => <option key={m} value={m} />)}</datalist>
             </label>
-            <label>Priority
+            <label>Muhimlik
               <select value={f.priority} onChange={(e) => setF({ ...f, priority: e.target.value })}>
                 <option value="yuqori">Yuqori</option><option value="orta">O'rta</option><option value="past">Past</option>
               </select>
@@ -404,10 +410,11 @@ export default function Leads() {
                 </label>
                 <label>Fan
                   <select value={df.subject} onChange={(e) => setDf({ ...df, subject: e.target.value })}>
-                    <option value="General">General</option><option value="IELTS">IELTS</option>
+                    {!fanlar.includes(df.subject) && df.subject && <option value={df.subject}>{df.subject}</option>}
+                    {fanlar.map((fn) => <option key={fn} value={fn}>{fn}</option>)}
                   </select>
                 </label>
-                <label>Priority
+                <label>Muhimlik
                   <select value={df.priority} onChange={(e) => setDf({ ...df, priority: e.target.value })}>
                     <option value="yuqori">Yuqori</option><option value="orta">O'rta</option><option value="past">Past</option>
                   </select>
@@ -417,7 +424,7 @@ export default function Leads() {
                     <option value="">—</option><option value="yuqori">Yuqori</option><option value="orta">O'rta</option><option value="past">Past</option>
                   </select>
                 </label>
-                <label>Keyingi follow-up<input type="date" value={df.next_followup_at} onChange={(e) => setDf({ ...df, next_followup_at: e.target.value })} /></label>
+                <label>Keyingi aloqa sanasi<input type="date" value={df.next_followup_at} onChange={(e) => setDf({ ...df, next_followup_at: e.target.value })} /></label>
                 <button type="button" className="btn" style={{ alignSelf: 'end' }} onClick={detalSaqla}>Saqlash</button>
               </div>
 

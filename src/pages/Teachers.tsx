@@ -6,11 +6,12 @@ import Modal from '../components/Modal';
 import Confirm from '../components/Confirm';
 import { useRole } from '../lib/role';
 
-const BOSH = { full_name: '', phone: '', general: true, ielts: false, degree: 'main', hire_date: '' };
+const BOSH = { full_name: '', phone: '', fanlar: ['General'] as string[], degree: 'main', hire_date: '' };
 
 export default function Teachers() {
   const { superadmin } = useRole();
   const [rows, setRows] = useState<any[]>([]);
+  const [fanRoyxat, setFanRoyxat] = useState<string[]>(['General', 'IELTS']);
   const [modal, setModal] = useState<null | { id?: string }>(null);
   const [f, setF] = useState<any>(BOSH);
   const [xato, setXato] = useState('');
@@ -20,7 +21,11 @@ export default function Teachers() {
     const { data } = await supabase.from('teachers').select('*').order('id');
     setRows(data ?? []);
   }
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    supabase.from('subjects').select('name').eq('faol', true).order('id')
+      .then(({ data }) => { if (data?.length) setFanRoyxat(data.map((x) => x.name)); });
+  }, []);
 
   function yangiOch() {
     setF(BOSH);
@@ -32,8 +37,7 @@ export default function Teachers() {
     setF({
       full_name: r.full_name,
       phone: r.phone,
-      general: String(r.levels).includes('General'),
-      ielts: String(r.levels).includes('IELTS'),
+      fanlar: String(r.levels ?? '').split(',').map((x: string) => x.trim()).filter(Boolean),
       degree: r.degree ?? 'main',
       hire_date: r.hire_date ?? '',
     });
@@ -41,14 +45,21 @@ export default function Teachers() {
     setModal({ id: r.id });
   }
 
+  function fanAlmash(nom: string) {
+    setF((old: any) => ({
+      ...old,
+      fanlar: old.fanlar.includes(nom) ? old.fanlar.filter((x: string) => x !== nom) : [...old.fanlar, nom],
+    }));
+  }
+
   async function saqla(e: React.FormEvent) {
     e.preventDefault();
     setXato('');
-    if (!f.general && !f.ielts) return setXato('Kamida bitta bosqich tanlang (General yoki IELTS)');
+    if (!f.fanlar.length) return setXato('Kamida bitta fan tanlang');
     const body = {
       full_name: f.full_name,
       phone: f.phone,
-      levels: [f.general && 'General', f.ielts && 'IELTS'].filter(Boolean).join(','),
+      levels: f.fanlar.join(','),
       degree: f.degree,
       hire_date: f.hire_date || null,
     };
@@ -85,7 +96,7 @@ export default function Teachers() {
       </div>
       <div className="card">
         <table>
-          <thead><tr><th>ID</th><th>Ism-familiya</th><th>Telefon</th><th>Bosqichlari</th><th>Daraja</th><th>Ishga olingan</th><th>Holat</th><th></th></tr></thead>
+          <thead><tr><th>ID</th><th>Ism-familiya</th><th>Telefon</th><th>Fanlari</th><th>Daraja</th><th>Ishga olingan</th><th>Holat</th><th></th></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.id}>
@@ -93,7 +104,7 @@ export default function Teachers() {
                 <td><Link to={`/oqituvchilar/${r.id}`}><b>{r.full_name}</b></Link></td>
                 <td className="mono">{r.phone}</td>
                 <td>{r.levels || '—'}</td>
-                <td>{r.degree === 'support' ? <span className="badge badge-blue">Support</span> : <span className="badge badge-green">Main</span>}</td>
+                <td>{r.degree === 'support' ? <span className="badge badge-blue">Yordamchi</span> : <span className="badge badge-green">Asosiy</span>}</td>
                 <td>{sana(r.hire_date)}</td>
                 <td>
                   <select className="sel-inline" value={r.status} onChange={(e) => holatOzgar(r.id, e.target.value)}>
@@ -122,16 +133,19 @@ export default function Teachers() {
             <label>Telefon
               <input value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} required />
             </label>
-            <label className="span2">Bosqichlari
-              <div className="row-gap" style={{ paddingTop: 4 }}>
-                <label className="check-line"><input type="checkbox" checked={f.general} onChange={(e) => setF({ ...f, general: e.target.checked })} /> General (Beginner - Advanced)</label>
-                <label className="check-line"><input type="checkbox" checked={f.ielts} onChange={(e) => setF({ ...f, ielts: e.target.checked })} /> IELTS</label>
+            <label className="span2">Fanlari
+              <div className="row-gap" style={{ paddingTop: 4, flexWrap: 'wrap' }}>
+                {fanRoyxat.map((fn) => (
+                  <label key={fn} className="check-line">
+                    <input type="checkbox" checked={f.fanlar.includes(fn)} onChange={() => fanAlmash(fn)} /> {fn}
+                  </label>
+                ))}
               </div>
             </label>
             <label>Daraja
               <select value={f.degree} onChange={(e) => setF({ ...f, degree: e.target.value })}>
-                <option value="main">Asosiy (Main)</option>
-                <option value="support">Yordamchi (Support)</option>
+                <option value="main">Asosiy</option>
+                <option value="support">Yordamchi</option>
               </select>
             </label>
             <label>Ishga olingan sana

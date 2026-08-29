@@ -40,7 +40,7 @@ export const HOLAT_UZ: Record<string, string> = {
   // a'zolik
   yakunladi: 'Yakunladi', tashlab_ketdi: 'Tashlab ketdi', chetlashtirildi: 'Chetlashtirildi',
   // o'qituvchi darajasi
-  main: 'Asosiy (Main)', support: 'Yordamchi (Support)',
+  main: 'Asosiy', support: 'Yordamchi',
   bosqich_takrorlaydi: 'Bosqichni takrorlaydi',
   // dars turi
   yangi_mavzu: 'Yangi mavzu', mustahkamlash: 'Mustahkamlash', amaliyot: 'Amaliyot',

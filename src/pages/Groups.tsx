@@ -107,13 +107,13 @@ export default function Groups() {
                 {levels.map((l) => <option key={l.code} value={l.code}>{l.name} ({l.code})</option>)}
               </select>
             </label>
-            <label>Asosiy o'qituvchi (Main) *
+            <label>Asosiy o'qituvchi *
               <select value={f.teacher_id} onChange={(e) => setF({ ...f, teacher_id: e.target.value })} required>
                 <option value="">— Tanlang —</option>
                 {mains.map((t) => <option key={t.id} value={t.id}>{t.full_name}</option>)}
               </select>
             </label>
-            <label>Yordamchi o'qituvchi (Support)
+            <label>Yordamchi o'qituvchi
               <select value={f.support_id} onChange={(e) => setF({ ...f, support_id: e.target.value })}>
                 <option value="">— Yo'q —</option>
                 {supports.map((t) => <option key={t.id} value={t.id}>{t.full_name}</option>)}

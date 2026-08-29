@@ -47,7 +47,7 @@ export default function TeacherDetail() {
         <div className="card">
           <h2>Ma'lumotlar</h2>
           <div className="kv"><span>Telefon</span><b className="mono">{t.phone}</b></div>
-          <div className="kv"><span>Bosqichlari</span><b>{t.levels || '—'}</b></div>
+          <div className="kv"><span>Fanlari</span><b>{t.levels || '—'}</b></div>
           <div className="kv"><span>Daraja</span><b>{holat(t.degree)}</b></div>
           <div className="kv"><span>Ishga olingan</span><b>{sana(t.hire_date)}</b></div>
           <div className="kv"><span>Faol guruhlari</span><b>{faolGuruhlar.length} ta</b></div>
@@ -84,7 +84,7 @@ export default function TeacherDetail() {
               <tr key={g.id}>
                 <td><Link to={`/guruhlar/${g.id}`} className="mono"><b>{g.id}</b></Link></td>
                 <td>{g.levels?.name ?? g.level_code}</td>
-                <td>{g.teacher_id === id ? <span className="badge badge-green">Main</span> : <span className="badge badge-blue">Support</span>}</td>
+                <td>{g.teacher_id === id ? <span className="badge badge-green">Asosiy</span> : <span className="badge badge-blue">Yordamchi</span>}</td>
                 <td>{KUNLAR[g.days_pattern]} · {String(g.start_time).slice(0, 5)}</td>
                 <td><Badge s={g.status} /></td>
                 <td><b>{soni[g.id] ?? 0}</b> / {g.capacity}</td>

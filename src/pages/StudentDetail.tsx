@@ -169,14 +169,14 @@ export default function StudentDetail() {
             const r = riskRows.reduce((m, x) => (x.score < m.score ? x : m), riskRows[0]);
             const h = riskHolat(r.score);
             return (
-              <div className="kv"><span>Risk Score</span>
+              <div className="kv"><span>Xavf bali</span>
                 <b><span className={'badge badge-' + h.rang}>{r.score} · {h.label}</span>
                 {r.score < 70 && <span className="muted small"> ({r.kelmagan_14} qoldirish/14k{r.qarz_bor ? ' · qarz bor' : ''}{r.ketma_ket ? ` · ${r.ketma_ket} ketma-ket` : ''})</span>}</b>
               </div>
             );
           })()}
           {s.status === 'ketgan' && (
-            <div className="kv"><span>Churn</span><b className="red">{s.churn_reason ? holat(s.churn_reason) : '—'} · {sana(s.churned_at)}{s.winback ? ` · Win-back: ${holat(s.winback)}` : ''}</b></div>
+            <div className="kv"><span>Churn</span><b className="red">{s.churn_reason ? holat(s.churn_reason) : '—'} · {sana(s.churned_at)}{s.winback ? ` · Qaytarish: ${holat(s.winback)}` : ''}</b></div>
           )}
         </div>
 
@@ -304,7 +304,7 @@ export default function StudentDetail() {
                 {CHURN_SABABLAR.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
               </select>
             </label>
-            <p className="muted small span2">Sabab churn analitikasiga saqlanadi; o'quvchi "Ketganlar / Win-back" ro'yxatiga tushadi — u yerdan qaytarish jarayonini yuritasiz.</p>
+            <p className="muted small span2">Sabab churn analitikasiga saqlanadi; o'quvchi "Ketganlar / Qaytarish" ro'yxatiga tushadi — u yerdan qaytarish jarayonini yuritasiz.</p>
             <button className="btn span2" disabled={!churnSabab}>Saqlash</button>
           </form>
         </Modal>

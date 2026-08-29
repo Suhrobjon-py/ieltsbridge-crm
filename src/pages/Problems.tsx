@@ -82,8 +82,8 @@ export default function Problems() {
         const top = Object.entries(sabablar).sort((a, b) => b[1] - a[1])[0];
         muammolar.push({
           daraja: noshowRate >= 40 ? 'critical' : 'warning', kategoriya: 'Sinov',
-          nomi: 'Trial no-show yuqori',
-          sabab: `Oxirgi 30 kunda no-show ${noshowRate}%${top ? ` · eng ko'p sabab: ${holat(top[0])}` : ''}`,
+          nomi: 'Sinovga kelmaslik yuqori',
+          sabab: `Oxirgi 30 kunda kelmaslik ${noshowRate}%${top ? ` · eng ko'p sabab: ${holat(top[0])}` : ''}`,
           tasir: `${kelmadiN} ta potensial o'quvchi yo'qotilmoqda`,
           tavsiya: top?.[0] === 'vaqt_mos_kelmadi' ? "Kechki/dam olish kunlari sinov slotlarini ko'paytiring" : 'Sinovdan 1 kun va 2 soat oldin eslatma tizimini joriy qiling',
           havola: '/sinovlar',
@@ -99,7 +99,7 @@ export default function Problems() {
       if (conv < 50) {
         muammolar.push({
           daraja: conv < 35 ? 'critical' : 'warning', kategoriya: 'Sotuv',
-          nomi: 'Trialdan keyingi sotuv konversiyasi past',
+          nomi: 'Sinovdan keyingi sotuv konversiyasi past',
           sabab: `Sinovga kelganlarning faqat ${conv}% i sotib olmoqda (${sotilgan.length}/${kelganlar.length})`,
           tasir: `${kelganlar.length - sotilgan.length} ta "issiq" lid yopilmagan`,
           tavsiya: 'Sinovdan keyin 24 soat ichida taklif berish va 3 bosqichli follow-up joriy qiling', havola: '/lidlar',
@@ -111,7 +111,7 @@ export default function Problems() {
     const xavfli = risk.filter((r) => r.score < 40);
     const etibor = risk.filter((r) => r.score >= 40 && r.score < 70);
     if (xavfli.length) {
-      alerts.push({ daraja: 'critical', matn: `${xavfli.length} ta o'quvchining Risk Score darajasi 40 dan past`, havola: '/oquvchilar' });
+      alerts.push({ daraja: 'critical', matn: `${xavfli.length} ta o'quvchining xavf bali 40 dan past`, havola: '/oquvchilar' });
       const summa = xavfli.reduce((s, r) => s + (feeMap[r.group_id] ?? 0), 0);
       muammolar.push({
         daraja: 'critical', kategoriya: "O'quvchi", nomi: 'Chiqib ketish xavfi',
@@ -120,7 +120,7 @@ export default function Problems() {
         tavsiya: "Har biri bilan bugun aloqa qiling: sabab aniqlang, to'lov/jadval bo'yicha kelishuv taklif qiling", havola: '/oquvchilar',
       });
     }
-    if (etibor.length) alerts.push({ daraja: 'warning', matn: `${etibor.length} ta o'quvchiga e'tibor kerak (Risk 40-69)`, havola: '/oquvchilar' });
+    if (etibor.length) alerts.push({ daraja: 'warning', matn: `${etibor.length} ta o'quvchiga e'tibor kerak (xavf bali 40-69)`, havola: '/oquvchilar' });
 
     const qarzlar = payments.filter((p) => ['muddati_otgan', 'qisman', 'kutilmoqda'].includes(p.status) && Number(p.amount_due) > Number(p.amount_paid));
     const qarzSum = qarzlar.reduce((s, p) => s + Number(p.amount_due) - Number(p.amount_paid), 0);
@@ -140,10 +140,10 @@ export default function Problems() {
       for (const s of churn30) if (s.churn_reason) sab[s.churn_reason] = (sab[s.churn_reason] ?? 0) + 1;
       const top = Object.entries(sab).sort((a, b) => b[1] - a[1])[0];
       muammolar.push({
-        daraja: 'warning', kategoriya: "O'quvchi", nomi: 'Churn oshgan',
+        daraja: 'warning', kategoriya: "O'quvchi", nomi: "Ketish (churn) ko'paygan",
         sabab: `Oxirgi 30 kunda ${churn30.length} ta o'quvchi ketdi${top ? ` · asosiy sabab: ${holat(top[0])}` : ''}`,
         tasir: `Yo'qotilgan oylik daromad: ~${som(churn30.length * 500000)}`,
-        tavsiya: "Win-back ro'yxatini ishga soling: har biriga maxsus taklif bilan qo'ng'iroq", havola: '/oquvchilar',
+        tavsiya: "Qaytarish ro'yxatini ishga soling: har biriga maxsus taklif bilan qo'ng'iroq", havola: '/oquvchilar',
       });
     }
 
@@ -193,9 +193,9 @@ export default function Problems() {
 
           {xavfli.length > 0 && (
             <div className="card" style={{ marginTop: 18 }}>
-              <h2>Xavf ostidagi o'quvchilar (Risk Score &lt; 40)</h2>
+              <h2>Xavf ostidagi o'quvchilar (xavf bali 40 dan past)</h2>
               <table>
-                <thead><tr><th>O'quvchi</th><th>Guruh</th><th>Score</th><th>14 kunda qoldirgan</th><th>Ketma-ket</th><th>Qarz</th></tr></thead>
+                <thead><tr><th>O'quvchi</th><th>Guruh</th><th>Ball</th><th>14 kunda qoldirgan</th><th>Ketma-ket</th><th>Qarz</th></tr></thead>
                 <tbody>
                   {xavfli.map((r) => (
                     <tr key={r.student_id + r.group_id}>

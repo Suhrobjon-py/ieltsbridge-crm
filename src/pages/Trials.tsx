@@ -94,13 +94,13 @@ export default function Trials() {
       <div className="stat-row">
         <div className="stat-card"><div className="stat-n">{stat.booked}</div><div className="stat-t">Yozilgan (30 kun)</div></div>
         <div className="stat-card"><div className="stat-n" style={{ color: '#22c55e' }}>{stat.keldi}</div><div className="stat-t">Kelgan</div></div>
-        <div className="stat-card"><div className="stat-n" style={{ color: '#ef4444' }}>{stat.kelmadi}</div><div className="stat-t">Kelmagan (no-show)</div></div>
+        <div className="stat-card"><div className="stat-n" style={{ color: '#ef4444' }}>{stat.kelmadi}</div><div className="stat-t">Kelmaganlar</div></div>
         <div className="stat-card"><div className="stat-n">{stat.rate !== null ? stat.rate + '%' : '—'}</div><div className="stat-t">Kelish darajasi</div></div>
       </div>
 
       {stat.topSabab && stat.rate !== null && stat.rate < 75 && (
         <div className="insight">
-          💡 <b>Insight:</b> Sinovga kelmaslik darajasi yuqori ({100 - stat.rate}%). Eng asosiy sabab: <b>{holat(stat.topSabab[0])}</b> ({stat.topSabab[1]} marta).
+          💡 <b>Xulosa:</b> Sinovga kelmaslik darajasi yuqori ({100 - stat.rate}%). Eng asosiy sabab: <b>{holat(stat.topSabab[0])}</b> ({stat.topSabab[1]} marta).
           {stat.topSabab[0] === 'vaqt_mos_kelmadi' && " Tavsiya: kechki va dam olish kunlari uchun sinov slotlarini ko'paytiring."}
           {stat.topSabab[0] === 'unutgan' && ' Tavsiya: sinovdan bir kun oldin va 2 soat oldin eslatma yuborishni yo‘lga qo‘ying.'}
         </div>
@@ -108,7 +108,7 @@ export default function Trials() {
 
       {stat.sabablar.length > 0 && (
         <div className="card">
-          <h2>No-show sabablari</h2>
+          <h2>Kelmaslik sabablari</h2>
           {stat.sabablar.map(([s, n]) => (
             <div key={s} className="hbar-row">
               <span className="hbar-label">{holat(s)}</span>
@@ -184,7 +184,7 @@ export default function Trials() {
       )}
 
       {feedback && (
-        <Modal title="Trial feedback" onClose={() => setFeedback(null)}>
+        <Modal title="Sinov darsi fikri" onClose={() => setFeedback(null)}>
           <form onSubmit={fbSaqla} className="form-grid">
             <label className="span2">O'qituvchi fikri
               <textarea value={fbMatn} onChange={(e) => setFbMatn(e.target.value)} rows={3} placeholder="Darsdagi taassurot, saviya, tavsiya..." />

@@ -123,7 +123,7 @@ export default function Dashboard() {
         </div>
         <div className="stat-card">
           <div className="stat-n">{kpi.trialKeldi ? Math.round((100 * kpi.sotuv) / kpi.trialKeldi) : 0}%</div>
-          <div className="stat-t">Trial → Sotuv</div>
+          <div className="stat-t">Sinov → Sotuv</div>
         </div>
         <Link to="/muammolar" className="stat-card stat-warn">
           <div className="stat-n">{kpi.xavfli}</div>
@@ -145,7 +145,7 @@ export default function Dashboard() {
 
       <div className="grid2">
         <div className="card">
-          <h2>Sales Funnel</h2>
+          <h2>Sotuv voronkasi</h2>
           {leads.length === 0 ? <p className="muted">Lidlar qo'shilgach funnel paydo bo'ladi.</p> : (
             <div>
               {funnel.steps.map((s, i) => (
@@ -165,7 +165,7 @@ export default function Dashboard() {
               ))}
               {funnel.engKatta.idx > 0 && (
                 <div className="insight" style={{ marginTop: 10 }}>
-                  💡 <b>Insight:</b> Eng katta yo'qotish "{funnel.steps[funnel.engKatta.idx - 1].nom} → {funnel.steps[funnel.engKatta.idx].nom}" bosqichida (−{funnel.engKatta.foiz}%).
+                  💡 <b>Xulosa:</b> Eng katta yo'qotish "{funnel.steps[funnel.engKatta.idx - 1].nom} → {funnel.steps[funnel.engKatta.idx].nom}" bosqichida (−{funnel.engKatta.foiz}%).
                   {' '}<Link to="/muammolar">Muammolar markazida tavsiyalar →</Link>
                 </div>
               )}

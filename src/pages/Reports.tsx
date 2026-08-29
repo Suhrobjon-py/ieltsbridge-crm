@@ -332,7 +332,7 @@ function ManagerPanel({ leads, levents }: { leads: any[]; levents: any[] }) {
     <div className="card">
       <h2>Menejerlar samaradorligi</h2>
       <table>
-        <thead><tr><th>Menejer</th><th>Lidlar</th><th>Aloqa</th><th>Trial</th><th>Keldi</th><th>Sotuv</th><th>Yo'qotilgan</th><th>Konv.</th><th>O'rt. 1-javob</th><th>Insight</th></tr></thead>
+        <thead><tr><th>Menejer</th><th>Lidlar</th><th>Aloqa</th><th>Trial</th><th>Keldi</th><th>Sotuv</th><th>Yo'qotilgan</th><th>Konv.</th><th>O'rt. 1-javob</th><th>Xulosa</th></tr></thead>
         <tbody>
           {qatorlar.map((q) => (
             <tr key={q.m}>

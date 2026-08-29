@@ -1,0 +1,2566 @@
+-- 400 O'QUVCHI + 200 LIDLI MARKAZ HOLATI (avto-generatsiya, 9-seriya IDlar)
+-- Tozalash: supabase/demo_ochirish.sql
+
+INSERT INTO rooms (id, name, capacity) VALUES
+('XONA-91', '1-xona', 14),
+('XONA-92', '2-xona', 14),
+('XONA-93', '3-xona', 16),
+('XONA-94', '4-xona', 16),
+('XONA-95', '5-xona', 16),
+('XONA-96', '6-xona', 12),
+('XONA-97', '7-xona', 12),
+('XONA-98', '8-xona', 12)
+ON CONFLICT DO NOTHING;
+INSERT INTO teachers (id, full_name, phone, levels, degree, status) VALUES
+('TCH-901', 'Malika Salimova', '+998 93 243 55 14', 'General', 'main', 'faol'),
+('TCH-902', 'Gulnora Aliyeva', '+998 90 535 79 78', 'General', 'main', 'faol'),
+('TCH-903', 'Akmal Mirzayev', '+998 97 437 16 73', 'General', 'main', 'faol'),
+('TCH-904', 'Ulugbek Mahmudov', '+998 94 821 69 90', 'General', 'main', 'faol'),
+('TCH-905', 'Farrux Karimov', '+998 91 368 29 93', 'General', 'main', 'faol'),
+('TCH-906', 'Muhammadali Ahmedov', '+998 94 371 32 74', 'General', 'main', 'faol'),
+('TCH-907', 'Nozima Qodirova', '+998 90 356 28 41', 'General', 'main', 'faol'),
+('TCH-908', 'Zarina Berdiyeva', '+998 94 649 18 20', 'IELTS', 'main', 'faol'),
+('TCH-909', 'Xadicha Umarova', '+998 97 296 37 23', 'IELTS', 'main', 'faol'),
+('TCH-910', 'Jasur Mahmudov', '+998 97 593 89 97', 'IELTS', 'main', 'faol'),
+('TCH-911', 'Umida Olimova', '+998 98 416 77 79', 'General,IELTS', 'support', 'faol'),
+('TCH-912', 'Bexruz Karimov', '+998 97 326 77 00', 'General,IELTS', 'support', 'faol'),
+('TCH-913', 'Zarina Ergasheva', '+998 97 300 40 30', 'General,IELTS', 'support', 'faol'),
+('TCH-914', 'Kamola Umarova', '+998 94 428 35 50', 'General,IELTS', 'support', 'faol')
+ON CONFLICT DO NOTHING;
+INSERT INTO groups (id, level_code, teacher_id, support_teacher_id, room_id, days_pattern, start_time, start_date, end_date_planned, status, capacity, monthly_fee) VALUES
+('GRP-DEMO-01', 'BEG', 'TCH-901', NULL, 'XONA-91', 'DCJ', '09:00', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 500000),
+('GRP-DEMO-02', 'BEG', 'TCH-902', NULL, 'XONA-92', 'SPS', '09:00', CURRENT_DATE - 28, CURRENT_DATE + 62, 'faol', 14, 500000),
+('GRP-DEMO-03', 'BEG', 'TCH-903', 'TCH-913', 'XONA-93', 'DCJ', '09:00', CURRENT_DATE - 56, CURRENT_DATE + 34, 'faol', 14, 500000),
+('GRP-DEMO-04', 'BEG', 'TCH-904', NULL, 'XONA-94', 'SPS', '09:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-05', 'BEG', 'TCH-905', NULL, 'XONA-95', 'DCJ', '09:00', CURRENT_DATE - -7, CURRENT_DATE + 97, 'rejada', 14, 500000),
+('GRP-DEMO-06', 'BEG', 'TCH-906', NULL, 'XONA-96', 'SPS', '09:00', CURRENT_DATE - 56, CURRENT_DATE + 34, 'faol', 14, 500000),
+('GRP-DEMO-07', 'BEG', 'TCH-907', NULL, 'XONA-97', 'DCJ', '09:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-08', 'BEG', 'TCH-901', 'TCH-914', 'XONA-98', 'SPS', '09:00', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 500000),
+('GRP-DEMO-09', 'BEG', 'TCH-902', NULL, 'XONA-91', 'DCJ', '10:30', CURRENT_DATE - 56, CURRENT_DATE + 34, 'faol', 14, 500000),
+('GRP-DEMO-10', 'BEG', 'TCH-903', NULL, 'XONA-92', 'SPS', '10:30', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-11', 'ELE', 'TCH-904', NULL, 'XONA-93', 'DCJ', '10:30', CURRENT_DATE - 56, CURRENT_DATE + 34, 'faol', 14, 500000),
+('GRP-DEMO-12', 'ELE', 'TCH-905', 'TCH-914', 'XONA-94', 'SPS', '10:30', CURRENT_DATE - -7, CURRENT_DATE + 97, 'rejada', 14, 500000),
+('GRP-DEMO-13', 'ELE', 'TCH-906', NULL, 'XONA-95', 'DCJ', '10:30', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 500000),
+('GRP-DEMO-14', 'ELE', 'TCH-907', 'TCH-912', 'XONA-96', 'SPS', '10:30', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 500000),
+('GRP-DEMO-15', 'ELE', 'TCH-901', NULL, 'XONA-97', 'DCJ', '10:30', CURRENT_DATE - -7, CURRENT_DATE + 97, 'rejada', 14, 500000),
+('GRP-DEMO-16', 'ELE', 'TCH-902', NULL, 'XONA-98', 'SPS', '10:30', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 500000),
+('GRP-DEMO-17', 'ELE', 'TCH-903', NULL, 'XONA-91', 'DCJ', '14:00', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 500000),
+('GRP-DEMO-18', 'ELE', 'TCH-904', NULL, 'XONA-92', 'SPS', '14:00', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 500000),
+('GRP-DEMO-19', 'INT', 'TCH-905', 'TCH-913', 'XONA-93', 'DCJ', '14:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-20', 'INT', 'TCH-906', NULL, 'XONA-94', 'SPS', '14:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-21', 'INT', 'TCH-907', NULL, 'XONA-95', 'DCJ', '14:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-22', 'INT', 'TCH-901', 'TCH-912', 'XONA-96', 'SPS', '14:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-23', 'INT', 'TCH-902', NULL, 'XONA-97', 'DCJ', '14:00', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 500000),
+('GRP-DEMO-24', 'INT', 'TCH-903', 'TCH-914', 'XONA-98', 'SPS', '14:00', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-25', 'INT', 'TCH-904', 'TCH-911', 'XONA-91', 'DCJ', '15:30', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 500000),
+('GRP-DEMO-26', 'UPP', 'TCH-905', NULL, 'XONA-92', 'SPS', '15:30', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 500000),
+('GRP-DEMO-27', 'UPP', 'TCH-906', NULL, 'XONA-93', 'DCJ', '15:30', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 500000),
+('GRP-DEMO-28', 'UPP', 'TCH-907', NULL, 'XONA-94', 'SPS', '15:30', CURRENT_DATE - 0, CURRENT_DATE + 90, 'faol', 14, 500000),
+('GRP-DEMO-29', 'UPP', 'TCH-901', NULL, 'XONA-95', 'DCJ', '15:30', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 500000),
+('GRP-DEMO-30', 'ADV', 'TCH-902', NULL, 'XONA-96', 'SPS', '15:30', CURRENT_DATE - -7, CURRENT_DATE + 97, 'rejada', 14, 600000),
+('GRP-DEMO-31', 'ADV', 'TCH-903', 'TCH-913', 'XONA-97', 'DCJ', '15:30', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 600000),
+('GRP-DEMO-32', 'ADV', 'TCH-904', 'TCH-914', 'XONA-98', 'SPS', '15:30', CURRENT_DATE - 14, CURRENT_DATE + 76, 'faol', 14, 600000),
+('GRP-DEMO-33', 'IEL', 'TCH-910', NULL, 'XONA-91', 'DCJ', '17:00', CURRENT_DATE - 28, CURRENT_DATE + 62, 'faol', 14, 700000),
+('GRP-DEMO-34', 'IEL', 'TCH-908', NULL, 'XONA-92', 'SPS', '17:00', CURRENT_DATE - 56, CURRENT_DATE + 34, 'faol', 14, 700000),
+('GRP-DEMO-35', 'IEL', 'TCH-909', 'TCH-913', 'XONA-93', 'DCJ', '17:00', CURRENT_DATE - 70, CURRENT_DATE + 20, 'faol', 14, 700000),
+('GRP-DEMO-36', 'IEL', 'TCH-910', 'TCH-914', 'XONA-94', 'SPS', '17:00', CURRENT_DATE - 42, CURRENT_DATE + 48, 'faol', 14, 700000)
+ON CONFLICT DO NOTHING;
+
+SELECT generate_sessions('GRP-DEMO-01');
+SELECT generate_sessions('GRP-DEMO-02');
+SELECT generate_sessions('GRP-DEMO-03');
+SELECT generate_sessions('GRP-DEMO-04');
+SELECT generate_sessions('GRP-DEMO-05');
+SELECT generate_sessions('GRP-DEMO-06');
+SELECT generate_sessions('GRP-DEMO-07');
+SELECT generate_sessions('GRP-DEMO-08');
+SELECT generate_sessions('GRP-DEMO-09');
+SELECT generate_sessions('GRP-DEMO-10');
+SELECT generate_sessions('GRP-DEMO-11');
+SELECT generate_sessions('GRP-DEMO-12');
+SELECT generate_sessions('GRP-DEMO-13');
+SELECT generate_sessions('GRP-DEMO-14');
+SELECT generate_sessions('GRP-DEMO-15');
+SELECT generate_sessions('GRP-DEMO-16');
+SELECT generate_sessions('GRP-DEMO-17');
+SELECT generate_sessions('GRP-DEMO-18');
+SELECT generate_sessions('GRP-DEMO-19');
+SELECT generate_sessions('GRP-DEMO-20');
+SELECT generate_sessions('GRP-DEMO-21');
+SELECT generate_sessions('GRP-DEMO-22');
+SELECT generate_sessions('GRP-DEMO-23');
+SELECT generate_sessions('GRP-DEMO-24');
+SELECT generate_sessions('GRP-DEMO-25');
+SELECT generate_sessions('GRP-DEMO-26');
+SELECT generate_sessions('GRP-DEMO-27');
+SELECT generate_sessions('GRP-DEMO-28');
+SELECT generate_sessions('GRP-DEMO-29');
+SELECT generate_sessions('GRP-DEMO-30');
+SELECT generate_sessions('GRP-DEMO-31');
+SELECT generate_sessions('GRP-DEMO-32');
+SELECT generate_sessions('GRP-DEMO-33');
+SELECT generate_sessions('GRP-DEMO-34');
+SELECT generate_sessions('GRP-DEMO-35');
+SELECT generate_sessions('GRP-DEMO-36');
+UPDATE sessions SET status='otildi' WHERE group_id LIKE 'GRP-DEMO%' AND session_date < CURRENT_DATE;
+
+INSERT INTO students (id, first_name, last_name, phone, parent_name, parent_phone, source, status, current_level_code, joined_at, churn_reason, churned_at, winback) VALUES
+('STU-90001', 'Botir', 'Karimov', '+998 94 116 88 19', 'Ahmedov aka', '+998 97 985 05 25', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90002', 'Gulnora', 'Mirzayeva', '+998 94 671 78 62', 'Mahmudov aka', '+998 90 134 10 35', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90003', 'Robiya', 'Raximova', '+998 94 301 72 45', 'Sattorov aka', '+998 98 422 72 34', 'website', 'faol', 'BEG', CURRENT_DATE - 79, NULL, NULL, NULL),
+('STU-90004', 'Munisa', 'Rustamova', '+998 94 468 50 94', 'Davronov aka', '+998 98 654 73 77', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 41, NULL, NULL, NULL),
+('STU-90005', 'Bobur', 'Yusupov', '+998 93 429 14 46', 'Salimov aka', '+998 94 262 17 18', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 40, NULL, NULL, NULL),
+('STU-90006', 'Nodir', 'Berdiyev', '+998 97 424 57 14', 'Hamidov aka', '+998 93 168 87 80', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 86, NULL, NULL, NULL),
+('STU-90007', 'Shohruh', 'Hamidov', '+998 93 414 98 37', 'Ergashev aka', '+998 98 200 75 46', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90008', 'Nilufar', 'Berdiyeva', '+998 93 358 90 61', 'Toshmatov aka', '+998 91 425 35 29', 'website', 'faol', 'BEG', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90009', 'Eldor', 'Sharipov', '+998 97 231 35 29', 'Davronov aka', '+998 90 765 33 09', 'telegram', 'faol', 'BEG', CURRENT_DATE - 21, NULL, NULL, NULL),
+('STU-90010', 'Umid', 'Sodiqov', '+998 97 423 00 11', 'Karimov aka', '+998 98 701 10 79', 'telegram', 'faol', 'BEG', CURRENT_DATE - 51, NULL, NULL, NULL),
+('STU-90011', 'Shohruh', 'Rustamov', '+998 94 495 17 24', 'Karimov aka', '+998 93 781 03 56', 'website', 'faol', 'ELE', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90012', 'Rayhona', 'Qodirova', '+998 94 590 52 03', 'Nazarov aka', '+998 98 322 56 51', 'offline', 'faol', 'ELE', CURRENT_DATE - 10, NULL, NULL, NULL),
+('STU-90013', 'Firdavs', 'Yusupov', '+998 94 796 80 02', 'Umarov aka', '+998 97 525 63 99', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90014', 'Temur', 'Toshmatov', '+998 97 607 06 82', 'Toshmatov aka', '+998 93 315 19 65', 'telegram', 'faol', 'ELE', CURRENT_DATE - 38, NULL, NULL, NULL),
+('STU-90015', 'Eldor', 'Ahmedov', '+998 94 809 38 87', 'Ergashev aka', '+998 93 449 53 19', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 31, NULL, NULL, NULL),
+('STU-90016', 'Madina', 'Sattorova', '+998 98 596 82 16', 'Toshmatov aka', '+998 98 508 65 80', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 63, NULL, NULL, NULL),
+('STU-90017', 'Dilshod', 'Sharipov', '+998 98 433 50 61', 'Mirzayev aka', '+998 97 903 52 37', 'offline', 'faol', 'ELE', CURRENT_DATE - 74, NULL, NULL, NULL),
+('STU-90018', 'Shohruh', 'Tohirov', '+998 98 914 03 26', 'Tohirov aka', '+998 94 291 42 91', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 73, NULL, NULL, NULL),
+('STU-90019', 'Shohruh', 'Rustamov', '+998 98 818 26 83', 'Mirzayev aka', '+998 98 376 72 42', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 34, NULL, NULL, NULL),
+('STU-90020', 'Dilrabo', 'Sattorova', '+998 91 993 21 28', 'Aliyev aka', '+998 97 705 01 09', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 14, NULL, NULL, NULL),
+('STU-90021', 'Eldor', 'Hamidov', '+998 94 288 08 20', 'Mahmudov aka', '+998 93 831 56 89', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 88, NULL, NULL, NULL),
+('STU-90022', 'Farrux', 'Tohirov', '+998 97 739 75 79', 'Toshmatov aka', '+998 93 317 03 32', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 33, NULL, NULL, NULL),
+('STU-90023', 'Ulugbek', 'Nazarov', '+998 91 965 65 85', 'Nazarov aka', '+998 98 127 55 09', 'google_ads', 'faol', 'INT', CURRENT_DATE - 58, NULL, NULL, NULL),
+('STU-90024', 'Diyor', 'Davronov', '+998 94 146 40 73', 'Ergashev aka', '+998 94 998 74 72', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 80, NULL, NULL, NULL),
+('STU-90025', 'Javohir', 'Toshmatov', '+998 93 754 85 76', 'Toshmatov aka', '+998 98 326 22 84', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 58, NULL, NULL, NULL),
+('STU-90026', 'Islom', 'Yusupov', '+998 97 256 58 37', 'Mirzayev aka', '+998 94 329 87 05', 'offline', 'faol', 'UPP', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90027', 'Robiya', 'Yusupova', '+998 91 454 66 21', 'Yusupov aka', '+998 98 644 55 98', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90028', 'Zafar', 'Tohirov', '+998 97 686 61 13', 'Aliyev aka', '+998 97 671 84 56', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 28, NULL, NULL, NULL),
+('STU-90029', 'Kamola', 'Yusupova', '+998 91 184 26 86', 'Sattorov aka', '+998 97 690 72 47', 'facebook_ads', 'faol', 'UPP', CURRENT_DATE - 85, NULL, NULL, NULL),
+('STU-90030', 'Jasur', 'Nazarov', '+998 97 884 30 33', 'Umarov aka', '+998 98 396 61 30', 'hamkor', 'faol', 'ADV', CURRENT_DATE - 17, NULL, NULL, NULL),
+('STU-90031', 'Mohira', 'Berdiyeva', '+998 94 952 99 24', 'Umarov aka', '+998 93 306 99 79', 'facebook_ads', 'faol', 'ADV', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90032', 'Zafar', 'Karimov', '+998 91 791 52 21', 'Sharipov aka', '+998 97 469 91 55', 'instagram_organic', 'faol', 'ADV', CURRENT_DATE - 79, NULL, NULL, NULL),
+('STU-90033', 'Sitora', 'Mirzayeva', '+998 97 413 66 36', 'Davronov aka', '+998 93 490 03 07', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 81, NULL, NULL, NULL),
+('STU-90034', 'Doston', 'Ergashev', '+998 94 423 66 76', 'Sodiqov aka', '+998 90 414 46 12', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 10, NULL, NULL, NULL),
+('STU-90035', 'Muhammadali', 'Hamidov', '+998 91 880 61 91', 'Karimov aka', '+998 98 279 09 87', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90036', 'Sardor', 'Olimov', '+998 90 810 07 23', 'Berdiyev aka', '+998 93 201 45 40', 'offline', 'faol', 'BEG', CURRENT_DATE - 34, NULL, NULL, NULL),
+('STU-90037', 'Ulugbek', 'Umarov', '+998 94 187 36 31', 'Sattorov aka', '+998 98 818 79 90', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 17, NULL, NULL, NULL),
+('STU-90038', 'Malika', 'Nazarova', '+998 93 833 93 39', 'Ahmedov aka', '+998 93 554 51 65', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 16, NULL, NULL, NULL),
+('STU-90039', 'Nozima', 'Raximova', '+998 94 125 74 42', 'Tohirov aka', '+998 93 239 30 82', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90040', 'Akmal', 'Mahmudov', '+998 91 960 11 86', 'Ismoilov aka', '+998 97 663 72 76', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 16, NULL, NULL, NULL),
+('STU-90041', 'Sevinch', 'Berdiyeva', '+998 93 794 99 82', 'Sharipov aka', '+998 94 935 40 98', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90042', 'Abbos', 'Raximov', '+998 94 780 09 09', 'Yusupov aka', '+998 97 627 63 60', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 13, NULL, NULL, NULL),
+('STU-90043', 'Madina', 'Ahmedova', '+998 94 747 08 89', 'Karimov aka', '+998 90 685 61 88', 'offline', 'faol', 'ELE', CURRENT_DATE - 89, NULL, NULL, NULL),
+('STU-90044', 'Gulnora', 'Xasanova', '+998 94 866 78 77', 'Berdiyev aka', '+998 97 899 15 58', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 16, NULL, NULL, NULL),
+('STU-90045', 'Nozima', 'Olimova', '+998 98 508 23 06', 'Ahmedov aka', '+998 90 494 17 54', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 24, NULL, NULL, NULL),
+('STU-90046', 'Yulduz', 'Karimova', '+998 90 833 96 90', 'Nazarov aka', '+998 94 182 90 07', 'website', 'faol', 'ELE', CURRENT_DATE - 38, NULL, NULL, NULL),
+('STU-90047', 'Dilshod', 'Ergashev', '+998 91 102 47 10', 'Toshmatov aka', '+998 90 122 99 12', 'telegram', 'faol', 'ELE', CURRENT_DATE - 83, NULL, NULL, NULL),
+('STU-90048', 'Nilufar', 'Olimova', '+998 93 963 76 63', 'Ergashev aka', '+998 98 695 32 86', 'offline', 'faol', 'ELE', CURRENT_DATE - 77, NULL, NULL, NULL),
+('STU-90049', 'Bobur', 'Raximov', '+998 97 330 75 23', 'Tohirov aka', '+998 90 243 44 46', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90050', 'Shahzoda', 'Sharipova', '+998 97 617 09 64', 'Davronov aka', '+998 90 239 62 67', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 81, NULL, NULL, NULL),
+('STU-90051', 'Abbos', 'Davronov', '+998 91 663 75 32', 'Davronov aka', '+998 91 636 82 48', 'google_ads', 'faol', 'INT', CURRENT_DATE - 64, NULL, NULL, NULL),
+('STU-90052', 'Laylo', 'Mirzayeva', '+998 90 353 32 79', 'Aliyev aka', '+998 91 197 49 64', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 16, NULL, NULL, NULL),
+('STU-90053', 'Sherzod', 'Qodirov', '+998 94 347 60 69', 'Tohirov aka', '+998 91 315 86 44', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90054', 'Kamola', 'Karimova', '+998 97 523 42 09', 'Nazarov aka', '+998 90 357 91 97', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 60, NULL, NULL, NULL),
+('STU-90055', 'Islom', 'Nazarov', '+998 93 550 03 12', 'Ismoilov aka', '+998 93 244 45 61', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 10, NULL, NULL, NULL),
+('STU-90056', 'Robiya', 'Toshmatova', '+998 94 118 21 46', 'Berdiyev aka', '+998 90 265 73 42', 'telegram', 'faol', 'INT', CURRENT_DATE - 18, NULL, NULL, NULL),
+('STU-90057', 'Sherzod', 'Davronov', '+998 93 183 77 09', 'Tohirov aka', '+998 90 592 70 92', 'google_ads', 'faol', 'INT', CURRENT_DATE - 43, NULL, NULL, NULL),
+('STU-90058', 'Firdavs', 'Sharipov', '+998 93 776 84 67', 'Olimov aka', '+998 90 917 78 24', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 47, NULL, NULL, NULL),
+('STU-90059', 'Yulduz', 'Umarova', '+998 93 770 15 38', 'Hamidov aka', '+998 94 828 76 45', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 45, NULL, NULL, NULL),
+('STU-90060', 'Sherzod', 'Yusupov', '+998 94 391 28 47', 'Rustamov aka', '+998 93 859 56 74', 'facebook_ads', 'faol', 'UPP', CURRENT_DATE - 45, NULL, NULL, NULL),
+('STU-90061', 'Aziz', 'Yusupov', '+998 97 871 17 60', 'Yusupov aka', '+998 94 455 20 95', 'google_ads', 'faol', 'UPP', CURRENT_DATE - 85, NULL, NULL, NULL),
+('STU-90062', 'Kamola', 'Tohirova', '+998 93 559 53 80', 'Qodirov aka', '+998 98 758 91 52', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 11, NULL, NULL, NULL),
+('STU-90063', 'Munisa', 'Raximova', '+998 94 360 60 22', 'Toshmatov aka', '+998 98 147 80 77', 'instagram_organic', 'faol', 'ADV', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90064', 'Kamron', 'Hamidov', '+998 98 181 00 61', 'Olimov aka', '+998 93 156 19 19', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 40, NULL, NULL, NULL),
+('STU-90065', 'Rustam', 'Xasanov', '+998 91 923 86 17', 'Nazarov aka', '+998 91 615 01 79', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 42, NULL, NULL, NULL),
+('STU-90066', 'Bobur', 'Sodiqov', '+998 93 789 05 69', 'Ergashev aka', '+998 97 927 84 00', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 53, NULL, NULL, NULL),
+('STU-90067', 'Botir', 'Raximov', '+998 90 133 64 11', 'Hamidov aka', '+998 91 337 54 37', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 81, NULL, NULL, NULL),
+('STU-90068', 'Anvar', 'Hamidov', '+998 94 858 75 48', 'Mahmudov aka', '+998 93 692 32 71', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90069', 'Firdavs', 'Sattorov', '+998 97 102 64 88', 'Ganiyev aka', '+998 94 721 70 29', 'offline', 'faol', 'BEG', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90070', 'Malika', 'Ahmedova', '+998 91 653 35 80', 'Olimov aka', '+998 94 168 84 71', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 81, NULL, NULL, NULL),
+('STU-90071', 'Eldor', 'Mirzayev', '+998 90 635 78 91', 'Hamidov aka', '+998 91 482 62 20', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 12, NULL, NULL, NULL),
+('STU-90072', 'Yulduz', 'Umarova', '+998 98 686 95 98', 'Ergashev aka', '+998 90 947 46 13', 'website', 'faol', 'BEG', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90073', 'Zafar', 'Davronov', '+998 98 114 88 33', 'Toshmatov aka', '+998 93 855 30 18', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 40, NULL, NULL, NULL),
+('STU-90074', 'Sevinch', 'Sodiqova', '+998 98 502 49 80', 'Ergashev aka', '+998 90 143 27 51', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 51, NULL, NULL, NULL),
+('STU-90075', 'Shahzoda', 'Salimova', '+998 91 610 55 17', 'Ergashev aka', '+998 98 276 20 24', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 29, NULL, NULL, NULL),
+('STU-90076', 'Islom', 'Aliyev', '+998 91 221 95 26', 'Nazarov aka', '+998 93 248 89 14', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 58, NULL, NULL, NULL),
+('STU-90077', 'Kamola', 'Nazarova', '+998 93 391 78 09', 'Ahmedov aka', '+998 93 605 90 06', 'google_ads', 'faol', 'ELE', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90078', 'Abbos', 'Nazarov', '+998 97 296 28 09', 'Xasanov aka', '+998 91 580 52 41', 'offline', 'faol', 'ELE', CURRENT_DATE - 59, NULL, NULL, NULL),
+('STU-90079', 'Shohruh', 'Rustamov', '+998 97 465 62 25', 'Ismoilov aka', '+998 91 363 85 18', 'website', 'faol', 'ELE', CURRENT_DATE - 12, NULL, NULL, NULL),
+('STU-90080', 'Dilshod', 'Tohirov', '+998 93 564 78 38', 'Berdiyev aka', '+998 94 816 11 48', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 23, NULL, NULL, NULL),
+('STU-90081', 'Bexruz', 'Ismoilov', '+998 98 693 80 28', 'Tohirov aka', '+998 97 220 38 35', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 88, NULL, NULL, NULL),
+('STU-90082', 'Iroda', 'Davronova', '+998 98 810 61 97', 'Berdiyev aka', '+998 93 554 55 22', 'telegram', 'faol', 'ELE', CURRENT_DATE - 27, NULL, NULL, NULL),
+('STU-90083', 'Sanjar', 'Ergashev', '+998 90 845 18 71', 'Yusupov aka', '+998 94 252 51 99', 'google_ads', 'faol', 'INT', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90084', 'Gulbahor', 'Tohirova', '+998 91 764 73 35', 'Salimov aka', '+998 94 633 89 44', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 83, NULL, NULL, NULL),
+('STU-90085', 'Sevinch', 'Ahmedova', '+998 93 604 51 08', 'Aliyev aka', '+998 93 245 12 85', 'hamkor', 'faol', 'INT', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90086', 'Jasmina', 'Raximova', '+998 90 394 68 22', 'Ganiyev aka', '+998 93 503 94 46', 'offline', 'faol', 'INT', CURRENT_DATE - 45, NULL, NULL, NULL),
+('STU-90087', 'Nilufar', 'Sattorova', '+998 93 814 70 64', 'Qodirov aka', '+998 91 125 54 21', 'website', 'faol', 'INT', CURRENT_DATE - 55, NULL, NULL, NULL),
+('STU-90088', 'Nilufar', 'Sattorova', '+998 94 684 66 90', 'Aliyev aka', '+998 97 547 86 80', 'telegram', 'faol', 'INT', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90089', 'Dilrabo', 'Mirzayeva', '+998 94 448 73 45', 'Rustamov aka', '+998 91 540 79 34', 'offline', 'faol', 'INT', CURRENT_DATE - 22, NULL, NULL, NULL),
+('STU-90090', 'Gulbahor', 'Rustamova', '+998 97 790 03 39', 'Salimov aka', '+998 90 469 53 61', 'instagram_organic', 'faol', 'UPP', CURRENT_DATE - 70, NULL, NULL, NULL),
+('STU-90091', 'Munisa', 'Mirzayeva', '+998 94 141 91 13', 'Yusupov aka', '+998 98 218 78 10', 'offline', 'faol', 'UPP', CURRENT_DATE - 72, NULL, NULL, NULL),
+('STU-90092', 'Diyor', 'Karimov', '+998 93 321 20 70', 'Nazarov aka', '+998 91 410 72 88', 'instagram_organic', 'faol', 'UPP', CURRENT_DATE - 27, NULL, NULL, NULL),
+('STU-90093', 'Umida', 'Mahmudova', '+998 94 899 94 79', 'Qodirov aka', '+998 90 479 29 79', 'tavsiya', 'faol', 'UPP', CURRENT_DATE - 10, NULL, NULL, NULL),
+('STU-90094', 'Munisa', 'Ganiyeva', '+998 90 401 36 59', 'Yusupov aka', '+998 94 872 61 70', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 33, NULL, NULL, NULL),
+('STU-90095', 'Anvar', 'Toshmatov', '+998 94 296 20 71', 'Aliyev aka', '+998 97 483 70 61', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90096', 'Bexruz', 'Ahmedov', '+998 91 981 73 18', 'Yusupov aka', '+998 97 437 90 08', 'offline', 'faol', 'ADV', CURRENT_DATE - 73, NULL, NULL, NULL),
+('STU-90097', 'Aziz', 'Nazarov', '+998 91 405 05 77', 'Mirzayev aka', '+998 93 327 59 51', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 51, NULL, NULL, NULL),
+('STU-90098', 'Anvar', 'Salimov', '+998 91 227 16 78', 'Qodirov aka', '+998 90 421 69 16', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 34, NULL, NULL, NULL),
+('STU-90099', 'Bexruz', 'Ismoilov', '+998 90 545 23 94', 'Ismoilov aka', '+998 91 535 65 12', 'website', 'faol', 'BEG', CURRENT_DATE - 47, NULL, NULL, NULL),
+('STU-90100', 'Islom', 'Umarov', '+998 93 209 21 95', 'Rustamov aka', '+998 98 610 91 66', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 74, NULL, NULL, NULL),
+('STU-90101', 'Munisa', 'Aliyeva', '+998 98 314 46 10', 'Xasanov aka', '+998 94 202 79 08', 'website', 'faol', 'BEG', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90102', 'Otabek', 'Salimov', '+998 91 845 20 78', 'Nazarov aka', '+998 94 149 84 04', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 54, NULL, NULL, NULL),
+('STU-90103', 'Zarina', 'Sharipova', '+998 91 860 94 04', 'Davronov aka', '+998 90 781 10 05', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 31, NULL, NULL, NULL),
+('STU-90104', 'Xadicha', 'Sattorova', '+998 97 284 74 73', 'Tohirov aka', '+998 98 800 17 78', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90105', 'Oysha', 'Toshmatova', '+998 90 607 42 50', 'Ahmedov aka', '+998 97 223 16 08', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90106', 'Marjona', 'Olimova', '+998 90 351 75 67', 'Ismoilov aka', '+998 93 979 52 48', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 83, NULL, NULL, NULL),
+('STU-90107', 'Kamola', 'Yusupova', '+998 93 827 82 53', 'Aliyev aka', '+998 91 224 97 24', 'telegram', 'faol', 'ELE', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90108', 'Yulduz', 'Yusupova', '+998 93 557 01 83', 'Umarov aka', '+998 98 733 41 97', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 38, NULL, NULL, NULL),
+('STU-90109', 'Mohira', 'Sodiqova', '+998 97 641 76 60', 'Ergashev aka', '+998 90 923 24 62', 'telegram', 'faol', 'ELE', CURRENT_DATE - 20, NULL, NULL, NULL),
+('STU-90110', 'Nodir', 'Raximov', '+998 97 461 70 86', 'Toshmatov aka', '+998 90 231 08 54', 'google_ads', 'faol', 'ELE', CURRENT_DATE - 82, NULL, NULL, NULL),
+('STU-90111', 'Laylo', 'Ganiyeva', '+998 97 869 48 04', 'Sattorov aka', '+998 98 855 06 14', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 83, NULL, NULL, NULL),
+('STU-90112', 'Gulnora', 'Mahmudova', '+998 98 654 54 26', 'Sodiqov aka', '+998 91 675 69 85', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 65, NULL, NULL, NULL),
+('STU-90113', 'Sanjar', 'Ergashev', '+998 93 392 85 02', 'Hamidov aka', '+998 97 364 05 73', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 21, NULL, NULL, NULL),
+('STU-90114', 'Nilufar', 'Sattorova', '+998 97 964 44 72', 'Nazarov aka', '+998 98 548 75 34', 'telegram', 'faol', 'ELE', CURRENT_DATE - 36, NULL, NULL, NULL),
+('STU-90115', 'Ozoda', 'Yusupova', '+998 91 365 59 02', 'Tohirov aka', '+998 91 623 52 86', 'offline', 'faol', 'INT', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90116', 'Nilufar', 'Ismoilova', '+998 98 136 73 35', 'Nazarov aka', '+998 94 158 89 10', 'hamkor', 'faol', 'INT', CURRENT_DATE - 80, NULL, NULL, NULL),
+('STU-90117', 'Islom', 'Sodiqov', '+998 97 410 93 41', 'Rustamov aka', '+998 90 517 31 51', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 41, NULL, NULL, NULL),
+('STU-90118', 'Madina', 'Sodiqova', '+998 93 527 53 70', 'Hamidov aka', '+998 91 659 21 46', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 17, NULL, NULL, NULL),
+('STU-90119', 'Madina', 'Sharipova', '+998 90 784 12 72', 'Raximov aka', '+998 91 186 32 97', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 57, NULL, NULL, NULL),
+('STU-90120', 'Zarina', 'Raximova', '+998 94 908 69 97', 'Salimov aka', '+998 93 133 87 87', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90121', 'Sherzod', 'Raximov', '+998 93 478 76 66', 'Raximov aka', '+998 91 433 77 13', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 52, NULL, NULL, NULL),
+('STU-90122', 'Malika', 'Rustamova', '+998 94 272 30 08', 'Toshmatov aka', '+998 91 378 73 74', 'google_ads', 'faol', 'UPP', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90123', 'Malika', 'Salimova', '+998 97 322 80 04', 'Aliyev aka', '+998 94 946 89 16', 'instagram_organic', 'faol', 'UPP', CURRENT_DATE - 13, NULL, NULL, NULL),
+('STU-90124', 'Sanjar', 'Toshmatov', '+998 97 694 97 23', 'Salimov aka', '+998 93 450 08 41', 'telegram', 'faol', 'UPP', CURRENT_DATE - 46, NULL, NULL, NULL),
+('STU-90125', 'Rayhona', 'Karimova', '+998 98 574 52 04', 'Tohirov aka', '+998 93 489 54 64', 'hamkor', 'faol', 'UPP', CURRENT_DATE - 40, NULL, NULL, NULL),
+('STU-90126', 'Farrux', 'Salimov', '+998 93 189 10 26', 'Berdiyev aka', '+998 98 922 86 31', 'telegram', 'faol', 'ADV', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90127', 'Jasmina', 'Qodirova', '+998 98 742 04 55', 'Tohirov aka', '+998 90 659 77 68', 'tavsiya', 'faol', 'ADV', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90128', 'Akmal', 'Tohirov', '+998 97 957 99 88', 'Ergashev aka', '+998 97 780 83 05', 'website', 'faol', 'ADV', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90129', 'Diyor', 'Nazarov', '+998 97 546 08 52', 'Mirzayev aka', '+998 90 617 59 54', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 88, NULL, NULL, NULL),
+('STU-90130', 'Muhammadali', 'Rustamov', '+998 97 120 48 63', 'Sharipov aka', '+998 97 572 70 99', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 89, NULL, NULL, NULL),
+('STU-90131', 'Kamola', 'Olimova', '+998 98 328 04 56', 'Hamidov aka', '+998 94 135 29 64', 'telegram', 'faol', 'BEG', CURRENT_DATE - 29, NULL, NULL, NULL),
+('STU-90132', 'Munisa', 'Toshmatova', '+998 98 485 38 14', 'Karimov aka', '+998 98 461 06 48', 'offline', 'faol', 'BEG', CURRENT_DATE - 13, NULL, NULL, NULL),
+('STU-90133', 'Doston', 'Rustamov', '+998 94 284 57 12', 'Sattorov aka', '+998 90 621 16 25', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 90, NULL, NULL, NULL),
+('STU-90134', 'Nilufar', 'Salimova', '+998 90 793 12 95', 'Xasanov aka', '+998 91 962 72 94', 'facebook_ads', 'faol', 'BEG', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90135', 'Muhammadali', 'Ergashev', '+998 97 838 29 21', 'Tohirov aka', '+998 90 314 36 04', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90136', 'Ozoda', 'Raximova', '+998 90 731 07 15', 'Xasanov aka', '+998 97 870 71 33', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 62, NULL, NULL, NULL),
+('STU-90137', 'Sitora', 'Umarova', '+998 91 413 26 27', 'Mahmudov aka', '+998 97 762 38 32', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 80, NULL, NULL, NULL),
+('STU-90138', 'Nodir', 'Rustamov', '+998 91 417 65 36', 'Salimov aka', '+998 98 591 13 73', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 50, NULL, NULL, NULL),
+('STU-90139', 'Nodir', 'Hamidov', '+998 94 566 35 69', 'Ahmedov aka', '+998 94 521 32 71', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 84, NULL, NULL, NULL),
+('STU-90140', 'Sanjar', 'Ahmedov', '+998 94 401 21 01', 'Mirzayev aka', '+998 98 441 61 12', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90141', 'Zilola', 'Sodiqova', '+998 97 774 72 30', 'Tohirov aka', '+998 90 837 87 50', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 47, NULL, NULL, NULL),
+('STU-90142', 'Feruza', 'Sharipova', '+998 93 322 16 90', 'Ganiyev aka', '+998 97 781 87 58', 'website', 'faol', 'ELE', CURRENT_DATE - 29, NULL, NULL, NULL),
+('STU-90143', 'Jasur', 'Mahmudov', '+998 93 509 92 46', 'Ergashev aka', '+998 98 608 82 99', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 12, NULL, NULL, NULL),
+('STU-90144', 'Islom', 'Xasanov', '+998 90 914 93 34', 'Qodirov aka', '+998 98 301 97 42', 'website', 'faol', 'ELE', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90145', 'Munisa', 'Rustamova', '+998 97 325 37 95', 'Davronov aka', '+998 93 430 40 56', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 22, NULL, NULL, NULL),
+('STU-90146', 'Shahzoda', 'Rustamova', '+998 91 772 66 63', 'Sharipov aka', '+998 93 656 04 04', 'telegram', 'faol', 'ELE', CURRENT_DATE - 14, NULL, NULL, NULL),
+('STU-90147', 'Kamron', 'Olimov', '+998 97 246 28 54', 'Yusupov aka', '+998 98 674 81 23', 'offline', 'faol', 'INT', CURRENT_DATE - 24, NULL, NULL, NULL),
+('STU-90148', 'Diyor', 'Qodirov', '+998 97 202 86 41', 'Berdiyev aka', '+998 93 743 45 46', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90149', 'Feruza', 'Ergasheva', '+998 98 242 23 98', 'Nazarov aka', '+998 91 353 69 01', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90150', 'Umid', 'Karimov', '+998 91 420 23 28', 'Ergashev aka', '+998 93 952 06 90', 'website', 'faol', 'INT', CURRENT_DATE - 23, NULL, NULL, NULL),
+('STU-90151', 'Botir', 'Hamidov', '+998 98 612 98 91', 'Qodirov aka', '+998 94 168 54 19', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 64, NULL, NULL, NULL),
+('STU-90152', 'Mohira', 'Umarova', '+998 91 977 52 81', 'Yusupov aka', '+998 98 230 72 88', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 89, NULL, NULL, NULL),
+('STU-90153', 'Bexruz', 'Davronov', '+998 94 328 13 79', 'Ganiyev aka', '+998 97 757 14 56', 'offline', 'faol', 'INT', CURRENT_DATE - 51, NULL, NULL, NULL),
+('STU-90154', 'Iroda', 'Ahmedova', '+998 90 325 07 51', 'Mirzayev aka', '+998 90 463 25 47', 'offline', 'faol', 'UPP', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90155', 'Nozima', 'Davronova', '+998 94 592 91 94', 'Nazarov aka', '+998 91 867 64 08', 'tavsiya', 'faol', 'UPP', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90156', 'Dilshod', 'Sodiqov', '+998 94 149 46 77', 'Ismoilov aka', '+998 98 529 65 99', 'facebook_ads', 'faol', 'UPP', CURRENT_DATE - 32, NULL, NULL, NULL),
+('STU-90157', 'Oysha', 'Mirzayeva', '+998 91 428 07 18', 'Davronov aka', '+998 98 436 77 43', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90158', 'Zilola', 'Berdiyeva', '+998 91 827 32 65', 'Ganiyev aka', '+998 93 416 06 11', 'tavsiya', 'faol', 'ADV', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90159', 'Yulduz', 'Ahmedova', '+998 91 107 62 86', 'Mahmudov aka', '+998 90 248 33 62', 'tavsiya', 'faol', 'ADV', CURRENT_DATE - 51, NULL, NULL, NULL),
+('STU-90160', 'Firdavs', 'Ismoilov', '+998 91 803 29 94', 'Mahmudov aka', '+998 98 877 02 16', 'hamkor', 'faol', 'ADV', CURRENT_DATE - 27, NULL, NULL, NULL),
+('STU-90161', 'Oysha', 'Tohirova', '+998 97 553 02 07', 'Ganiyev aka', '+998 94 904 10 47', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90162', 'Iroda', 'Raximova', '+998 98 274 70 09', 'Mahmudov aka', '+998 94 579 79 13', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 51, NULL, NULL, NULL),
+('STU-90163', 'Umid', 'Raximov', '+998 91 619 98 35', 'Rustamov aka', '+998 98 426 55 73', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 80, NULL, NULL, NULL),
+('STU-90164', 'Mohira', 'Mirzayeva', '+998 98 832 43 78', 'Sharipov aka', '+998 94 977 84 65', 'facebook_ads', 'faol', 'BEG', CURRENT_DATE - 21, NULL, NULL, NULL),
+('STU-90165', 'Botir', 'Karimov', '+998 94 602 97 36', 'Salimov aka', '+998 94 859 17 04', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 29, NULL, NULL, NULL),
+('STU-90166', 'Rustam', 'Hamidov', '+998 94 110 98 20', 'Tohirov aka', '+998 91 597 94 97', 'telegram', 'faol', 'BEG', CURRENT_DATE - 64, NULL, NULL, NULL),
+('STU-90167', 'Yulduz', 'Qodirova', '+998 93 836 15 11', 'Karimov aka', '+998 98 285 29 13', 'offline', 'faol', 'BEG', CURRENT_DATE - 20, NULL, NULL, NULL),
+('STU-90168', 'Muhammadali', 'Qodirov', '+998 91 524 76 51', 'Sodiqov aka', '+998 97 229 19 68', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90169', 'Diyor', 'Mirzayev', '+998 93 600 30 84', 'Karimov aka', '+998 97 822 60 81', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90170', 'Kamron', 'Tohirov', '+998 91 113 21 79', 'Toshmatov aka', '+998 97 259 11 72', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 73, NULL, NULL, NULL),
+('STU-90171', 'Ulugbek', 'Qodirov', '+998 90 119 88 61', 'Davronov aka', '+998 91 487 91 77', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 55, NULL, NULL, NULL),
+('STU-90172', 'Diyor', 'Toshmatov', '+998 98 308 02 63', 'Aliyev aka', '+998 93 385 62 86', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90173', 'Botir', 'Tohirov', '+998 93 538 48 16', 'Hamidov aka', '+998 91 861 70 25', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 45, NULL, NULL, NULL),
+('STU-90174', 'Rayhona', 'Karimova', '+998 94 895 85 15', 'Karimov aka', '+998 97 502 40 89', 'telegram', 'faol', 'ELE', CURRENT_DATE - 87, NULL, NULL, NULL),
+('STU-90175', 'Marjona', 'Mirzayeva', '+998 97 607 08 76', 'Davronov aka', '+998 90 657 57 98', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 23, NULL, NULL, NULL),
+('STU-90176', 'Nilufar', 'Karimova', '+998 93 351 08 98', 'Hamidov aka', '+998 94 847 14 90', 'offline', 'faol', 'ELE', CURRENT_DATE - 73, NULL, NULL, NULL),
+('STU-90177', 'Islom', 'Mirzayev', '+998 93 715 07 82', 'Toshmatov aka', '+998 91 399 65 04', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 22, NULL, NULL, NULL),
+('STU-90178', 'Dilrabo', 'Qodirova', '+998 90 156 63 67', 'Hamidov aka', '+998 94 642 47 60', 'offline', 'faol', 'ELE', CURRENT_DATE - 46, NULL, NULL, NULL),
+('STU-90179', 'Doston', 'Tohirov', '+998 91 837 77 77', 'Aliyev aka', '+998 97 457 62 53', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 86, NULL, NULL, NULL),
+('STU-90180', 'Gulnora', 'Toshmatova', '+998 97 223 92 38', 'Xasanov aka', '+998 91 981 78 62', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90181', 'Firdavs', 'Mirzayev', '+998 90 799 03 30', 'Sodiqov aka', '+998 98 996 74 21', 'telegram', 'faol', 'INT', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90182', 'Ulugbek', 'Qodirov', '+998 94 695 28 99', 'Ismoilov aka', '+998 98 833 08 97', 'telegram', 'faol', 'INT', CURRENT_DATE - 52, NULL, NULL, NULL),
+('STU-90183', 'Sardor', 'Toshmatov', '+998 93 676 23 01', 'Hamidov aka', '+998 98 936 20 44', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 60, NULL, NULL, NULL),
+('STU-90184', 'Islom', 'Toshmatov', '+998 98 402 59 83', 'Yusupov aka', '+998 94 475 66 35', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 25, NULL, NULL, NULL),
+('STU-90185', 'Madina', 'Toshmatova', '+998 90 274 37 17', 'Mahmudov aka', '+998 90 421 69 13', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 36, NULL, NULL, NULL),
+('STU-90186', 'Umida', 'Berdiyeva', '+998 91 474 00 74', 'Olimov aka', '+998 97 766 23 90', 'instagram_organic', 'faol', 'UPP', CURRENT_DATE - 17, NULL, NULL, NULL),
+('STU-90187', 'Botir', 'Berdiyev', '+998 94 457 60 92', 'Salimov aka', '+998 90 764 81 60', 'tavsiya', 'faol', 'UPP', CURRENT_DATE - 14, NULL, NULL, NULL),
+('STU-90188', 'Kamola', 'Olimova', '+998 98 251 78 24', 'Ahmedov aka', '+998 93 424 69 53', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 17, NULL, NULL, NULL),
+('STU-90189', 'Aziz', 'Rustamov', '+998 91 318 04 33', 'Ergashev aka', '+998 91 497 02 34', 'website', 'faol', 'UPP', CURRENT_DATE - 35, NULL, NULL, NULL),
+('STU-90190', 'Nozima', 'Karimova', '+998 98 745 83 82', 'Karimov aka', '+998 98 888 87 09', 'tavsiya', 'faol', 'ADV', CURRENT_DATE - 62, NULL, NULL, NULL),
+('STU-90191', 'Shohruh', 'Ganiyev', '+998 94 624 71 02', 'Berdiyev aka', '+998 93 846 94 30', 'hamkor', 'faol', 'ADV', CURRENT_DATE - 22, NULL, NULL, NULL),
+('STU-90192', 'Farrux', 'Yusupov', '+998 94 538 39 81', 'Toshmatov aka', '+998 91 643 76 73', 'google_ads', 'faol', 'ADV', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90193', 'Dildora', 'Nazarova', '+998 94 763 22 28', 'Berdiyev aka', '+998 94 830 45 12', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90194', 'Zarina', 'Aliyeva', '+998 94 724 82 28', 'Yusupov aka', '+998 91 766 14 49', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 18, NULL, NULL, NULL),
+('STU-90195', 'Jasur', 'Raximov', '+998 98 979 22 96', 'Yusupov aka', '+998 91 218 77 40', 'facebook_ads', 'faol', 'BEG', CURRENT_DATE - 32, NULL, NULL, NULL),
+('STU-90196', 'Ulugbek', 'Raximov', '+998 90 622 77 87', 'Raximov aka', '+998 93 417 58 90', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90197', 'Jasmina', 'Sharipova', '+998 94 279 89 47', 'Salimov aka', '+998 97 926 44 94', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 31, NULL, NULL, NULL),
+('STU-90198', 'Kamola', 'Olimova', '+998 97 431 90 68', 'Ganiyev aka', '+998 91 869 22 94', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 75, NULL, NULL, NULL),
+('STU-90199', 'Sitora', 'Mirzayeva', '+998 93 441 08 67', 'Davronov aka', '+998 98 322 01 49', 'telegram', 'faol', 'BEG', CURRENT_DATE - 42, NULL, NULL, NULL),
+('STU-90200', 'Ulugbek', 'Davronov', '+998 93 191 89 35', 'Xasanov aka', '+998 93 875 96 96', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 43, NULL, NULL, NULL),
+('STU-90201', 'Nozima', 'Ergasheva', '+998 94 658 68 66', 'Ganiyev aka', '+998 97 776 73 67', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90202', 'Nargiza', 'Berdiyeva', '+998 98 878 72 14', 'Karimov aka', '+998 97 589 68 16', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 52, NULL, NULL, NULL),
+('STU-90203', 'Robiya', 'Sattorova', '+998 91 904 38 48', 'Ismoilov aka', '+998 98 566 67 75', 'website', 'faol', 'ELE', CURRENT_DATE - 60, NULL, NULL, NULL),
+('STU-90204', 'Ozoda', 'Rustamova', '+998 94 153 19 75', 'Tohirov aka', '+998 91 906 82 75', 'website', 'faol', 'ELE', CURRENT_DATE - 41, NULL, NULL, NULL),
+('STU-90205', 'Farrux', 'Sattorov', '+998 97 799 07 42', 'Hamidov aka', '+998 91 834 93 68', 'offline', 'faol', 'ELE', CURRENT_DATE - 87, NULL, NULL, NULL),
+('STU-90206', 'Nilufar', 'Davronova', '+998 97 722 20 83', 'Sharipov aka', '+998 97 590 46 10', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 54, NULL, NULL, NULL),
+('STU-90207', 'Shirin', 'Olimova', '+998 91 808 35 42', 'Rustamov aka', '+998 98 461 99 62', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90208', 'Robiya', 'Tohirova', '+998 91 895 38 77', 'Mahmudov aka', '+998 98 994 60 22', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90209', 'Diyor', 'Toshmatov', '+998 97 210 91 66', 'Aliyev aka', '+998 90 474 25 64', 'website', 'faol', 'ELE', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90210', 'Zafar', 'Salimov', '+998 97 160 95 08', 'Yusupov aka', '+998 97 492 36 55', 'telegram', 'faol', 'ELE', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90211', 'Rayhona', 'Hamidova', '+998 90 912 86 49', 'Ismoilov aka', '+998 98 244 41 41', 'google_ads', 'faol', 'INT', CURRENT_DATE - 13, NULL, NULL, NULL),
+('STU-90212', 'Iroda', 'Umarova', '+998 94 581 97 41', 'Salimov aka', '+998 98 592 31 95', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90213', 'Umida', 'Aliyeva', '+998 98 306 20 17', 'Tohirov aka', '+998 97 318 20 23', 'offline', 'faol', 'INT', CURRENT_DATE - 72, NULL, NULL, NULL),
+('STU-90214', 'Kamron', 'Ismoilov', '+998 93 401 42 08', 'Nazarov aka', '+998 90 881 12 10', 'offline', 'faol', 'INT', CURRENT_DATE - 30, NULL, NULL, NULL),
+('STU-90215', 'Zilola', 'Berdiyeva', '+998 93 677 06 07', 'Qodirov aka', '+998 97 880 58 53', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 52, NULL, NULL, NULL),
+('STU-90216', 'Jasmina', 'Qodirova', '+998 91 722 61 67', 'Salimov aka', '+998 97 728 17 03', 'telegram', 'faol', 'INT', CURRENT_DATE - 45, NULL, NULL, NULL),
+('STU-90217', 'Yulduz', 'Ergasheva', '+998 91 822 25 34', 'Salimov aka', '+998 93 363 43 63', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90218', 'Zafar', 'Sodiqov', '+998 90 472 97 06', 'Sattorov aka', '+998 90 655 03 34', 'telegram', 'faol', 'UPP', CURRENT_DATE - 74, NULL, NULL, NULL),
+('STU-90219', 'Malika', 'Salimova', '+998 98 547 47 30', 'Ergashev aka', '+998 93 742 44 69', 'facebook_ads', 'faol', 'UPP', CURRENT_DATE - 73, NULL, NULL, NULL),
+('STU-90220', 'Jasur', 'Olimov', '+998 93 991 29 83', 'Raximov aka', '+998 90 136 72 21', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 54, NULL, NULL, NULL),
+('STU-90221', 'Eldor', 'Tohirov', '+998 94 325 10 82', 'Toshmatov aka', '+998 93 173 58 80', 'google_ads', 'faol', 'UPP', CURRENT_DATE - 59, NULL, NULL, NULL),
+('STU-90222', 'Sitora', 'Rustamova', '+998 98 397 70 11', 'Nazarov aka', '+998 93 497 19 49', 'tavsiya', 'faol', 'ADV', CURRENT_DATE - 88, NULL, NULL, NULL),
+('STU-90223', 'Otabek', 'Sharipov', '+998 97 251 32 62', 'Salimov aka', '+998 98 677 41 84', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90224', 'Marjona', 'Yusupova', '+998 91 405 31 22', 'Ismoilov aka', '+998 91 221 61 34', 'hamkor', 'faol', 'ADV', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90225', 'Shirin', 'Hamidova', '+998 97 835 26 29', 'Raximov aka', '+998 91 262 22 58', 'telegram', 'faol', 'BEG', CURRENT_DATE - 14, NULL, NULL, NULL),
+('STU-90226', 'Sanjar', 'Karimov', '+998 94 825 04 54', 'Mirzayev aka', '+998 91 782 21 23', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 25, NULL, NULL, NULL),
+('STU-90227', 'Dilrabo', 'Davronova', '+998 93 294 17 30', 'Aliyev aka', '+998 91 351 56 95', 'facebook_ads', 'faol', 'BEG', CURRENT_DATE - 62, NULL, NULL, NULL),
+('STU-90228', 'Bobur', 'Raximov', '+998 90 351 09 67', 'Toshmatov aka', '+998 91 861 84 20', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 11, NULL, NULL, NULL),
+('STU-90229', 'Sitora', 'Toshmatova', '+998 90 355 83 36', 'Davronov aka', '+998 94 153 84 67', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 21, NULL, NULL, NULL),
+('STU-90230', 'Temur', 'Hamidov', '+998 94 915 26 77', 'Sharipov aka', '+998 94 218 53 89', 'facebook_ads', 'faol', 'BEG', CURRENT_DATE - 27, NULL, NULL, NULL),
+('STU-90231', 'Yulduz', 'Nazarova', '+998 90 369 92 06', 'Raximov aka', '+998 90 278 91 58', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 71, NULL, NULL, NULL),
+('STU-90232', 'Diyor', 'Ganiyev', '+998 93 479 79 43', 'Tohirov aka', '+998 98 531 63 55', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 61, NULL, NULL, NULL),
+('STU-90233', 'Rustam', 'Tohirov', '+998 93 303 81 40', 'Ismoilov aka', '+998 97 321 90 30', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 49, NULL, NULL, NULL),
+('STU-90234', 'Sitora', 'Ahmedova', '+998 94 777 71 82', 'Toshmatov aka', '+998 93 611 36 01', 'website', 'faol', 'BEG', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90235', 'Otabek', 'Toshmatov', '+998 93 964 08 77', 'Ismoilov aka', '+998 93 526 74 24', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90236', 'Bexruz', 'Ergashev', '+998 90 942 69 66', 'Mahmudov aka', '+998 98 765 87 57', 'telegram', 'faol', 'ELE', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90237', 'Shohruh', 'Aliyev', '+998 94 853 82 54', 'Umarov aka', '+998 98 821 98 82', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 18, NULL, NULL, NULL),
+('STU-90238', 'Botir', 'Karimov', '+998 90 369 91 38', 'Xasanov aka', '+998 90 666 08 06', 'website', 'faol', 'ELE', CURRENT_DATE - 77, NULL, NULL, NULL),
+('STU-90239', 'Gulnora', 'Ahmedova', '+998 97 983 36 18', 'Ergashev aka', '+998 93 604 04 66', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 75, NULL, NULL, NULL),
+('STU-90240', 'Temur', 'Salimov', '+998 98 202 48 54', 'Olimov aka', '+998 98 544 03 57', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 53, NULL, NULL, NULL),
+('STU-90241', 'Umid', 'Umarov', '+998 94 381 11 69', 'Sattorov aka', '+998 98 185 91 04', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 12, NULL, NULL, NULL),
+('STU-90242', 'Sherzod', 'Raximov', '+998 93 255 44 35', 'Qodirov aka', '+998 98 418 27 66', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 74, NULL, NULL, NULL),
+('STU-90243', 'Sherzod', 'Mahmudov', '+998 93 371 59 72', 'Yusupov aka', '+998 98 538 91 77', 'telegram', 'faol', 'INT', CURRENT_DATE - 72, NULL, NULL, NULL),
+('STU-90244', 'Zarina', 'Umarova', '+998 98 986 29 86', 'Sattorov aka', '+998 93 421 76 04', 'hamkor', 'faol', 'INT', CURRENT_DATE - 57, NULL, NULL, NULL),
+('STU-90245', 'Aziz', 'Ismoilov', '+998 91 815 86 63', 'Aliyev aka', '+998 97 914 06 43', 'google_ads', 'faol', 'INT', CURRENT_DATE - 64, NULL, NULL, NULL),
+('STU-90246', 'Anvar', 'Ganiyev', '+998 94 610 65 07', 'Qodirov aka', '+998 98 998 25 96', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90247', 'Shohruh', 'Tohirov', '+998 97 542 92 39', 'Mahmudov aka', '+998 93 418 16 52', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90248', 'Umid', 'Olimov', '+998 97 997 53 26', 'Karimov aka', '+998 98 175 97 94', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 36, NULL, NULL, NULL),
+('STU-90249', 'Kamron', 'Aliyev', '+998 94 900 80 14', 'Hamidov aka', '+998 98 844 64 06', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 53, NULL, NULL, NULL),
+('STU-90250', 'Ozoda', 'Tohirova', '+998 98 293 17 02', 'Umarov aka', '+998 98 624 28 40', 'tavsiya', 'faol', 'UPP', CURRENT_DATE - 34, NULL, NULL, NULL),
+('STU-90251', 'Nozima', 'Toshmatova', '+998 94 818 37 67', 'Tohirov aka', '+998 94 233 81 55', 'google_ads', 'faol', 'UPP', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90252', 'Madina', 'Raximova', '+998 90 785 59 97', 'Aliyev aka', '+998 97 789 50 43', 'facebook_ads', 'faol', 'UPP', CURRENT_DATE - 53, NULL, NULL, NULL),
+('STU-90253', 'Sardor', 'Qodirov', '+998 93 756 18 25', 'Tohirov aka', '+998 97 993 03 46', 'tavsiya', 'faol', 'UPP', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90254', 'Munisa', 'Xasanova', '+998 98 462 23 09', 'Qodirov aka', '+998 97 325 18 80', 'instagram_organic', 'faol', 'ADV', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90255', 'Nozima', 'Xasanova', '+998 90 772 70 54', 'Sattorov aka', '+998 97 886 83 62', 'hamkor', 'faol', 'ADV', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90256', 'Zafar', 'Olimov', '+998 97 873 32 12', 'Salimov aka', '+998 94 876 35 81', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90257', 'Malika', 'Qodirova', '+998 90 654 99 49', 'Umarov aka', '+998 94 192 26 18', 'facebook_ads', 'faol', 'BEG', CURRENT_DATE - 70, NULL, NULL, NULL),
+('STU-90258', 'Bobur', 'Qodirov', '+998 90 161 83 49', 'Sattorov aka', '+998 98 502 66 72', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 47, NULL, NULL, NULL),
+('STU-90259', 'Umid', 'Salimov', '+998 91 377 50 49', 'Sodiqov aka', '+998 91 987 77 91', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90260', 'Dilshod', 'Xasanov', '+998 98 741 31 67', 'Karimov aka', '+998 98 117 45 79', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 46, NULL, NULL, NULL),
+('STU-90261', 'Marjona', 'Sharipova', '+998 93 291 54 21', 'Qodirov aka', '+998 93 798 48 23', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 23, NULL, NULL, NULL),
+('STU-90262', 'Bexruz', 'Rustamov', '+998 90 950 68 10', 'Berdiyev aka', '+998 98 910 08 14', 'telegram', 'faol', 'BEG', CURRENT_DATE - 40, NULL, NULL, NULL),
+('STU-90263', 'Nilufar', 'Aliyeva', '+998 91 659 73 71', 'Qodirov aka', '+998 93 232 61 06', 'telegram', 'faol', 'BEG', CURRENT_DATE - 62, NULL, NULL, NULL),
+('STU-90264', 'Xadicha', 'Qodirova', '+998 97 563 04 80', 'Toshmatov aka', '+998 93 745 06 08', 'website', 'faol', 'BEG', CURRENT_DATE - 63, NULL, NULL, NULL),
+('STU-90265', 'Nodir', 'Sodiqov', '+998 98 377 34 02', 'Umarov aka', '+998 98 283 52 35', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 56, NULL, NULL, NULL),
+('STU-90266', 'Dilshod', 'Sattorov', '+998 94 797 96 50', 'Ismoilov aka', '+998 98 481 89 48', 'instagram_organic', 'faol', 'BEG', CURRENT_DATE - 61, NULL, NULL, NULL),
+('STU-90267', 'Abbos', 'Nazarov', '+998 94 366 46 19', 'Sharipov aka', '+998 98 362 54 09', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 25, NULL, NULL, NULL),
+('STU-90268', 'Umida', 'Olimova', '+998 91 300 76 95', 'Tohirov aka', '+998 98 751 64 36', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 83, NULL, NULL, NULL),
+('STU-90269', 'Eldor', 'Sharipov', '+998 94 219 28 25', 'Berdiyev aka', '+998 98 211 52 98', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 32, NULL, NULL, NULL),
+('STU-90270', 'Zarina', 'Sodiqova', '+998 90 629 91 49', 'Berdiyev aka', '+998 98 575 54 91', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 76, NULL, NULL, NULL),
+('STU-90271', 'Bexruz', 'Olimov', '+998 91 327 99 03', 'Hamidov aka', '+998 97 997 90 10', 'telegram', 'faol', 'ELE', CURRENT_DATE - 17, NULL, NULL, NULL),
+('STU-90272', 'Eldor', 'Raximov', '+998 91 654 28 38', 'Mahmudov aka', '+998 90 427 34 42', 'google_ads', 'faol', 'ELE', CURRENT_DATE - 55, NULL, NULL, NULL),
+('STU-90273', 'Shahzoda', 'Xasanova', '+998 93 325 13 44', 'Toshmatov aka', '+998 93 188 59 22', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 46, NULL, NULL, NULL),
+('STU-90274', 'Dildora', 'Berdiyeva', '+998 93 134 22 19', 'Yusupov aka', '+998 90 857 00 96', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 19, NULL, NULL, NULL),
+('STU-90275', 'Nodir', 'Olimov', '+998 90 236 25 73', 'Umarov aka', '+998 91 262 10 77', 'instagram_organic', 'faol', 'INT', CURRENT_DATE - 63, NULL, NULL, NULL),
+('STU-90276', 'Zafar', 'Toshmatov', '+998 91 473 44 35', 'Hamidov aka', '+998 94 638 06 74', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 11, NULL, NULL, NULL),
+('STU-90277', 'Eldor', 'Salimov', '+998 98 101 36 96', 'Mirzayev aka', '+998 93 205 57 41', 'telegram', 'faol', 'INT', CURRENT_DATE - 87, NULL, NULL, NULL),
+('STU-90278', 'Alisher', 'Ergashev', '+998 90 822 24 72', 'Olimov aka', '+998 90 412 83 49', 'offline', 'faol', 'INT', CURRENT_DATE - 50, NULL, NULL, NULL),
+('STU-90279', 'Xadicha', 'Mirzayeva', '+998 97 423 50 53', 'Ganiyev aka', '+998 98 189 70 73', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90280', 'Marjona', 'Ismoilova', '+998 93 516 57 73', 'Nazarov aka', '+998 91 924 05 33', 'website', 'faol', 'INT', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90281', 'Jasmina', 'Ismoilova', '+998 94 561 28 63', 'Berdiyev aka', '+998 97 549 83 69', 'hamkor', 'faol', 'INT', CURRENT_DATE - 60, NULL, NULL, NULL),
+('STU-90282', 'Umida', 'Ismoilova', '+998 91 140 99 40', 'Berdiyev aka', '+998 94 491 84 91', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 89, NULL, NULL, NULL),
+('STU-90283', 'Temur', 'Toshmatov', '+998 90 550 41 87', 'Karimov aka', '+998 93 693 46 66', 'website', 'faol', 'UPP', CURRENT_DATE - 43, NULL, NULL, NULL),
+('STU-90284', 'Botir', 'Ergashev', '+998 97 971 56 34', 'Ganiyev aka', '+998 97 136 04 87', 'instagram_organic', 'faol', 'UPP', CURRENT_DATE - 27, NULL, NULL, NULL),
+('STU-90285', 'Mohira', 'Sodiqova', '+998 93 343 46 48', 'Ganiyev aka', '+998 91 206 14 26', 'instagram_organic', 'faol', 'UPP', CURRENT_DATE - 19, NULL, NULL, NULL),
+('STU-90286', 'Doston', 'Ergashev', '+998 97 946 00 58', 'Olimov aka', '+998 98 783 24 78', 'website', 'faol', 'ADV', CURRENT_DATE - 11, NULL, NULL, NULL),
+('STU-90287', 'Dildora', 'Qodirova', '+998 93 595 36 89', 'Sattorov aka', '+998 98 145 49 27', 'facebook_ads', 'faol', 'ADV', CURRENT_DATE - 63, NULL, NULL, NULL),
+('STU-90288', 'Rustam', 'Berdiyev', '+998 98 835 93 74', 'Ganiyev aka', '+998 93 501 02 21', 'tavsiya', 'faol', 'ADV', CURRENT_DATE - 32, NULL, NULL, NULL),
+('STU-90289', 'Shahzoda', 'Ismoilova', '+998 94 330 48 49', 'Berdiyev aka', '+998 91 937 63 48', 'website', 'faol', 'BEG', CURRENT_DATE - 45, NULL, NULL, NULL),
+('STU-90290', 'Akmal', 'Yusupov', '+998 91 340 93 98', 'Nazarov aka', '+998 91 925 43 64', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 79, NULL, NULL, NULL),
+('STU-90291', 'Munisa', 'Karimova', '+998 98 562 13 95', 'Davronov aka', '+998 91 713 49 06', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 20, NULL, NULL, NULL),
+('STU-90292', 'Zilola', 'Ergasheva', '+998 94 939 59 62', 'Davronov aka', '+998 98 718 50 13', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 16, NULL, NULL, NULL),
+('STU-90293', 'Bexruz', 'Ergashev', '+998 91 677 00 41', 'Ganiyev aka', '+998 97 845 71 86', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 82, NULL, NULL, NULL),
+('STU-90294', 'Firdavs', 'Sharipov', '+998 97 144 05 57', 'Umarov aka', '+998 94 933 34 24', 'website', 'faol', 'BEG', CURRENT_DATE - 10, NULL, NULL, NULL),
+('STU-90295', 'Alisher', 'Aliyev', '+998 98 676 83 29', 'Karimov aka', '+998 93 487 00 89', 'hamkor', 'faol', 'BEG', CURRENT_DATE - 72, NULL, NULL, NULL),
+('STU-90296', 'Anvar', 'Ahmedov', '+998 90 744 47 72', 'Mirzayev aka', '+998 94 589 35 45', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 47, NULL, NULL, NULL),
+('STU-90297', 'Javohir', 'Sattorov', '+998 97 145 17 71', 'Salimov aka', '+998 97 809 22 69', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 67, NULL, NULL, NULL),
+('STU-90298', 'Islom', 'Umarov', '+998 94 352 51 10', 'Umarov aka', '+998 94 580 27 05', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 71, NULL, NULL, NULL),
+('STU-90299', 'Sardor', 'Ganiyev', '+998 97 303 25 69', 'Ismoilov aka', '+998 98 291 73 40', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 83, NULL, NULL, NULL),
+('STU-90300', 'Dildora', 'Yusupova', '+998 90 582 90 40', 'Ganiyev aka', '+998 98 977 27 42', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 24, NULL, NULL, NULL),
+('STU-90301', 'Sherzod', 'Berdiyev', '+998 97 441 25 53', 'Ahmedov aka', '+998 94 417 48 71', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 16, NULL, NULL, NULL),
+('STU-90302', 'Zafar', 'Mirzayev', '+998 91 718 39 13', 'Rustamov aka', '+998 97 390 36 00', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 75, NULL, NULL, NULL),
+('STU-90303', 'Gulnora', 'Umarova', '+998 97 962 38 22', 'Mahmudov aka', '+998 91 873 01 18', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 85, NULL, NULL, NULL),
+('STU-90304', 'Sardor', 'Ahmedov', '+998 97 356 90 65', 'Karimov aka', '+998 98 897 70 45', 'telegram', 'faol', 'ELE', CURRENT_DATE - 38, NULL, NULL, NULL),
+('STU-90305', 'Rayhona', 'Rustamova', '+998 98 266 67 66', 'Salimov aka', '+998 97 462 49 36', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 89, NULL, NULL, NULL),
+('STU-90306', 'Doston', 'Olimov', '+998 98 619 62 60', 'Xasanov aka', '+998 98 670 61 72', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 82, NULL, NULL, NULL),
+('STU-90307', 'Shahzoda', 'Olimova', '+998 94 857 38 04', 'Yusupov aka', '+998 90 368 19 82', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 52, NULL, NULL, NULL),
+('STU-90308', 'Sitora', 'Mahmudova', '+998 91 100 22 75', 'Davronov aka', '+998 98 737 43 16', 'telegram', 'faol', 'INT', CURRENT_DATE - 77, NULL, NULL, NULL),
+('STU-90309', 'Malika', 'Rustamova', '+998 94 664 34 70', 'Ahmedov aka', '+998 93 335 20 04', 'hamkor', 'faol', 'INT', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90310', 'Muhammadali', 'Xasanov', '+998 91 759 67 04', 'Ergashev aka', '+998 94 374 45 86', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 46, NULL, NULL, NULL),
+('STU-90311', 'Farrux', 'Yusupov', '+998 90 698 76 29', 'Xasanov aka', '+998 97 159 21 73', 'google_ads', 'faol', 'INT', CURRENT_DATE - 43, NULL, NULL, NULL),
+('STU-90312', 'Malika', 'Sharipova', '+998 94 590 16 49', 'Raximov aka', '+998 97 812 64 70', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90313', 'Bexruz', 'Mahmudov', '+998 93 984 23 13', 'Ismoilov aka', '+998 94 190 77 04', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 81, NULL, NULL, NULL),
+('STU-90314', 'Dilrabo', 'Yusupova', '+998 98 438 09 26', 'Aliyev aka', '+998 91 298 84 96', 'offline', 'faol', 'UPP', CURRENT_DATE - 49, NULL, NULL, NULL),
+('STU-90315', 'Eldor', 'Raximov', '+998 98 147 94 98', 'Berdiyev aka', '+998 90 204 17 75', 'hamkor', 'faol', 'UPP', CURRENT_DATE - 74, NULL, NULL, NULL),
+('STU-90316', 'Kamola', 'Sodiqova', '+998 94 417 29 89', 'Ahmedov aka', '+998 90 652 61 43', 'tavsiya', 'faol', 'UPP', CURRENT_DATE - 87, NULL, NULL, NULL),
+('STU-90317', 'Gulbahor', 'Sattorova', '+998 90 742 38 61', 'Rustamov aka', '+998 98 690 99 36', 'facebook_ads', 'faol', 'UPP', CURRENT_DATE - 54, NULL, NULL, NULL),
+('STU-90318', 'Anvar', 'Salimov', '+998 98 277 80 67', 'Ganiyev aka', '+998 90 704 01 40', 'hamkor', 'faol', 'ADV', CURRENT_DATE - 36, NULL, NULL, NULL),
+('STU-90319', 'Rayhona', 'Sodiqova', '+998 93 154 07 03', 'Ganiyev aka', '+998 91 952 98 67', 'instagram_organic', 'faol', 'ADV', CURRENT_DATE - 22, NULL, NULL, NULL),
+('STU-90320', 'Shirin', 'Raximova', '+998 94 309 91 55', 'Ergashev aka', '+998 97 811 93 86', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90321', 'Dilshod', 'Ergashev', '+998 94 197 07 17', 'Qodirov aka', '+998 94 341 68 33', 'website', 'faol', 'BEG', CURRENT_DATE - 42, NULL, NULL, NULL),
+('STU-90322', 'Shirin', 'Qodirova', '+998 98 492 28 11', 'Rustamov aka', '+998 98 575 72 87', 'website', 'faol', 'BEG', CURRENT_DATE - 57, NULL, NULL, NULL),
+('STU-90323', 'Ozoda', 'Ergasheva', '+998 97 412 21 31', 'Yusupov aka', '+998 91 141 08 43', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 78, NULL, NULL, NULL),
+('STU-90324', 'Islom', 'Ahmedov', '+998 97 316 37 51', 'Sodiqov aka', '+998 94 920 30 97', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 79, NULL, NULL, NULL),
+('STU-90325', 'Malika', 'Ismoilova', '+998 94 524 46 63', 'Ganiyev aka', '+998 90 301 17 02', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 22, NULL, NULL, NULL),
+('STU-90326', 'Malika', 'Ismoilova', '+998 94 135 49 31', 'Toshmatov aka', '+998 94 304 02 00', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90327', 'Oysha', 'Aliyeva', '+998 98 909 80 73', 'Mirzayev aka', '+998 94 670 20 25', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90328', 'Kamola', 'Olimova', '+998 91 646 15 73', 'Sodiqov aka', '+998 98 262 86 78', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 32, NULL, NULL, NULL),
+('STU-90329', 'Feruza', 'Umarova', '+998 91 898 44 91', 'Sodiqov aka', '+998 91 473 91 49', 'website', 'faol', 'BEG', CURRENT_DATE - 28, NULL, NULL, NULL),
+('STU-90330', 'Eldor', 'Aliyev', '+998 94 882 64 79', 'Salimov aka', '+998 90 613 74 41', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 79, NULL, NULL, NULL),
+('STU-90331', 'Muhammadali', 'Xasanov', '+998 91 392 42 48', 'Raximov aka', '+998 90 759 23 50', 'facebook_ads', 'faol', 'ELE', CURRENT_DATE - 48, NULL, NULL, NULL),
+('STU-90332', 'Yulduz', 'Ismoilova', '+998 97 764 82 09', 'Raximov aka', '+998 90 883 15 27', 'instagram_organic', 'faol', 'ELE', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90333', 'Munisa', 'Rustamova', '+998 91 589 78 59', 'Salimov aka', '+998 97 379 04 80', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 42, NULL, NULL, NULL),
+('STU-90334', 'Abbos', 'Qodirov', '+998 93 980 79 49', 'Toshmatov aka', '+998 97 406 32 96', 'telegram', 'faol', 'ELE', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90335', 'Shahzoda', 'Olimova', '+998 98 734 91 22', 'Nazarov aka', '+998 97 591 08 41', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90336', 'Aziz', 'Ganiyev', '+998 91 339 75 91', 'Karimov aka', '+998 91 633 54 61', 'offline', 'faol', 'ELE', CURRENT_DATE - 66, NULL, NULL, NULL),
+('STU-90337', 'Gulnora', 'Mirzayeva', '+998 90 651 71 35', 'Mahmudov aka', '+998 90 312 08 94', 'offline', 'faol', 'ELE', CURRENT_DATE - 12, NULL, NULL, NULL),
+('STU-90338', 'Nilufar', 'Ismoilova', '+998 98 955 24 81', 'Qodirov aka', '+998 94 744 42 46', 'instagram_ads', 'faol', 'ELE', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90339', 'Nodir', 'Davronov', '+998 94 108 77 42', 'Mahmudov aka', '+998 94 229 67 58', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 41, NULL, NULL, NULL),
+('STU-90340', 'Oysha', 'Yusupova', '+998 90 251 67 19', 'Sattorov aka', '+998 90 437 31 65', 'tavsiya', 'faol', 'INT', CURRENT_DATE - 20, NULL, NULL, NULL),
+('STU-90341', 'Anvar', 'Ismoilov', '+998 97 730 66 63', 'Sharipov aka', '+998 94 976 69 43', 'telegram', 'faol', 'INT', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90342', 'Mohira', 'Tohirova', '+998 90 369 71 30', 'Ganiyev aka', '+998 90 562 94 52', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 65, NULL, NULL, NULL),
+('STU-90343', 'Islom', 'Umarov', '+998 93 168 89 71', 'Aliyev aka', '+998 97 518 95 31', 'facebook_ads', 'faol', 'INT', CURRENT_DATE - 80, NULL, NULL, NULL),
+('STU-90344', 'Ozoda', 'Tohirova', '+998 94 957 02 19', 'Berdiyev aka', '+998 98 600 22 83', 'google_ads', 'faol', 'INT', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90345', 'Nilufar', 'Sattorova', '+998 91 872 42 21', 'Sodiqov aka', '+998 93 702 49 87', 'instagram_ads', 'faol', 'INT', CURRENT_DATE - 75, NULL, NULL, NULL),
+('STU-90346', 'Diyor', 'Tohirov', '+998 98 940 38 88', 'Karimov aka', '+998 97 315 65 87', 'instagram_ads', 'faol', 'UPP', CURRENT_DATE - 64, NULL, NULL, NULL),
+('STU-90347', 'Botir', 'Karimov', '+998 93 240 56 32', 'Hamidov aka', '+998 94 671 99 78', 'google_ads', 'faol', 'UPP', CURRENT_DATE - 58, NULL, NULL, NULL),
+('STU-90348', 'Dildora', 'Ergasheva', '+998 97 912 15 79', 'Sodiqov aka', '+998 90 538 72 28', 'telegram', 'faol', 'UPP', CURRENT_DATE - 44, NULL, NULL, NULL),
+('STU-90349', 'Doston', 'Qodirov', '+998 91 236 61 97', 'Umarov aka', '+998 94 146 87 20', 'google_ads', 'faol', 'UPP', CURRENT_DATE - 13, NULL, NULL, NULL),
+('STU-90350', 'Yulduz', 'Sattorova', '+998 94 710 72 66', 'Aliyev aka', '+998 94 946 42 91', 'offline', 'faol', 'ADV', CURRENT_DATE - 32, NULL, NULL, NULL),
+('STU-90351', 'Otabek', 'Umarov', '+998 90 106 83 58', 'Mahmudov aka', '+998 91 629 11 93', 'website', 'faol', 'ADV', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90352', 'Muhammadali', 'Tohirov', '+998 91 440 28 24', 'Ahmedov aka', '+998 91 149 61 33', 'instagram_ads', 'faol', 'ADV', CURRENT_DATE - 69, NULL, NULL, NULL),
+('STU-90353', 'Feruza', 'Davronova', '+998 97 817 35 68', 'Sharipov aka', '+998 98 969 98 80', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 25, NULL, NULL, NULL),
+('STU-90354', 'Botir', 'Hamidov', '+998 97 878 12 26', 'Toshmatov aka', '+998 91 901 94 56', 'google_ads', 'faol', 'BEG', CURRENT_DATE - 15, NULL, NULL, NULL),
+('STU-90355', 'Feruza', 'Mahmudova', '+998 97 613 17 46', 'Umarov aka', '+998 94 110 12 30', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 65, NULL, NULL, NULL),
+('STU-90356', 'Diyor', 'Raximov', '+998 98 268 31 59', 'Rustamov aka', '+998 97 105 43 27', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 90, NULL, NULL, NULL),
+('STU-90357', 'Shohruh', 'Raximov', '+998 94 871 42 78', 'Sodiqov aka', '+998 97 300 71 47', 'website', 'faol', 'BEG', CURRENT_DATE - 90, NULL, NULL, NULL),
+('STU-90358', 'Nozima', 'Berdiyeva', '+998 98 983 37 71', 'Raximov aka', '+998 93 161 10 47', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 74, NULL, NULL, NULL),
+('STU-90359', 'Laylo', 'Ganiyeva', '+998 98 273 45 21', 'Sharipov aka', '+998 98 635 60 58', 'offline', 'faol', 'BEG', CURRENT_DATE - 70, NULL, NULL, NULL),
+('STU-90360', 'Shirin', 'Olimova', '+998 91 119 43 61', 'Olimov aka', '+998 98 185 20 46', 'website', 'faol', 'BEG', CURRENT_DATE - 59, NULL, NULL, NULL),
+('STU-90361', 'Kamron', 'Rustamov', '+998 93 554 55 31', 'Yusupov aka', '+998 90 774 73 11', 'tavsiya', 'faol', 'BEG', CURRENT_DATE - 68, NULL, NULL, NULL),
+('STU-90362', 'Ozoda', 'Rustamova', '+998 97 449 87 99', 'Hamidov aka', '+998 98 511 80 53', 'instagram_ads', 'faol', 'BEG', CURRENT_DATE - 84, NULL, NULL, NULL),
+('STU-90363', 'Yulduz', 'Sodiqova', '+998 97 477 20 02', 'Sattorov aka', '+998 98 634 18 01', 'google_ads', 'faol', 'ELE', CURRENT_DATE - 19, NULL, NULL, NULL),
+('STU-90364', 'Malika', 'Rustamova', '+998 98 951 53 31', 'Mahmudov aka', '+998 98 130 92 72', 'hamkor', 'faol', 'ELE', CURRENT_DATE - 37, NULL, NULL, NULL),
+('STU-90365', 'Feruza', 'Umarova', '+998 97 856 19 91', 'Nazarov aka', '+998 93 161 62 30', 'google_ads', 'faol', 'ELE', CURRENT_DATE - 39, NULL, NULL, NULL),
+('STU-90366', 'Anvar', 'Ganiyev', '+998 94 179 80 02', 'Tohirov aka', '+998 94 245 45 66', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 25, NULL, NULL, NULL),
+('STU-90367', 'Kamola', 'Raximova', '+998 93 412 21 79', 'Salimov aka', '+998 90 738 03 55', 'website', 'faol', 'ELE', CURRENT_DATE - 61, NULL, NULL, NULL),
+('STU-90368', 'Kamron', 'Yusupov', '+998 93 959 46 03', 'Sodiqov aka', '+998 91 339 52 09', 'tavsiya', 'faol', 'ELE', CURRENT_DATE - 63, NULL, NULL, NULL),
+('STU-90369', 'Anvar', 'Yusupov', '+998 91 508 77 53', 'Toshmatov aka', '+998 90 153 64 23', 'tavsiya', 'ketgan', 'ELE', CURRENT_DATE - 103, 'boshqa_markaz', CURRENT_DATE - 51, 'taklif_berildi'),
+('STU-90370', 'Oysha', 'Hamidova', '+998 98 436 32 99', 'Raximov aka', '+998 91 102 54 47', 'website', 'ketgan', 'ELE', CURRENT_DATE - 141, 'narx', CURRENT_DATE - 12, NULL),
+('STU-90371', 'Kamola', 'Rustamova', '+998 91 959 55 10', 'Yusupov aka', '+998 90 137 65 06', 'offline', 'ketgan', 'INT', CURRENT_DATE - 108, 'davomat', CURRENT_DATE - 46, NULL),
+('STU-90372', 'Umid', 'Ahmedov', '+998 90 549 43 79', 'Olimov aka', '+998 98 222 05 94', 'tavsiya', 'ketgan', 'INT', CURRENT_DATE - 90, 'narx', CURRENT_DATE - 39, NULL),
+('STU-90373', 'Anvar', 'Sattorov', '+998 90 823 13 86', 'Umarov aka', '+998 90 579 83 51', 'instagram_ads', 'ketgan', 'INT', CURRENT_DATE - 90, 'narx', CURRENT_DATE - 20, NULL),
+('STU-90374', 'Nozima', 'Davronova', '+998 97 475 56 39', 'Olimov aka', '+998 94 197 75 37', 'hamkor', 'ketgan', 'INT', CURRENT_DATE - 82, 'vaqt_mos_emas', CURRENT_DATE - 31, 'taklif_berildi'),
+('STU-90375', 'Nilufar', 'Aliyeva', '+998 93 763 95 88', 'Salimov aka', '+998 94 461 49 25', 'telegram', 'ketgan', 'INT', CURRENT_DATE - 79, 'narx', CURRENT_DATE - 46, 'qiziqdi'),
+('STU-90376', 'Kamron', 'Sattorov', '+998 90 841 75 03', 'Karimov aka', '+998 98 330 69 44', 'website', 'ketgan', 'INT', CURRENT_DATE - 129, 'narx', CURRENT_DATE - 29, 'qiziqdi'),
+('STU-90377', 'Gulbahor', 'Umarova', '+998 97 627 19 96', 'Nazarov aka', '+998 91 872 76 48', 'google_ads', 'ketgan', 'INT', CURRENT_DATE - 63, 'narx', CURRENT_DATE - 51, 'aloqa_qilindi'),
+('STU-90378', 'Marjona', 'Olimova', '+998 98 556 97 92', 'Rustamov aka', '+998 91 275 45 00', 'instagram_ads', 'ketgan', 'UPP', CURRENT_DATE - 89, 'davomat', CURRENT_DATE - 45, NULL),
+('STU-90379', 'Nozima', 'Qodirova', '+998 90 155 15 76', 'Yusupov aka', '+998 97 642 81 78', 'instagram_organic', 'ketgan', 'UPP', CURRENT_DATE - 66, 'vaqt_mos_emas', CURRENT_DATE - 50, 'aloqa_qilindi'),
+('STU-90380', 'Temur', 'Ganiyev', '+998 98 439 24 94', 'Umarov aka', '+998 94 401 77 31', 'telegram', 'ketgan', 'UPP', CURRENT_DATE - 133, 'narx', CURRENT_DATE - 22, 'aloqa_qilindi'),
+('STU-90381', 'Anvar', 'Nazarov', '+998 98 500 09 58', 'Ergashev aka', '+998 90 451 40 24', 'hamkor', 'ketgan', 'UPP', CURRENT_DATE - 71, 'vaqt_mos_emas', CURRENT_DATE - 15, 'qiziqdi'),
+('STU-90382', 'Nodir', 'Yusupov', '+998 91 177 92 01', 'Mirzayev aka', '+998 98 879 80 12', 'telegram', 'ketgan', 'ADV', CURRENT_DATE - 60, 'davomat', CURRENT_DATE - 13, 'aloqa_qilindi'),
+('STU-90383', 'Farrux', 'Toshmatov', '+998 94 738 94 75', 'Sharipov aka', '+998 91 166 14 57', 'telegram', 'ketgan', 'ADV', CURRENT_DATE - 91, 'vaqt_mos_emas', CURRENT_DATE - 20, 'qiziqdi'),
+('STU-90384', 'Islom', 'Olimov', '+998 94 744 26 94', 'Tohirov aka', '+998 91 648 02 41', 'website', 'ketgan', 'ADV', CURRENT_DATE - 116, 'vaqt_mos_emas', CURRENT_DATE - 26, 'aloqa_qilindi'),
+('STU-90385', 'Temur', 'Mirzayev', '+998 97 328 19 32', 'Umarov aka', '+998 97 163 96 77', 'hamkor', 'ketgan', 'BEG', CURRENT_DATE - 147, 'boshqa_markaz', CURRENT_DATE - 20, NULL),
+('STU-90386', 'Sanjar', 'Ismoilov', '+998 98 248 43 41', 'Umarov aka', '+998 97 622 25 42', 'telegram', 'ketgan', 'BEG', CURRENT_DATE - 63, 'natija_yoq', CURRENT_DATE - 23, 'aloqa_qilindi'),
+('STU-90387', 'Eldor', 'Sattorov', '+998 93 107 21 11', 'Ergashev aka', '+998 91 852 16 86', 'instagram_ads', 'ketgan', 'BEG', CURRENT_DATE - 100, 'boshqa_markaz', CURRENT_DATE - 40, 'taklif_berildi'),
+('STU-90388', 'Jasmina', 'Olimova', '+998 91 143 37 93', 'Karimov aka', '+998 93 167 38 36', 'instagram_organic', 'ketgan', 'BEG', CURRENT_DATE - 77, 'boshqa_markaz', CURRENT_DATE - 15, NULL),
+('STU-90389', 'Dildora', 'Berdiyeva', '+998 94 162 02 83', 'Nazarov aka', '+998 97 114 75 32', 'hamkor', 'ketgan', 'BEG', CURRENT_DATE - 72, 'davomat', CURRENT_DATE - 16, 'qiziqdi'),
+('STU-90390', 'Sevinch', 'Nazarova', '+998 93 798 34 46', 'Ismoilov aka', '+998 90 955 73 03', 'hamkor', 'ketgan', 'BEG', CURRENT_DATE - 79, 'oqituvchi', CURRENT_DATE - 3, 'qiziqdi'),
+('STU-90391', 'Kamron', 'Mahmudov', '+998 98 562 32 22', 'Sodiqov aka', '+998 93 483 85 92', 'instagram_organic', 'ketgan', 'BEG', CURRENT_DATE - 115, 'narx', CURRENT_DATE - 14, 'taklif_berildi'),
+('STU-90392', 'Botir', 'Xasanov', '+998 91 994 17 90', 'Ergashev aka', '+998 93 321 07 58', 'google_ads', 'ketgan', 'BEG', CURRENT_DATE - 84, 'boshqa_markaz', CURRENT_DATE - 55, 'aloqa_qilindi'),
+('STU-90393', 'Oysha', 'Mahmudova', '+998 90 484 30 93', 'Mahmudov aka', '+998 93 575 06 18', 'hamkor', 'ketgan', 'BEG', CURRENT_DATE - 92, 'davomat', CURRENT_DATE - 42, 'taklif_berildi'),
+('STU-90394', 'Nargiza', 'Nazarova', '+998 94 448 42 52', 'Salimov aka', '+998 90 787 78 69', 'tavsiya', 'ketgan', 'BEG', CURRENT_DATE - 148, 'shaxsiy', CURRENT_DATE - 9, 'aloqa_qilindi'),
+('STU-90395', 'Iroda', 'Davronova', '+998 91 852 57 75', 'Xasanov aka', '+998 91 678 49 90', 'offline', 'ketgan', 'ELE', CURRENT_DATE - 68, 'boshqa_markaz', CURRENT_DATE - 49, NULL),
+('STU-90396', 'Nilufar', 'Olimova', '+998 90 927 14 79', 'Sattorov aka', '+998 94 559 70 80', 'instagram_ads', 'ketgan', 'ELE', CURRENT_DATE - 110, 'narx', CURRENT_DATE - 27, NULL),
+('STU-90397', 'Kamron', 'Ganiyev', '+998 97 894 50 17', 'Yusupov aka', '+998 97 427 82 91', 'tavsiya', 'ketgan', 'ELE', CURRENT_DATE - 80, 'boshqa_markaz', CURRENT_DATE - 29, NULL),
+('STU-90398', 'Ozoda', 'Ismoilova', '+998 94 641 61 14', 'Davronov aka', '+998 90 327 44 66', 'website', 'ketgan', 'ELE', CURRENT_DATE - 93, 'oqituvchi', CURRENT_DATE - 32, NULL),
+('STU-90399', 'Sanjar', 'Ergashev', '+998 97 652 30 74', 'Ismoilov aka', '+998 93 582 61 39', 'google_ads', 'ketgan', 'ELE', CURRENT_DATE - 97, 'vaqt_mos_emas', CURRENT_DATE - 49, 'qiziqdi'),
+('STU-90400', 'Kamron', 'Yusupov', '+998 93 842 12 58', 'Berdiyev aka', '+998 97 731 86 39', 'telegram', 'ketgan', 'ELE', CURRENT_DATE - 138, 'narx', CURRENT_DATE - 15, 'aloqa_qilindi')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO enrollments (student_id, group_id, enrolled_at, status, discount_pct) VALUES
+('STU-90001', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 35), 'faol', 0),
+('STU-90002', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 66), 'faol', 15),
+('STU-90003', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 44), 'faol', 0),
+('STU-90004', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 54), 'faol', 0),
+('STU-90005', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 12), 'faol', 0),
+('STU-90006', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 45), 'faol', 0),
+('STU-90007', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 57), 'faol', 0),
+('STU-90008', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 39), 'faol', 10),
+('STU-90009', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 68), 'faol', 0),
+('STU-90010', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 13), 'faol', 10),
+('STU-90011', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 33), 'faol', 15),
+('STU-90012', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 56), 'faol', 0),
+('STU-90013', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 61), 'faol', 0),
+('STU-90014', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 70), 'faol', 0),
+('STU-90015', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 65), 'faol', 15),
+('STU-90016', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 37), 'faol', 0),
+('STU-90017', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 10), 'faol', 0),
+('STU-90018', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 66), 'faol', 0),
+('STU-90019', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 33), 'faol', 15),
+('STU-90020', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 24), 'faol', 0),
+('STU-90021', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 47), 'faol', 15),
+('STU-90022', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 61), 'faol', 0),
+('STU-90023', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 56), 'faol', 0),
+('STU-90024', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 57), 'faol', 0),
+('STU-90025', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 11), 'faol', 10),
+('STU-90026', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 37), 'faol', 10),
+('STU-90027', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 59), 'faol', 0),
+('STU-90028', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 52), 'faol', 0),
+('STU-90029', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 41), 'faol', 0),
+('STU-90030', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 25), 'faol', 0),
+('STU-90031', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 23), 'faol', 10),
+('STU-90032', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 26), 'faol', 0),
+('STU-90033', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 32), 'faol', 0),
+('STU-90034', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 46), 'faol', 15),
+('STU-90035', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 11), 'faol', 0),
+('STU-90036', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 16), 'faol', 15),
+('STU-90037', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 20), 'faol', 0),
+('STU-90038', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 26), 'faol', 15),
+('STU-90039', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 34), 'faol', 0),
+('STU-90040', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 40), 'faol', 0),
+('STU-90041', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 44), 'faol', 0),
+('STU-90042', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 22), 'faol', 0),
+('STU-90043', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 53), 'faol', 0),
+('STU-90044', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 48), 'faol', 0),
+('STU-90045', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 16), 'faol', 0),
+('STU-90046', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 53), 'faol', 0),
+('STU-90047', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 67), 'faol', 10),
+('STU-90048', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 48), 'faol', 0),
+('STU-90049', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 49), 'faol', 0),
+('STU-90050', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 58), 'faol', 15),
+('STU-90051', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 28), 'faol', 0),
+('STU-90052', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 36), 'faol', 0),
+('STU-90053', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 65), 'faol', 0),
+('STU-90054', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 11), 'faol', 10),
+('STU-90055', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 31), 'faol', 0),
+('STU-90056', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 29), 'faol', 10),
+('STU-90057', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 35), 'faol', 15),
+('STU-90058', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 35), 'faol', 0),
+('STU-90059', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 23), 'faol', 0),
+('STU-90060', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 0),
+('STU-90061', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 52), 'faol', 0),
+('STU-90062', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 11), 'faol', 0),
+('STU-90063', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 27), 'faol', 0),
+('STU-90064', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 31), 'faol', 0),
+('STU-90065', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 60), 'faol', 0),
+('STU-90066', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 33), 'faol', 10),
+('STU-90067', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 20), 'faol', 0),
+('STU-90068', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 39), 'faol', 0),
+('STU-90069', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 28), 'faol', 0),
+('STU-90070', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 56), 'faol', 0),
+('STU-90071', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 64), 'faol', 0),
+('STU-90072', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 48), 'faol', 0),
+('STU-90073', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 23), 'faol', 0),
+('STU-90074', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 20), 'faol', 10),
+('STU-90075', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 42), 'faol', 0),
+('STU-90076', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 37), 'faol', 0),
+('STU-90077', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 52), 'faol', 0),
+('STU-90078', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 28), 'faol', 15),
+('STU-90079', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 13), 'faol', 10),
+('STU-90080', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 65), 'faol', 10),
+('STU-90081', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 53), 'faol', 15),
+('STU-90082', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 19), 'faol', 0),
+('STU-90083', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 46), 'faol', 0),
+('STU-90084', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 55), 'faol', 0),
+('STU-90085', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 22), 'faol', 10),
+('STU-90086', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 44), 'faol', 0),
+('STU-90087', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 60), 'faol', 10),
+('STU-90088', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 45), 'faol', 0),
+('STU-90089', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 38), 'faol', 15),
+('STU-90090', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 39), 'faol', 0),
+('STU-90091', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 66), 'faol', 15),
+('STU-90092', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 59), 'faol', 0),
+('STU-90093', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 63), 'faol', 15),
+('STU-90094', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 16), 'faol', 0),
+('STU-90095', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 47), 'faol', 15),
+('STU-90096', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 41), 'faol', 10),
+('STU-90097', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 69), 'faol', 15),
+('STU-90098', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 61), 'faol', 0),
+('STU-90099', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 49), 'faol', 0),
+('STU-90100', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 67), 'faol', 0),
+('STU-90101', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 57), 'faol', 0),
+('STU-90102', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 69), 'faol', 0),
+('STU-90103', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 44), 'faol', 15),
+('STU-90104', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 66), 'faol', 10),
+('STU-90105', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 37), 'faol', 0),
+('STU-90106', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 28), 'faol', 0),
+('STU-90107', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 57), 'faol', 0),
+('STU-90108', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 18), 'faol', 0),
+('STU-90109', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 28), 'faol', 0),
+('STU-90110', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 38), 'faol', 15),
+('STU-90111', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 64), 'faol', 10),
+('STU-90112', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 14), 'faol', 15),
+('STU-90113', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 14), 'faol', 0),
+('STU-90114', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 18), 'faol', 0),
+('STU-90115', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 10),
+('STU-90116', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 66), 'faol', 0),
+('STU-90117', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 0),
+('STU-90118', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 70), 'faol', 0),
+('STU-90119', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 16), 'faol', 0),
+('STU-90120', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 21), 'faol', 0),
+('STU-90121', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 28), 'faol', 15),
+('STU-90122', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 45), 'faol', 0),
+('STU-90123', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 41), 'faol', 0),
+('STU-90124', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 20), 'faol', 0),
+('STU-90125', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 32), 'faol', 15),
+('STU-90126', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 62), 'faol', 15),
+('STU-90127', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 35), 'faol', 0),
+('STU-90128', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 22), 'faol', 0),
+('STU-90129', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 27), 'faol', 10),
+('STU-90130', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 52), 'faol', 10),
+('STU-90131', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 31), 'faol', 0),
+('STU-90132', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 60), 'faol', 0),
+('STU-90133', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 21), 'faol', 0),
+('STU-90134', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 15), 'faol', 0),
+('STU-90135', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 70), 'faol', 15),
+('STU-90136', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 46), 'faol', 0),
+('STU-90137', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 10), 'faol', 0),
+('STU-90138', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 20), 'faol', 15),
+('STU-90139', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 50), 'faol', 0),
+('STU-90140', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 61), 'faol', 0),
+('STU-90141', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 59), 'faol', 10),
+('STU-90142', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 22), 'faol', 10),
+('STU-90143', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 27), 'faol', 0),
+('STU-90144', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 22), 'faol', 0),
+('STU-90145', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 55), 'faol', 15),
+('STU-90146', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 18), 'faol', 10),
+('STU-90147', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 43), 'faol', 0),
+('STU-90148', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 66), 'faol', 15),
+('STU-90149', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 70), 'faol', 0),
+('STU-90150', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 18), 'faol', 10),
+('STU-90151', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 32), 'faol', 0),
+('STU-90152', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 12), 'faol', 0),
+('STU-90153', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 29), 'faol', 0),
+('STU-90154', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 66), 'faol', 0),
+('STU-90155', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 60), 'faol', 0),
+('STU-90156', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 30), 'faol', 0),
+('STU-90157', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 52), 'faol', 15),
+('STU-90158', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 64), 'faol', 15),
+('STU-90159', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 21), 'faol', 0),
+('STU-90160', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 16), 'faol', 10),
+('STU-90161', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 35), 'faol', 0),
+('STU-90162', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 70), 'faol', 15),
+('STU-90163', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 36), 'faol', 0),
+('STU-90164', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 54), 'faol', 15),
+('STU-90165', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 34), 'faol', 15),
+('STU-90166', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 0),
+('STU-90167', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 68), 'faol', 0),
+('STU-90168', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 19), 'faol', 0),
+('STU-90169', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 63), 'faol', 0),
+('STU-90170', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 47), 'faol', 0),
+('STU-90171', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 50), 'faol', 0),
+('STU-90172', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 70), 'faol', 0),
+('STU-90173', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 34), 'faol', 0),
+('STU-90174', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 55), 'faol', 10),
+('STU-90175', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 33), 'faol', 0),
+('STU-90176', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 46), 'faol', 0),
+('STU-90177', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 14), 'faol', 0),
+('STU-90178', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 57), 'faol', 0),
+('STU-90179', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 0),
+('STU-90180', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 68), 'faol', 10),
+('STU-90181', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 21), 'faol', 0),
+('STU-90182', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 10), 'faol', 0),
+('STU-90183', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 12), 'faol', 0),
+('STU-90184', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 25), 'faol', 0),
+('STU-90185', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 17), 'faol', 10),
+('STU-90186', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 69), 'faol', 0),
+('STU-90187', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 67), 'faol', 0),
+('STU-90188', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 31), 'faol', 0),
+('STU-90189', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 49), 'faol', 0),
+('STU-90190', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 13), 'faol', 0),
+('STU-90191', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 51), 'faol', 0),
+('STU-90192', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 18), 'faol', 0),
+('STU-90193', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 29), 'faol', 15),
+('STU-90194', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 69), 'faol', 0),
+('STU-90195', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 27), 'faol', 0),
+('STU-90196', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 0),
+('STU-90197', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 39), 'faol', 0),
+('STU-90198', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 65), 'faol', 0),
+('STU-90199', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 41), 'faol', 0),
+('STU-90200', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 30), 'faol', 15),
+('STU-90201', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 30), 'faol', 0),
+('STU-90202', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 51), 'faol', 0),
+('STU-90203', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 39), 'faol', 15),
+('STU-90204', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 22), 'faol', 0),
+('STU-90205', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 38), 'faol', 0),
+('STU-90206', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 44), 'faol', 10),
+('STU-90207', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 41), 'faol', 0),
+('STU-90208', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 59), 'faol', 0),
+('STU-90209', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 47), 'faol', 0),
+('STU-90210', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 68), 'faol', 0),
+('STU-90211', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 34), 'faol', 0),
+('STU-90212', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 39), 'faol', 0),
+('STU-90213', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 56), 'faol', 0),
+('STU-90214', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 65), 'faol', 10),
+('STU-90215', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 59), 'faol', 10),
+('STU-90216', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 20), 'faol', 0),
+('STU-90217', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 47), 'faol', 0),
+('STU-90218', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 34), 'faol', 15),
+('STU-90219', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 21), 'faol', 0),
+('STU-90220', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 39), 'faol', 10),
+('STU-90221', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 25), 'faol', 0),
+('STU-90222', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 38), 'faol', 15),
+('STU-90223', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 63), 'faol', 15),
+('STU-90224', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 39), 'faol', 0),
+('STU-90225', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 22), 'faol', 15),
+('STU-90226', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 18), 'faol', 0),
+('STU-90227', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 43), 'faol', 10),
+('STU-90228', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 23), 'faol', 0),
+('STU-90229', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 59), 'faol', 15),
+('STU-90230', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 22), 'faol', 0),
+('STU-90231', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 68), 'faol', 15),
+('STU-90232', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 19), 'faol', 0),
+('STU-90233', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 64), 'faol', 0),
+('STU-90234', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 53), 'faol', 0),
+('STU-90235', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 13), 'faol', 0),
+('STU-90236', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 34), 'faol', 0),
+('STU-90237', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 51), 'faol', 10),
+('STU-90238', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 34), 'faol', 10),
+('STU-90239', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 29), 'faol', 0),
+('STU-90240', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 51), 'faol', 0),
+('STU-90241', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 21), 'faol', 0),
+('STU-90242', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 60), 'faol', 10),
+('STU-90243', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 10),
+('STU-90244', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 24), 'faol', 0),
+('STU-90245', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 55), 'faol', 10),
+('STU-90246', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 34), 'faol', 0),
+('STU-90247', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 45), 'faol', 0),
+('STU-90248', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 36), 'faol', 0),
+('STU-90249', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 66), 'faol', 0),
+('STU-90250', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 21), 'faol', 0),
+('STU-90251', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 19), 'faol', 10),
+('STU-90252', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 27), 'faol', 15),
+('STU-90253', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 59), 'faol', 0),
+('STU-90254', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 38), 'faol', 15),
+('STU-90255', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 10), 'faol', 0),
+('STU-90256', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 46), 'faol', 0),
+('STU-90257', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 40), 'faol', 0),
+('STU-90258', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 27), 'faol', 0),
+('STU-90259', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 16), 'faol', 15),
+('STU-90260', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 24), 'faol', 0),
+('STU-90261', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 69), 'faol', 15),
+('STU-90262', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 45), 'faol', 0),
+('STU-90263', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 62), 'faol', 15),
+('STU-90264', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 61), 'faol', 15),
+('STU-90265', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 27), 'faol', 0),
+('STU-90266', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 27), 'faol', 0),
+('STU-90267', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 47), 'faol', 15),
+('STU-90268', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 54), 'faol', 15),
+('STU-90269', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 68), 'faol', 0),
+('STU-90270', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 24), 'faol', 0),
+('STU-90271', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 50), 'faol', 10),
+('STU-90272', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 23), 'faol', 0),
+('STU-90273', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 63), 'faol', 15),
+('STU-90274', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 56), 'faol', 10),
+('STU-90275', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 29), 'faol', 0),
+('STU-90276', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 19), 'faol', 0),
+('STU-90277', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 29), 'faol', 0),
+('STU-90278', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 26), 'faol', 10),
+('STU-90279', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 43), 'faol', 15),
+('STU-90280', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 66), 'faol', 0),
+('STU-90281', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 34), 'faol', 0),
+('STU-90282', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 40), 'faol', 0),
+('STU-90283', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 50), 'faol', 15),
+('STU-90284', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 40), 'faol', 10),
+('STU-90285', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 61), 'faol', 0),
+('STU-90286', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 51), 'faol', 0),
+('STU-90287', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 44), 'faol', 0),
+('STU-90288', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 20), 'faol', 15),
+('STU-90289', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 64), 'faol', 0),
+('STU-90290', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 34), 'faol', 0),
+('STU-90291', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 18), 'faol', 10),
+('STU-90292', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 17), 'faol', 0),
+('STU-90293', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 60), 'faol', 10),
+('STU-90294', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 36), 'faol', 10),
+('STU-90295', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 70), 'faol', 15),
+('STU-90296', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 65), 'faol', 15),
+('STU-90297', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 42), 'faol', 15),
+('STU-90298', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 23), 'faol', 0),
+('STU-90299', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 47), 'faol', 10),
+('STU-90300', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 46), 'faol', 0),
+('STU-90301', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 37), 'faol', 0),
+('STU-90302', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 27), 'faol', 0),
+('STU-90303', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 48), 'faol', 15),
+('STU-90304', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 57), 'faol', 15),
+('STU-90305', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 69), 'faol', 15),
+('STU-90306', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 33), 'faol', 15),
+('STU-90307', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 49), 'faol', 0),
+('STU-90308', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 39), 'faol', 10),
+('STU-90309', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 68), 'faol', 0),
+('STU-90310', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 43), 'faol', 0),
+('STU-90311', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 18), 'faol', 15),
+('STU-90312', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 56), 'faol', 0),
+('STU-90313', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 53), 'faol', 0),
+('STU-90314', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 59), 'faol', 0),
+('STU-90315', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 59), 'faol', 15),
+('STU-90316', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 20), 'faol', 0),
+('STU-90317', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 18), 'faol', 0),
+('STU-90318', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 67), 'faol', 0),
+('STU-90319', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 28), 'faol', 10),
+('STU-90320', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 16), 'faol', 0),
+('STU-90321', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 30), 'faol', 0),
+('STU-90322', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 56), 'faol', 10),
+('STU-90323', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 10), 'faol', 10),
+('STU-90324', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 55), 'faol', 0),
+('STU-90325', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 38), 'faol', 0),
+('STU-90326', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 37), 'faol', 10),
+('STU-90327', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 37), 'faol', 0),
+('STU-90328', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 16), 'faol', 0),
+('STU-90329', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 62), 'faol', 0),
+('STU-90330', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 46), 'faol', 0),
+('STU-90331', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 55), 'faol', 0),
+('STU-90332', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 49), 'faol', 0),
+('STU-90333', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 44), 'faol', 0),
+('STU-90334', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 12), 'faol', 0),
+('STU-90335', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 47), 'faol', 0),
+('STU-90336', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 64), 'faol', 0),
+('STU-90337', 'GRP-DEMO-20', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 13), 'faol', 0),
+('STU-90338', 'GRP-DEMO-21', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 46), 'faol', 10),
+('STU-90339', 'GRP-DEMO-22', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 39), 'faol', 0),
+('STU-90340', 'GRP-DEMO-23', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 50), 'faol', 10),
+('STU-90341', 'GRP-DEMO-24', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 35), 'faol', 0),
+('STU-90342', 'GRP-DEMO-25', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 42), 'faol', 0),
+('STU-90343', 'GRP-DEMO-26', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 10), 'faol', 0),
+('STU-90344', 'GRP-DEMO-27', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 27), 'faol', 15),
+('STU-90345', 'GRP-DEMO-28', GREATEST(CURRENT_DATE - 0, CURRENT_DATE - 53), 'faol', 0),
+('STU-90346', 'GRP-DEMO-29', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 60), 'faol', 0),
+('STU-90347', 'GRP-DEMO-31', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 67), 'faol', 0),
+('STU-90348', 'GRP-DEMO-32', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 46), 'faol', 0),
+('STU-90349', 'GRP-DEMO-33', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 54), 'faol', 0),
+('STU-90350', 'GRP-DEMO-34', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 33), 'faol', 15),
+('STU-90351', 'GRP-DEMO-35', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 21), 'faol', 10),
+('STU-90352', 'GRP-DEMO-36', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 46), 'faol', 0),
+('STU-90353', 'GRP-DEMO-01', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 11), 'faol', 0),
+('STU-90354', 'GRP-DEMO-02', GREATEST(CURRENT_DATE - 28, CURRENT_DATE - 63), 'faol', 0),
+('STU-90355', 'GRP-DEMO-03', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 33), 'faol', 0),
+('STU-90356', 'GRP-DEMO-04', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 20), 'faol', 0),
+('STU-90357', 'GRP-DEMO-06', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 24), 'faol', 10),
+('STU-90358', 'GRP-DEMO-07', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 43), 'faol', 0),
+('STU-90359', 'GRP-DEMO-08', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 39), 'faol', 10),
+('STU-90360', 'GRP-DEMO-09', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 34), 'faol', 0),
+('STU-90361', 'GRP-DEMO-10', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 59), 'faol', 10),
+('STU-90362', 'GRP-DEMO-11', GREATEST(CURRENT_DATE - 56, CURRENT_DATE - 54), 'faol', 0),
+('STU-90363', 'GRP-DEMO-13', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 70), 'faol', 0),
+('STU-90364', 'GRP-DEMO-14', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 59), 'faol', 10),
+('STU-90365', 'GRP-DEMO-16', GREATEST(CURRENT_DATE - 70, CURRENT_DATE - 69), 'faol', 0),
+('STU-90366', 'GRP-DEMO-17', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 24), 'faol', 0),
+('STU-90367', 'GRP-DEMO-18', GREATEST(CURRENT_DATE - 42, CURRENT_DATE - 23), 'faol', 0),
+('STU-90368', 'GRP-DEMO-19', GREATEST(CURRENT_DATE - 14, CURRENT_DATE - 33), 'faol', 0)
+ON CONFLICT DO NOTHING;
+INSERT INTO enrollments (student_id, group_id, enrolled_at, left_at, status, discount_pct) VALUES
+('STU-90369', 'GRP-DEMO-01', CURRENT_DATE - 118, CURRENT_DATE - 29, 'tashlab_ketdi', 0),
+('STU-90370', 'GRP-DEMO-02', CURRENT_DATE - 98, CURRENT_DATE - 10, 'tashlab_ketdi', 0),
+('STU-90371', 'GRP-DEMO-03', CURRENT_DATE - 75, CURRENT_DATE - 28, 'tashlab_ketdi', 0),
+('STU-90372', 'GRP-DEMO-04', CURRENT_DATE - 91, CURRENT_DATE - 6, 'tashlab_ketdi', 0),
+('STU-90373', 'GRP-DEMO-06', CURRENT_DATE - 103, CURRENT_DATE - 40, 'tashlab_ketdi', 0),
+('STU-90374', 'GRP-DEMO-07', CURRENT_DATE - 109, CURRENT_DATE - 35, 'tashlab_ketdi', 0),
+('STU-90375', 'GRP-DEMO-08', CURRENT_DATE - 75, CURRENT_DATE - 33, 'tashlab_ketdi', 0),
+('STU-90376', 'GRP-DEMO-09', CURRENT_DATE - 78, CURRENT_DATE - 37, 'tashlab_ketdi', 0),
+('STU-90377', 'GRP-DEMO-10', CURRENT_DATE - 98, CURRENT_DATE - 8, 'tashlab_ketdi', 0),
+('STU-90378', 'GRP-DEMO-11', CURRENT_DATE - 94, CURRENT_DATE - 21, 'tashlab_ketdi', 0),
+('STU-90379', 'GRP-DEMO-13', CURRENT_DATE - 100, CURRENT_DATE - 24, 'tashlab_ketdi', 0),
+('STU-90380', 'GRP-DEMO-14', CURRENT_DATE - 84, CURRENT_DATE - 32, 'tashlab_ketdi', 0),
+('STU-90381', 'GRP-DEMO-16', CURRENT_DATE - 117, CURRENT_DATE - 21, 'tashlab_ketdi', 0),
+('STU-90382', 'GRP-DEMO-17', CURRENT_DATE - 87, CURRENT_DATE - 32, 'tashlab_ketdi', 0),
+('STU-90383', 'GRP-DEMO-18', CURRENT_DATE - 94, CURRENT_DATE - 20, 'tashlab_ketdi', 0),
+('STU-90384', 'GRP-DEMO-19', CURRENT_DATE - 74, CURRENT_DATE - 42, 'tashlab_ketdi', 0),
+('STU-90385', 'GRP-DEMO-20', CURRENT_DATE - 89, CURRENT_DATE - 24, 'tashlab_ketdi', 0),
+('STU-90386', 'GRP-DEMO-21', CURRENT_DATE - 95, CURRENT_DATE - 26, 'tashlab_ketdi', 0),
+('STU-90387', 'GRP-DEMO-22', CURRENT_DATE - 77, CURRENT_DATE - 6, 'tashlab_ketdi', 0),
+('STU-90388', 'GRP-DEMO-23', CURRENT_DATE - 108, CURRENT_DATE - 19, 'tashlab_ketdi', 0)
+ON CONFLICT DO NOTHING;
+
+-- Davomat (har o'quvchi uchun naqsh)
+-- STU-90001: 5 ketma-ket kelmadi -> trigger avtomatik chetlashtiradi
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90001', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t WHERE drn = 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90001', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t WHERE drn = 4 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90001', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t WHERE drn = 3 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90001', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t WHERE drn = 2 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90001', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t WHERE drn = 1 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90001', 'keldi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t WHERE drn > 5 ON CONFLICT DO NOTHING;
+-- STU-90002: 5 ketma-ket kelmadi -> trigger avtomatik chetlashtiradi
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90002', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t WHERE drn = 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90002', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t WHERE drn = 4 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90002', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t WHERE drn = 3 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90002', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t WHERE drn = 2 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90002', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t WHERE drn = 1 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90002', 'keldi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t WHERE drn > 5 ON CONFLICT DO NOTHING;
+-- STU-90003: 5 ketma-ket kelmadi -> trigger avtomatik chetlashtiradi
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90003', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t WHERE drn = 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90003', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t WHERE drn = 4 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90003', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t WHERE drn = 3 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90003', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t WHERE drn = 2 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90003', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t WHERE drn = 1 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90003', 'keldi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t WHERE drn > 5 ON CONFLICT DO NOTHING;
+-- STU-90004: 5 ketma-ket kelmadi -> trigger avtomatik chetlashtiradi
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90004', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t WHERE drn = 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90004', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t WHERE drn = 4 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90004', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t WHERE drn = 3 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90004', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t WHERE drn = 2 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90004', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t WHERE drn = 1 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90004', 'keldi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t WHERE drn > 5 ON CONFLICT DO NOTHING;
+-- STU-90005: 5 ketma-ket kelmadi -> trigger avtomatik chetlashtiradi
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90005', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t WHERE drn = 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90005', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t WHERE drn = 4 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90005', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t WHERE drn = 3 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90005', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t WHERE drn = 2 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90005', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t WHERE drn = 1 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90005', 'keldi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t WHERE drn > 5 ON CONFLICT DO NOTHING;
+-- STU-90006: 5 ketma-ket kelmadi -> trigger avtomatik chetlashtiradi
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90006', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t WHERE drn = 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90006', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t WHERE drn = 4 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90006', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t WHERE drn = 3 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90006', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t WHERE drn = 2 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90006', 'kelmadi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t WHERE drn = 1 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90006', 'keldi' FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t WHERE drn > 5 ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90007', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90008', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90009', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90010', CASE WHEN rn IN (17) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90011', CASE WHEN rn IN (21) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90012', CASE WHEN rn IN (23) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90013', CASE WHEN rn IN (17) THEN 'kelmadi' WHEN rn = 17 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90014', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90015', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90016', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90017', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90018', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90019', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90020', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90021', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90022', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90023', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90024', CASE WHEN rn IN (3,7,13,17,24) THEN 'kelmadi' WHEN rn = 19 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90026', CASE WHEN rn IN (2,8,12) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90027', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90028', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90029', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90030', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90031', CASE WHEN rn IN (1,5,9,14,18,28,26) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90032', CASE WHEN rn IN (2,9,12) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90033', CASE WHEN rn IN (2,8,12) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90034', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90035', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90036', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90037', CASE WHEN rn IN (12) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90038', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90039', CASE WHEN rn IN (2,7,14,19,24) THEN 'kelmadi' WHEN rn = 23 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90040', CASE WHEN rn IN (17) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90041', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90042', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 15 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90043', CASE WHEN rn IN (23) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90044', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90045', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90046', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90047', CASE WHEN rn IN (3,7,12) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90048', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90049', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90050', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90051', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90052', CASE WHEN rn IN (2,6,10,16,14) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90053', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90054', CASE WHEN rn IN (1,5,9,13,17,28,26) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90055', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90056', CASE WHEN rn IN (18) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90058', CASE WHEN rn IN (4,7,12) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90059', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90060', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90061', CASE WHEN rn IN (2,6) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90062', CASE WHEN rn IN (1,6,10,14,22,20) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90063', CASE WHEN rn IN (1,5,10,14,18,28,26) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90064', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90065', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90066', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90067', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 15 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90068', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90069', CASE WHEN rn IN (16) THEN 'kelmadi' WHEN rn = 17 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90070', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90071', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 20 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90072', CASE WHEN rn IN (3,7,13,18) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90073', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90074', CASE WHEN rn IN (16) THEN 'kelmadi' WHEN rn = 19 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90075', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90076', CASE WHEN rn IN (12) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90077', CASE WHEN rn IN (1,5,9,14,18,28,26) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90078', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90079', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90080', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90081', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90082', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90083', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90084', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90085', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90086', CASE WHEN rn IN (22) THEN 'kelmadi' WHEN rn = 23 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90087', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90088', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90090', CASE WHEN rn IN (2,7,12) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90091', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90092', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90093', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90094', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 16 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90095', CASE WHEN rn IN (16) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90096', CASE WHEN rn IN (2,6,9,16,14) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90097', CASE WHEN rn IN (1,6,9,16,14) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90098', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90099', CASE WHEN rn IN (12) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90100', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90101', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90102', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90103', CASE WHEN rn IN (1,5,10,13,18,28,26) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90104', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90105', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90106', CASE WHEN rn IN (4,9,13,17,18) THEN 'kelmadi' WHEN rn = 16 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90107', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 20 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90108', CASE WHEN rn IN (4,8,12,17,24) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90109', CASE WHEN rn IN (20) THEN 'kelmadi' WHEN rn = 20 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90110', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90111', CASE WHEN rn IN (2,6,9,16,14) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90112', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90113', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90114', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90115', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90116', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90117', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90118', CASE WHEN rn IN (1,6,10,13,18,28,26) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90119', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90120', CASE WHEN rn IN (1,5,9,13,17,28,26) THEN 'kelmadi' WHEN rn = 16 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90122', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90123', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90124', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90125', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90126', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90127', CASE WHEN rn IN (3,8,14,18,24) THEN 'kelmadi' WHEN rn = 25 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90128', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90129', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90130', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90131', CASE WHEN rn IN (2,5,10,14,22,20) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90132', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90133', CASE WHEN rn IN (14) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90134', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90135', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 26 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90136', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90137', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90138', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90139', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90140', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 20 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90141', CASE WHEN rn IN (19) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90142', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90143', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90144', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90145', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90146', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90147', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90148', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90149', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90150', CASE WHEN rn IN (3,8,13,19,24) THEN 'kelmadi' WHEN rn = 24 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90151', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90152', CASE WHEN rn IN (17) THEN 'kelmadi' WHEN rn = 16 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90154', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90155', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90156', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90157', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90158', CASE WHEN rn IN (17) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90159', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90160', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90161', CASE WHEN rn IN (1,6,9,16,14) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90162', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90163', CASE WHEN rn IN (3,8,13,18) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90164', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90165', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90166', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90167', CASE WHEN rn IN (13) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90168', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90169', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90170', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90171', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90172', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90173', CASE WHEN rn IN (1,6,9,14,17,28,26) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90174', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90175', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90176', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90177', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90178', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90179', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90180', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90181', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90182', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90183', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90184', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90186', CASE WHEN rn IN (2,9,12) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90187', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90188', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90189', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90190', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90191', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90192', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90193', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90194', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90195', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90196', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90197', CASE WHEN rn IN (13) THEN 'kelmadi' WHEN rn = 15 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90198', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90199', CASE WHEN rn IN (4,9,12,18,24) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90200', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90201', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90202', CASE WHEN rn IN (2,6,9,13,22,20) THEN 'kelmadi' WHEN rn = 19 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90203', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90204', CASE WHEN rn IN (21) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90205', CASE WHEN rn IN (1,6,10,13,17,28,26) THEN 'kelmadi' WHEN rn = 15 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90206', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90207', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90208', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90209', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90210', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90211', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90212', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90213', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90214', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90215', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90216', CASE WHEN rn IN (2,7,14,19,24) THEN 'kelmadi' WHEN rn = 16 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90218', CASE WHEN rn IN (3,8,12) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90219', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90220', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90221', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90222', CASE WHEN rn IN (4,7,13,17,18) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90223', CASE WHEN rn IN (18) THEN 'kelmadi' WHEN rn = 25 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90224', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90225', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90226', CASE WHEN rn IN (1,5,10,8) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90227', CASE WHEN rn IN (4,9,13,17,18) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90228', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90229', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90230', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90231', CASE WHEN rn IN (4,7,12,18,24) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90232', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90233', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90234', CASE WHEN rn IN (12) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90235', CASE WHEN rn IN (17) THEN 'kelmadi' WHEN rn = 22 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90236', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90237', CASE WHEN rn IN (18) THEN 'kelmadi' WHEN rn = 25 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90238', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90239', CASE WHEN rn IN (2,5,10,16,14) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90240', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90241', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90242', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90243', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90244', CASE WHEN rn IN (1,5,9,16,14) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90245', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90246', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90247', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90248', CASE WHEN rn IN (2,6,9,13,18,28,26) THEN 'kelmadi' WHEN rn = 16 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90250', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90251', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90252', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90253', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90254', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 15 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90255', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90256', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90257', CASE WHEN rn IN (2,9,12) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90258', CASE WHEN rn IN (1,6,10,8) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90259', CASE WHEN rn IN (1,6,10,13,22,20) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90260', CASE WHEN rn IN (4,2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90261', CASE WHEN rn IN (12) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90262', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90263', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90264', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90265', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90266', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90267', CASE WHEN rn IN (3,9,12,19,24) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90268', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 23 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90269', CASE WHEN rn IN (23) THEN 'kelmadi' WHEN rn = 17 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90270', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90271', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90272', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90273', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90274', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90275', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90276', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90277', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90278', CASE WHEN rn IN (16) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90279', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90280', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 19 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90282', CASE WHEN rn IN (2,6,10,16,14) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90283', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90284', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90285', CASE WHEN rn IN (4,6) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90286', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90287', CASE WHEN rn IN (4,9,13,18,24) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90288', CASE WHEN rn IN (2,9,12) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90289', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90290', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90291', CASE WHEN rn IN (2,9,13,18) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90292', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90293', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90294', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90295', CASE WHEN rn IN (2,8,13,19,24) THEN 'kelmadi' WHEN rn = 18 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90296', CASE WHEN rn IN (15) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90297', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90298', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 17 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90299', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90300', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 23 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90301', CASE WHEN rn IN (3,9,13,17,24) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90302', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90303', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90304', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90305', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90306', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90307', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90308', CASE WHEN rn IN (10) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90309', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90310', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90311', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90312', CASE WHEN rn IN (2,6,9,13,17,28,26) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90314', CASE WHEN rn IN (9) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90315', CASE WHEN rn IN (2,6,10,16,14) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90316', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90317', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90318', CASE WHEN rn IN (2,5,10,13,22,20) THEN 'kelmadi' WHEN rn = 6 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90319', CASE WHEN rn IN (20) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90320', CASE WHEN rn IN (1,6,10,16,14) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90321', CASE WHEN rn IN (11) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90322', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90323', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 15 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90324', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90325', CASE WHEN rn IN (13) THEN 'kelmadi' WHEN rn = 17 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90326', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90327', CASE WHEN rn IN (7) THEN 'kelmadi' WHEN rn = 23 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90328', CASE WHEN rn IN (13) THEN 'kelmadi' WHEN rn = 12 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90329', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90330', CASE WHEN rn IN (4,8,14,17,18) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90331', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90332', CASE WHEN rn IN (19) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90333', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 20 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90334', CASE WHEN rn IN (3,7,12) THEN 'kelmadi' WHEN rn = 9 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90335', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 13 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90336', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90337', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-20' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90338', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-21' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90339', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-22' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90340', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-23' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90341', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-24' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90342', CASE WHEN rn IN (14) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-25' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90343', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-26' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90344', CASE WHEN rn IN (23) THEN 'kelmadi' WHEN rn = 20 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-27' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90346', CASE WHEN rn IN (3,8,12) THEN 'kelmadi' WHEN rn = 7 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-29' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90347', CASE WHEN rn IN (3) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-31' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90348', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-32' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90349', CASE WHEN rn IN (5) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-33' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90350', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-34' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90351', CASE WHEN rn IN (8) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-35' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90352', CASE WHEN rn IN (1,6,10,16,14) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-36' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90353', CASE WHEN rn IN (4) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-01' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90354', CASE WHEN rn IN (2) THEN 'kelmadi' WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-02' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90355', CASE WHEN rn IN (2,9,14,18) THEN 'kelmadi' WHEN rn = 14 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-03' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90356', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-04' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90357', CASE WHEN rn IN (16) THEN 'kelmadi' WHEN rn = 10 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-06' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90358', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-07' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90359', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-08' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90360', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-09' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90361', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-10' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90362', CASE WHEN rn IN (4,9,13,18) THEN 'kelmadi' WHEN rn = 8 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-11' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90363', CASE WHEN rn IN (13) THEN 'kelmadi' WHEN rn = 5 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-13' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90364', CASE WHEN drn <= 3 THEN 'kelmadi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date DESC) drn FROM sessions WHERE group_id='GRP-DEMO-14' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90365', CASE WHEN rn IN (16) THEN 'kelmadi' WHEN rn = 11 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-16' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90366', CASE WHEN rn IN (6) THEN 'kelmadi' WHEN rn = 3 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-17' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90367', CASE WHEN rn IN (4,9,12) THEN 'kelmadi' WHEN rn = 4 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-18' AND status='otildi') t ON CONFLICT DO NOTHING;
+INSERT INTO attendance (session_id, student_id, status) SELECT id, 'STU-90368', CASE WHEN rn = 2 THEN 'kechikdi' ELSE 'keldi' END FROM (SELECT id, row_number() OVER (ORDER BY session_date) rn FROM sessions WHERE group_id='GRP-DEMO-19' AND status='otildi') t ON CONFLICT DO NOTHING;
+
+-- To'lovlar: joriy oy (har faol a'zolik) + eski guruhlarga o'tgan oy
+INSERT INTO payments (id, student_id, group_id, period, amount_due, amount_paid, paid_at, method, status) VALUES
+('PAY-900001', 'STU-90001', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900002', 'STU-90001', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900003', 'STU-90002', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'naqd', 'tolangan'),
+('PAY-900004', 'STU-90003', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'click', 'tolangan'),
+('PAY-900005', 'STU-90003', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900006', 'STU-90004', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'karta', 'tolangan'),
+('PAY-900007', 'STU-90005', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'click', 'tolangan'),
+('PAY-900008', 'STU-90005', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900009', 'STU-90006', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900010', 'STU-90007', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'payme', 'tolangan'),
+('PAY-900011', 'STU-90007', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 39, 'naqd', 'muddati_otgan'),
+('PAY-900012', 'STU-90008', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 7, 'naqd', 'qisman'),
+('PAY-900013', 'STU-90008', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900014', 'STU-90009', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'click', 'tolangan'),
+('PAY-900015', 'STU-90010', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'click', 'tolangan'),
+('PAY-900016', 'STU-90010', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 25, 'naqd', 'muddati_otgan'),
+('PAY-900017', 'STU-90011', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900018', 'STU-90011', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900019', 'STU-90012', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'karta', 'tolangan'),
+('PAY-900020', 'STU-90012', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900021', 'STU-90013', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900022', 'STU-90013', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900023', 'STU-90014', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'payme', 'tolangan'),
+('PAY-900024', 'STU-90014', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900025', 'STU-90015', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 8, 'click', 'qisman'),
+('PAY-900026', 'STU-90015', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900027', 'STU-90016', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900028', 'STU-90017', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'karta', 'tolangan'),
+('PAY-900029', 'STU-90018', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900030', 'STU-90019', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900031', 'STU-90020', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'karta', 'tolangan'),
+('PAY-900032', 'STU-90020', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900033', 'STU-90021', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900034', 'STU-90022', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900035', 'STU-90022', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900036', 'STU-90023', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'payme', 'tolangan'),
+('PAY-900037', 'STU-90024', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'karta', 'tolangan'),
+('PAY-900038', 'STU-90024', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900039', 'STU-90025', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'naqd', 'tolangan'),
+('PAY-900040', 'STU-90026', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'karta', 'tolangan'),
+('PAY-900041', 'STU-90026', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900042', 'STU-90027', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 13, 'naqd', 'tolangan'),
+('PAY-900043', 'STU-90027', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900044', 'STU-90028', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 7, 'naqd', 'tolangan'),
+('PAY-900045', 'STU-90029', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 3, 'payme', 'tolangan'),
+('PAY-900046', 'STU-90030', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 1, 'karta', 'tolangan'),
+('PAY-900047', 'STU-90030', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900048', 'STU-90031', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 2, 'payme', 'tolangan'),
+('PAY-900049', 'STU-90031', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900050', 'STU-90032', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 7, 'click', 'tolangan'),
+('PAY-900051', 'STU-90032', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900052', 'STU-90033', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'click', 'tolangan'),
+('PAY-900053', 'STU-90033', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900054', 'STU-90034', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'click', 'tolangan'),
+('PAY-900055', 'STU-90035', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'naqd', 'tolangan'),
+('PAY-900056', 'STU-90035', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900057', 'STU-90036', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900058', 'STU-90037', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900059', 'STU-90037', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900060', 'STU-90038', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'karta', 'tolangan'),
+('PAY-900061', 'STU-90039', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 8, 'click', 'qisman'),
+('PAY-900062', 'STU-90039', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900063', 'STU-90040', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'naqd', 'tolangan'),
+('PAY-900064', 'STU-90040', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900065', 'STU-90041', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'click', 'tolangan'),
+('PAY-900066', 'STU-90042', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 3, 'click', 'qisman'),
+('PAY-900067', 'STU-90042', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900068', 'STU-90043', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'karta', 'tolangan'),
+('PAY-900069', 'STU-90043', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900070', 'STU-90044', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 4, 'click', 'qisman'),
+('PAY-900071', 'STU-90044', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900072', 'STU-90045', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'naqd', 'tolangan'),
+('PAY-900073', 'STU-90045', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900074', 'STU-90046', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'naqd', 'tolangan'),
+('PAY-900075', 'STU-90046', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900076', 'STU-90047', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900077', 'STU-90047', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900078', 'STU-90048', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900079', 'STU-90049', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900080', 'STU-90050', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900081', 'STU-90051', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900082', 'STU-90052', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900083', 'STU-90052', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900084', 'STU-90053', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'karta', 'tolangan'),
+('PAY-900085', 'STU-90054', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'naqd', 'tolangan'),
+('PAY-900086', 'STU-90054', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900087', 'STU-90055', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'karta', 'tolangan'),
+('PAY-900088', 'STU-90056', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'payme', 'tolangan'),
+('PAY-900089', 'STU-90056', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900090', 'STU-90057', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'karta', 'tolangan'),
+('PAY-900091', 'STU-90058', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'payme', 'tolangan'),
+('PAY-900092', 'STU-90058', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900093', 'STU-90059', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 15, 'karta', 'tolangan'),
+('PAY-900094', 'STU-90059', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900095', 'STU-90060', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 13, 'payme', 'tolangan'),
+('PAY-900096', 'STU-90061', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900097', 'STU-90062', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900098', 'STU-90062', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900099', 'STU-90063', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900100', 'STU-90063', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900101', 'STU-90064', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900102', 'STU-90064', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900103', 'STU-90065', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 10, 'click', 'qisman'),
+('PAY-900104', 'STU-90065', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900105', 'STU-90066', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'naqd', 'tolangan'),
+('PAY-900106', 'STU-90067', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900107', 'STU-90067', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900108', 'STU-90068', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'karta', 'tolangan'),
+('PAY-900109', 'STU-90069', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900110', 'STU-90069', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900111', 'STU-90070', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900112', 'STU-90071', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900113', 'STU-90071', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 26, 'naqd', 'muddati_otgan'),
+('PAY-900114', 'STU-90072', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900115', 'STU-90072', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900116', 'STU-90073', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 4, 'click', 'qisman'),
+('PAY-900117', 'STU-90074', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'click', 'tolangan'),
+('PAY-900118', 'STU-90074', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900119', 'STU-90075', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'payme', 'tolangan'),
+('PAY-900120', 'STU-90075', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900121', 'STU-90076', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'karta', 'tolangan'),
+('PAY-900122', 'STU-90076', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900123', 'STU-90077', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 2, 'naqd', 'qisman'),
+('PAY-900124', 'STU-90077', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900125', 'STU-90078', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900126', 'STU-90078', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900127', 'STU-90079', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'naqd', 'tolangan'),
+('PAY-900128', 'STU-90079', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900129', 'STU-90080', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'naqd', 'tolangan'),
+('PAY-900130', 'STU-90081', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'payme', 'tolangan'),
+('PAY-900131', 'STU-90082', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 6, 'click', 'qisman'),
+('PAY-900132', 'STU-90083', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 2, 'click', 'qisman'),
+('PAY-900133', 'STU-90084', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'payme', 'tolangan'),
+('PAY-900134', 'STU-90084', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900135', 'STU-90085', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900136', 'STU-90086', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'karta', 'tolangan'),
+('PAY-900137', 'STU-90086', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900138', 'STU-90087', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'payme', 'tolangan'),
+('PAY-900139', 'STU-90088', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'karta', 'tolangan'),
+('PAY-900140', 'STU-90088', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900141', 'STU-90089', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'naqd', 'tolangan'),
+('PAY-900142', 'STU-90090', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'click', 'tolangan'),
+('PAY-900143', 'STU-90090', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900144', 'STU-90091', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 4, 'naqd', 'tolangan'),
+('PAY-900145', 'STU-90091', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900146', 'STU-90092', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 10, 'payme', 'tolangan'),
+('PAY-900147', 'STU-90093', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900148', 'STU-90094', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900149', 'STU-90094', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900150', 'STU-90095', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 14, 'karta', 'tolangan'),
+('PAY-900151', 'STU-90095', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900152', 'STU-90096', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900153', 'STU-90096', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900154', 'STU-90097', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900155', 'STU-90097', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900156', 'STU-90098', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'naqd', 'tolangan'),
+('PAY-900157', 'STU-90099', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'click', 'tolangan'),
+('PAY-900158', 'STU-90099', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900159', 'STU-90100', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'karta', 'tolangan'),
+('PAY-900160', 'STU-90101', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900161', 'STU-90101', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900162', 'STU-90102', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 3, 'naqd', 'qisman'),
+('PAY-900163', 'STU-90103', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'karta', 'tolangan'),
+('PAY-900164', 'STU-90103', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900165', 'STU-90104', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900166', 'STU-90104', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900167', 'STU-90105', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900168', 'STU-90106', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'payme', 'tolangan'),
+('PAY-900169', 'STU-90106', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900170', 'STU-90107', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'karta', 'tolangan'),
+('PAY-900171', 'STU-90107', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 25, 'naqd', 'tolangan'),
+('PAY-900172', 'STU-90108', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'naqd', 'tolangan'),
+('PAY-900173', 'STU-90108', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900174', 'STU-90109', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900175', 'STU-90109', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900176', 'STU-90110', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'karta', 'tolangan'),
+('PAY-900177', 'STU-90110', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900178', 'STU-90111', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 2, 'naqd', 'qisman'),
+('PAY-900179', 'STU-90111', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900180', 'STU-90112', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'click', 'tolangan'),
+('PAY-900181', 'STU-90113', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'click', 'tolangan'),
+('PAY-900182', 'STU-90114', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 2, 'click', 'qisman'),
+('PAY-900183', 'STU-90115', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'naqd', 'tolangan'),
+('PAY-900184', 'STU-90116', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900185', 'STU-90116', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900186', 'STU-90117', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900187', 'STU-90118', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'payme', 'tolangan'),
+('PAY-900188', 'STU-90118', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900189', 'STU-90119', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900190', 'STU-90120', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900191', 'STU-90120', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 25, 'naqd', 'tolangan'),
+('PAY-900192', 'STU-90121', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'payme', 'tolangan'),
+('PAY-900193', 'STU-90122', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900194', 'STU-90122', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900195', 'STU-90123', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 3, 'karta', 'tolangan'),
+('PAY-900196', 'STU-90123', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900197', 'STU-90124', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 1, 'karta', 'tolangan'),
+('PAY-900198', 'STU-90125', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900199', 'STU-90126', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900200', 'STU-90126', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900201', 'STU-90127', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 3, 'payme', 'tolangan'),
+('PAY-900202', 'STU-90127', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900203', 'STU-90128', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 9, 'naqd', 'tolangan'),
+('PAY-900204', 'STU-90128', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900205', 'STU-90129', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900206', 'STU-90129', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900207', 'STU-90130', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900208', 'STU-90131', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900209', 'STU-90131', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900210', 'STU-90132', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'payme', 'tolangan'),
+('PAY-900211', 'STU-90133', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900212', 'STU-90133', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900213', 'STU-90134', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900214', 'STU-90135', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900215', 'STU-90135', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900216', 'STU-90136', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900217', 'STU-90136', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 33, 'naqd', 'muddati_otgan'),
+('PAY-900218', 'STU-90137', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'payme', 'tolangan'),
+('PAY-900219', 'STU-90138', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900220', 'STU-90138', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900221', 'STU-90139', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900222', 'STU-90139', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900223', 'STU-90140', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'karta', 'tolangan'),
+('PAY-900224', 'STU-90140', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900225', 'STU-90141', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'payme', 'tolangan'),
+('PAY-900226', 'STU-90141', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900227', 'STU-90142', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'karta', 'tolangan'),
+('PAY-900228', 'STU-90142', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900229', 'STU-90143', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900230', 'STU-90143', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900231', 'STU-90144', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 2, 'naqd', 'qisman'),
+('PAY-900232', 'STU-90145', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'naqd', 'tolangan'),
+('PAY-900233', 'STU-90146', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'naqd', 'tolangan'),
+('PAY-900234', 'STU-90147', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900235', 'STU-90148', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900236', 'STU-90148', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900237', 'STU-90149', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'karta', 'tolangan'),
+('PAY-900238', 'STU-90150', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'click', 'tolangan'),
+('PAY-900239', 'STU-90150', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900240', 'STU-90151', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900241', 'STU-90152', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 1, 'click', 'qisman'),
+('PAY-900242', 'STU-90152', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900243', 'STU-90153', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900244', 'STU-90154', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 10, 'naqd', 'qisman'),
+('PAY-900245', 'STU-90154', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900246', 'STU-90155', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900247', 'STU-90155', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900248', 'STU-90156', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 13, 'click', 'tolangan'),
+('PAY-900249', 'STU-90157', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 15, 'naqd', 'tolangan'),
+('PAY-900250', 'STU-90158', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900251', 'STU-90158', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 25, 'naqd', 'tolangan'),
+('PAY-900252', 'STU-90159', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900253', 'STU-90159', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900254', 'STU-90160', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 1, 'payme', 'tolangan'),
+('PAY-900255', 'STU-90160', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900256', 'STU-90161', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'karta', 'tolangan'),
+('PAY-900257', 'STU-90161', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900258', 'STU-90162', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900259', 'STU-90163', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900260', 'STU-90163', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900261', 'STU-90164', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'naqd', 'tolangan'),
+('PAY-900262', 'STU-90165', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'naqd', 'tolangan'),
+('PAY-900263', 'STU-90165', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900264', 'STU-90166', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'payme', 'tolangan'),
+('PAY-900265', 'STU-90167', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 5, 'click', 'qisman'),
+('PAY-900266', 'STU-90167', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 40, 'naqd', 'muddati_otgan'),
+('PAY-900267', 'STU-90168', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'naqd', 'tolangan'),
+('PAY-900268', 'STU-90168', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900269', 'STU-90169', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900270', 'STU-90170', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 9, 'naqd', 'qisman'),
+('PAY-900271', 'STU-90170', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900272', 'STU-90171', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900273', 'STU-90171', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 37, 'naqd', 'muddati_otgan'),
+('PAY-900274', 'STU-90172', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'karta', 'tolangan'),
+('PAY-900275', 'STU-90172', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900276', 'STU-90173', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'karta', 'tolangan'),
+('PAY-900277', 'STU-90173', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900278', 'STU-90174', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'click', 'tolangan'),
+('PAY-900279', 'STU-90174', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900280', 'STU-90175', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'karta', 'tolangan'),
+('PAY-900281', 'STU-90175', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900282', 'STU-90176', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 3, 'click', 'qisman'),
+('PAY-900283', 'STU-90177', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'click', 'tolangan'),
+('PAY-900284', 'STU-90178', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900285', 'STU-90179', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900286', 'STU-90180', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'naqd', 'tolangan'),
+('PAY-900287', 'STU-90180', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900288', 'STU-90181', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900289', 'STU-90182', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 6, 'naqd', 'qisman'),
+('PAY-900290', 'STU-90182', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900291', 'STU-90183', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900292', 'STU-90184', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 1, 'naqd', 'qisman'),
+('PAY-900293', 'STU-90184', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900294', 'STU-90185', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'naqd', 'tolangan'),
+('PAY-900295', 'STU-90186', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'click', 'tolangan'),
+('PAY-900296', 'STU-90186', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900297', 'STU-90187', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 14, 'naqd', 'tolangan'),
+('PAY-900298', 'STU-90187', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900299', 'STU-90188', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 13, 'karta', 'tolangan'),
+('PAY-900300', 'STU-90189', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900301', 'STU-90190', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 420000, CURRENT_DATE - 2, 'click', 'qisman'),
+('PAY-900302', 'STU-90190', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900303', 'STU-90191', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900304', 'STU-90191', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900305', 'STU-90192', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 3, 'naqd', 'tolangan'),
+('PAY-900306', 'STU-90192', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900307', 'STU-90193', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'click', 'tolangan'),
+('PAY-900308', 'STU-90193', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900309', 'STU-90194', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'click', 'tolangan'),
+('PAY-900310', 'STU-90195', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'naqd', 'tolangan'),
+('PAY-900311', 'STU-90195', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 26, 'naqd', 'muddati_otgan'),
+('PAY-900312', 'STU-90196', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900313', 'STU-90197', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'naqd', 'tolangan'),
+('PAY-900314', 'STU-90197', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900315', 'STU-90198', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900316', 'STU-90199', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'naqd', 'tolangan'),
+('PAY-900317', 'STU-90199', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900318', 'STU-90200', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'click', 'tolangan'),
+('PAY-900319', 'STU-90200', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900320', 'STU-90201', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900321', 'STU-90202', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900322', 'STU-90202', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900323', 'STU-90203', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'karta', 'tolangan'),
+('PAY-900324', 'STU-90203', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900325', 'STU-90204', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900326', 'STU-90204', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 25, 'naqd', 'tolangan'),
+('PAY-900327', 'STU-90205', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900328', 'STU-90205', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900329', 'STU-90206', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 8, 'naqd', 'qisman'),
+('PAY-900330', 'STU-90206', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900331', 'STU-90207', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900332', 'STU-90207', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 40, 'naqd', 'muddati_otgan'),
+('PAY-900333', 'STU-90208', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900334', 'STU-90209', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'naqd', 'tolangan'),
+('PAY-900335', 'STU-90210', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900336', 'STU-90211', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'karta', 'tolangan'),
+('PAY-900337', 'STU-90212', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'payme', 'tolangan'),
+('PAY-900338', 'STU-90212', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900339', 'STU-90213', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900340', 'STU-90214', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'payme', 'tolangan'),
+('PAY-900341', 'STU-90214', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900342', 'STU-90215', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'karta', 'tolangan'),
+('PAY-900343', 'STU-90216', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'karta', 'tolangan'),
+('PAY-900344', 'STU-90216', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900345', 'STU-90217', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'karta', 'tolangan'),
+('PAY-900346', 'STU-90218', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'click', 'tolangan'),
+('PAY-900347', 'STU-90218', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900348', 'STU-90219', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 180000, CURRENT_DATE - 2, 'click', 'qisman'),
+('PAY-900349', 'STU-90219', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900350', 'STU-90220', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900351', 'STU-90221', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 5, 'naqd', 'tolangan'),
+('PAY-900352', 'STU-90222', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900353', 'STU-90222', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900354', 'STU-90223', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 9, 'naqd', 'tolangan'),
+('PAY-900355', 'STU-90223', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900356', 'STU-90224', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900357', 'STU-90224', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 350000, CURRENT_DATE - 37, 'naqd', 'muddati_otgan'),
+('PAY-900358', 'STU-90225', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900359', 'STU-90225', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900360', 'STU-90226', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900361', 'STU-90227', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 7, 'click', 'qisman'),
+('PAY-900362', 'STU-90227', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900363', 'STU-90228', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900364', 'STU-90229', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900365', 'STU-90229', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 37, 'naqd', 'muddati_otgan'),
+('PAY-900366', 'STU-90230', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900367', 'STU-90231', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 10, 'naqd', 'qisman'),
+('PAY-900368', 'STU-90231', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900369', 'STU-90232', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900370', 'STU-90232', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900371', 'STU-90233', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'payme', 'tolangan'),
+('PAY-900372', 'STU-90234', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900373', 'STU-90234', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900374', 'STU-90235', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 8, 'click', 'qisman'),
+('PAY-900375', 'STU-90235', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900376', 'STU-90236', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900377', 'STU-90236', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900378', 'STU-90237', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 9, 'click', 'qisman'),
+('PAY-900379', 'STU-90237', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900380', 'STU-90238', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 8, 'naqd', 'qisman'),
+('PAY-900381', 'STU-90238', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900382', 'STU-90239', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'click', 'tolangan'),
+('PAY-900383', 'STU-90239', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 25, 'naqd', 'tolangan'),
+('PAY-900384', 'STU-90240', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'naqd', 'tolangan'),
+('PAY-900385', 'STU-90241', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900386', 'STU-90242', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'karta', 'tolangan'),
+('PAY-900387', 'STU-90243', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 6, 'click', 'qisman'),
+('PAY-900388', 'STU-90244', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'payme', 'tolangan'),
+('PAY-900389', 'STU-90244', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900390', 'STU-90245', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'naqd', 'tolangan'),
+('PAY-900391', 'STU-90246', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900392', 'STU-90246', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900393', 'STU-90247', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'click', 'tolangan'),
+('PAY-900394', 'STU-90248', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900395', 'STU-90248', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900396', 'STU-90249', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 10, 'naqd', 'qisman'),
+('PAY-900397', 'STU-90250', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900398', 'STU-90250', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900399', 'STU-90251', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 12, 'naqd', 'tolangan'),
+('PAY-900400', 'STU-90251', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900401', 'STU-90252', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900402', 'STU-90253', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900403', 'STU-90254', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 15, 'karta', 'tolangan'),
+('PAY-900404', 'STU-90254', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900405', 'STU-90255', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900406', 'STU-90255', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900407', 'STU-90256', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900408', 'STU-90256', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900409', 'STU-90257', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900410', 'STU-90257', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900411', 'STU-90258', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'click', 'tolangan'),
+('PAY-900412', 'STU-90259', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900413', 'STU-90259', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900414', 'STU-90260', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 5, 'click', 'qisman'),
+('PAY-900415', 'STU-90261', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900416', 'STU-90261', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 35, 'naqd', 'muddati_otgan'),
+('PAY-900417', 'STU-90262', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900418', 'STU-90263', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 6, 'naqd', 'qisman'),
+('PAY-900419', 'STU-90263', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900420', 'STU-90264', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'karta', 'tolangan'),
+('PAY-900421', 'STU-90264', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900422', 'STU-90265', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'click', 'tolangan'),
+('PAY-900423', 'STU-90266', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900424', 'STU-90266', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900425', 'STU-90267', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 3, 'naqd', 'qisman'),
+('PAY-900426', 'STU-90267', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900427', 'STU-90268', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'naqd', 'tolangan'),
+('PAY-900428', 'STU-90268', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900429', 'STU-90269', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900430', 'STU-90269', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900431', 'STU-90270', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 7, 'naqd', 'qisman'),
+('PAY-900432', 'STU-90270', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900433', 'STU-90271', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'naqd', 'tolangan'),
+('PAY-900434', 'STU-90271', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900435', 'STU-90272', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'naqd', 'tolangan'),
+('PAY-900436', 'STU-90273', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900437', 'STU-90274', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900438', 'STU-90275', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 6, 'click', 'qisman'),
+('PAY-900439', 'STU-90276', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'karta', 'tolangan'),
+('PAY-900440', 'STU-90276', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900441', 'STU-90277', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 9, 'click', 'qisman'),
+('PAY-900442', 'STU-90278', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'click', 'tolangan'),
+('PAY-900443', 'STU-90278', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900444', 'STU-90279', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'naqd', 'tolangan'),
+('PAY-900445', 'STU-90280', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900446', 'STU-90280', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900447', 'STU-90281', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900448', 'STU-90282', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 8, 'click', 'qisman'),
+('PAY-900449', 'STU-90282', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900450', 'STU-90283', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 11, 'click', 'tolangan'),
+('PAY-900451', 'STU-90283', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900452', 'STU-90284', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900453', 'STU-90285', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 12, 'karta', 'tolangan'),
+('PAY-900454', 'STU-90286', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 4, 'karta', 'tolangan'),
+('PAY-900455', 'STU-90286', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 350000, CURRENT_DATE - 33, 'naqd', 'muddati_otgan'),
+('PAY-900456', 'STU-90287', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 3, 'karta', 'tolangan'),
+('PAY-900457', 'STU-90287', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900458', 'STU-90288', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 3, 'click', 'tolangan'),
+('PAY-900459', 'STU-90288', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900460', 'STU-90289', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900461', 'STU-90289', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900462', 'STU-90290', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'karta', 'tolangan'),
+('PAY-900463', 'STU-90291', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 4, 'naqd', 'qisman'),
+('PAY-900464', 'STU-90291', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900465', 'STU-90292', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900466', 'STU-90293', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'karta', 'tolangan'),
+('PAY-900467', 'STU-90293', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 25, 'naqd', 'tolangan'),
+('PAY-900468', 'STU-90294', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900469', 'STU-90295', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900470', 'STU-90295', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900471', 'STU-90296', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900472', 'STU-90296', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900473', 'STU-90297', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'payme', 'tolangan'),
+('PAY-900474', 'STU-90298', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900475', 'STU-90298', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900476', 'STU-90299', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900477', 'STU-90299', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900478', 'STU-90300', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900479', 'STU-90300', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900480', 'STU-90301', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'payme', 'tolangan'),
+('PAY-900481', 'STU-90301', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900482', 'STU-90302', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900483', 'STU-90302', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900484', 'STU-90303', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900485', 'STU-90303', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900486', 'STU-90304', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'naqd', 'tolangan'),
+('PAY-900487', 'STU-90305', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900488', 'STU-90306', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'karta', 'tolangan'),
+('PAY-900489', 'STU-90307', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900490', 'STU-90308', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 8, 'naqd', 'tolangan'),
+('PAY-900491', 'STU-90308', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900492', 'STU-90309', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'click', 'tolangan'),
+('PAY-900493', 'STU-90310', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 12, 'karta', 'tolangan'),
+('PAY-900494', 'STU-90310', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 31, 'naqd', 'tolangan'),
+('PAY-900495', 'STU-90311', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'naqd', 'tolangan'),
+('PAY-900496', 'STU-90312', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900497', 'STU-90312', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900498', 'STU-90313', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900499', 'STU-90314', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 300000, CURRENT_DATE - 3, 'click', 'qisman'),
+('PAY-900500', 'STU-90314', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900501', 'STU-90315', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 15, 'naqd', 'tolangan'),
+('PAY-900502', 'STU-90315', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900503', 'STU-90316', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 360000, CURRENT_DATE - 10, 'click', 'qisman'),
+('PAY-900504', 'STU-90317', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 4, 'naqd', 'tolangan'),
+('PAY-900505', 'STU-90318', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900506', 'STU-90318', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900507', 'STU-90319', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 15, 'karta', 'tolangan'),
+('PAY-900508', 'STU-90319', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900509', 'STU-90320', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 12, 'naqd', 'tolangan'),
+('PAY-900510', 'STU-90320', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900511', 'STU-90321', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'payme', 'tolangan'),
+('PAY-900512', 'STU-90321', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900513', 'STU-90322', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'click', 'tolangan'),
+('PAY-900514', 'STU-90323', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'naqd', 'tolangan'),
+('PAY-900515', 'STU-90323', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900516', 'STU-90324', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900517', 'STU-90325', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900518', 'STU-90325', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 28, 'naqd', 'muddati_otgan'),
+('PAY-900519', 'STU-90326', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'payme', 'tolangan'),
+('PAY-900520', 'STU-90327', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'click', 'tolangan'),
+('PAY-900521', 'STU-90327', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900522', 'STU-90328', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'payme', 'tolangan'),
+('PAY-900523', 'STU-90328', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 38, 'naqd', 'tolangan'),
+('PAY-900524', 'STU-90329', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900525', 'STU-90330', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 7, 'payme', 'tolangan'),
+('PAY-900526', 'STU-90330', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 29, 'naqd', 'tolangan'),
+('PAY-900527', 'STU-90331', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900528', 'STU-90331', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900529', 'STU-90332', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'click', 'tolangan'),
+('PAY-900530', 'STU-90332', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900531', 'STU-90333', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'naqd', 'tolangan'),
+('PAY-900532', 'STU-90333', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900533', 'STU-90334', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 150000, CURRENT_DATE - 5, 'click', 'qisman'),
+('PAY-900534', 'STU-90334', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 40, 'naqd', 'tolangan'),
+('PAY-900535', 'STU-90335', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 250000, CURRENT_DATE - 9, 'naqd', 'qisman'),
+('PAY-900536', 'STU-90335', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900537', 'STU-90336', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'payme', 'tolangan'),
+('PAY-900538', 'STU-90337', 'GRP-DEMO-20', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900539', 'STU-90338', 'GRP-DEMO-21', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'naqd', 'tolangan'),
+('PAY-900540', 'STU-90339', 'GRP-DEMO-22', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900541', 'STU-90340', 'GRP-DEMO-23', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'click', 'tolangan'),
+('PAY-900542', 'STU-90340', 'GRP-DEMO-23', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900543', 'STU-90341', 'GRP-DEMO-24', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 5, 'payme', 'tolangan'),
+('PAY-900544', 'STU-90342', 'GRP-DEMO-25', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900545', 'STU-90342', 'GRP-DEMO-25', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 34, 'naqd', 'tolangan'),
+('PAY-900546', 'STU-90343', 'GRP-DEMO-26', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 15, 'naqd', 'tolangan'),
+('PAY-900547', 'STU-90344', 'GRP-DEMO-27', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'payme', 'tolangan'),
+('PAY-900548', 'STU-90344', 'GRP-DEMO-27', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900549', 'STU-90345', 'GRP-DEMO-28', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'click', 'tolangan'),
+('PAY-900550', 'STU-90346', 'GRP-DEMO-29', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 9, 'naqd', 'tolangan'),
+('PAY-900551', 'STU-90346', 'GRP-DEMO-29', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900552', 'STU-90347', 'GRP-DEMO-31', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 7, 'naqd', 'tolangan'),
+('PAY-900553', 'STU-90347', 'GRP-DEMO-31', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900554', 'STU-90348', 'GRP-DEMO-32', to_char(CURRENT_DATE, 'YYYY-MM'), 600000, 600000, CURRENT_DATE - 3, 'payme', 'tolangan'),
+('PAY-900555', 'STU-90349', 'GRP-DEMO-33', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 350000, CURRENT_DATE - 3, 'naqd', 'qisman'),
+('PAY-900556', 'STU-90350', 'GRP-DEMO-34', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 210000, CURRENT_DATE - 7, 'naqd', 'qisman'),
+('PAY-900557', 'STU-90350', 'GRP-DEMO-34', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 37, 'naqd', 'tolangan'),
+('PAY-900558', 'STU-90351', 'GRP-DEMO-35', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900559', 'STU-90351', 'GRP-DEMO-35', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900560', 'STU-90352', 'GRP-DEMO-36', to_char(CURRENT_DATE, 'YYYY-MM'), 700000, 0, NULL, NULL, 'muddati_otgan'),
+('PAY-900561', 'STU-90352', 'GRP-DEMO-36', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 700000, 700000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900562', 'STU-90353', 'GRP-DEMO-01', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 1, 'payme', 'tolangan'),
+('PAY-900563', 'STU-90353', 'GRP-DEMO-01', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900564', 'STU-90354', 'GRP-DEMO-02', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'click', 'tolangan'),
+('PAY-900565', 'STU-90355', 'GRP-DEMO-03', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 6, 'naqd', 'tolangan'),
+('PAY-900566', 'STU-90355', 'GRP-DEMO-03', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 28, 'naqd', 'tolangan'),
+('PAY-900567', 'STU-90356', 'GRP-DEMO-04', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 14, 'naqd', 'tolangan'),
+('PAY-900568', 'STU-90357', 'GRP-DEMO-06', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'naqd', 'tolangan'),
+('PAY-900569', 'STU-90357', 'GRP-DEMO-06', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900570', 'STU-90358', 'GRP-DEMO-07', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'payme', 'tolangan'),
+('PAY-900571', 'STU-90359', 'GRP-DEMO-08', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'karta', 'tolangan'),
+('PAY-900572', 'STU-90359', 'GRP-DEMO-08', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 32, 'naqd', 'tolangan'),
+('PAY-900573', 'STU-90360', 'GRP-DEMO-09', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 0, NULL, NULL, 'kutilmoqda'),
+('PAY-900574', 'STU-90360', 'GRP-DEMO-09', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 27, 'naqd', 'tolangan'),
+('PAY-900575', 'STU-90361', 'GRP-DEMO-10', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 13, 'naqd', 'tolangan'),
+('PAY-900576', 'STU-90362', 'GRP-DEMO-11', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'payme', 'tolangan'),
+('PAY-900577', 'STU-90362', 'GRP-DEMO-11', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 39, 'naqd', 'tolangan'),
+('PAY-900578', 'STU-90363', 'GRP-DEMO-13', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 3, 'naqd', 'tolangan'),
+('PAY-900579', 'STU-90363', 'GRP-DEMO-13', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 30, 'naqd', 'tolangan'),
+('PAY-900580', 'STU-90364', 'GRP-DEMO-14', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 2, 'click', 'tolangan'),
+('PAY-900581', 'STU-90364', 'GRP-DEMO-14', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 33, 'naqd', 'tolangan'),
+('PAY-900582', 'STU-90365', 'GRP-DEMO-16', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 10, 'click', 'tolangan'),
+('PAY-900583', 'STU-90365', 'GRP-DEMO-16', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 26, 'naqd', 'tolangan'),
+('PAY-900584', 'STU-90366', 'GRP-DEMO-17', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 4, 'karta', 'tolangan'),
+('PAY-900585', 'STU-90366', 'GRP-DEMO-17', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 36, 'naqd', 'tolangan'),
+('PAY-900586', 'STU-90367', 'GRP-DEMO-18', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'payme', 'tolangan'),
+('PAY-900587', 'STU-90367', 'GRP-DEMO-18', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 35, 'naqd', 'tolangan'),
+('PAY-900588', 'STU-90368', 'GRP-DEMO-19', to_char(CURRENT_DATE, 'YYYY-MM'), 500000, 500000, CURRENT_DATE - 11, 'karta', 'tolangan')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO teacher_salaries (teacher_id, period, amount, student_count, rate, paid_at) VALUES
+('TCH-901', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2520000, 42, 60000, CURRENT_DATE - 29),
+('TCH-902', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2220000, 37, 60000, CURRENT_DATE - 29),
+('TCH-903', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2400000, 40, 60000, CURRENT_DATE - 32),
+('TCH-904', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2160000, 36, 60000, CURRENT_DATE - 30),
+('TCH-905', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 1920000, 32, 60000, CURRENT_DATE - 20),
+('TCH-906', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2460000, 41, 60000, CURRENT_DATE - 23),
+('TCH-907', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 1980000, 33, 60000, CURRENT_DATE - 28),
+('TCH-908', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2220000, 37, 60000, CURRENT_DATE - 27),
+('TCH-909', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 1740000, 29, 60000, CURRENT_DATE - 27),
+('TCH-910', to_char(CURRENT_DATE - interval '1 month', 'YYYY-MM'), 2340000, 39, 60000, CURRENT_DATE - 23)
+ON CONFLICT DO NOTHING;
+INSERT INTO expenses (name, amount, spent_at) VALUES
+('Ijara (demo)', 12000000, date_trunc('month', CURRENT_DATE)::date + 1),
+('Kommunal (demo)', 1800000, date_trunc('month', CURRENT_DATE)::date + 2),
+('Marketing - Instagram (demo)', 4500000, date_trunc('month', CURRENT_DATE)::date + 3),
+('Marketing - Google (demo)', 2000000, date_trunc('month', CURRENT_DATE)::date + 4),
+('Kanstovarlar (demo)', 600000, date_trunc('month', CURRENT_DATE)::date + 5),
+('Internet (demo)', 400000, date_trunc('month', CURRENT_DATE)::date + 6),
+('Suv va choy (demo)', 350000, date_trunc('month', CURRENT_DATE)::date + 8),
+('Tozalash xizmati (demo)', 900000, date_trunc('month', CURRENT_DATE)::date + 9)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO leads (id, first_name, last_name, phone, phone2, parent_name, source, subject, status, manager, priority, interest, last_contact_at, next_followup_at, birth_year, lost_reason, note, created_at) VALUES
+('LID-90001', 'Gulnora', 'Rustamova', '+998 91 466 20 48', '+998 93 519 13 79', NULL, 'instagram_ads', 'General', 'yangi', 'Bekzod', 'orta', 'past', NULL, NULL, 2004, NULL, NULL, now() - interval '40 hours'),
+('LID-90002', 'Malika', 'Xasanova', '+998 90 236 62 46', NULL, 'Rustamov aka', 'instagram_ads', 'IELTS', 'yangi', 'Malika', 'orta', NULL, NULL, NULL, 2011, NULL, NULL, now() - interval '30 hours'),
+('LID-90003', 'Aziz', 'Raximov', '+998 93 957 30 14', NULL, 'Sattorov aka', 'instagram_ads', 'IELTS', 'yangi', 'Sardor', 'past', NULL, NULL, NULL, 2007, NULL, NULL, now() - interval '40 hours'),
+('LID-90004', 'Rayhona', 'Mirzayeva', '+998 97 308 35 22', NULL, 'Davronov aka', 'instagram_ads', 'General', 'yangi', 'Aziza', 'past', NULL, NULL, NULL, 2007, NULL, NULL, now() - interval '50 hours'),
+('LID-90005', 'Madina', 'Toshmatova', '+998 90 745 02 40', NULL, 'Davronov aka', 'instagram_ads', 'General', 'yangi', 'Bekzod', 'past', 'orta', NULL, NULL, 2008, NULL, NULL, now() - interval '20 hours'),
+('LID-90006', 'Farrux', 'Raximov', '+998 94 229 03 78', NULL, 'Rustamov aka', 'instagram_ads', 'General', 'yangi', 'Malika', 'orta', 'orta', NULL, NULL, 2010, NULL, NULL, now() - interval '30 hours'),
+('LID-90007', 'Muhammadali', 'Davronov', '+998 93 277 62 18', NULL, NULL, 'instagram_ads', 'IELTS', 'yangi', 'Sardor', 'yuqori', 'past', NULL, NULL, 2012, NULL, NULL, now() - interval '30 hours'),
+('LID-90008', 'Dilrabo', 'Ergasheva', '+998 90 238 39 88', NULL, 'Raximov aka', 'instagram_ads', 'General', 'yangi', 'Aziza', 'orta', NULL, NULL, NULL, 2005, NULL, NULL, now() - interval '20 hours'),
+('LID-90009', 'Anvar', 'Berdiyev', '+998 90 918 43 20', NULL, 'Nazarov aka', 'instagram_ads', 'IELTS', 'yangi', 'Bekzod', 'past', NULL, NULL, NULL, 2011, NULL, NULL, now() - interval '30 hours'),
+('LID-90010', 'Nozima', 'Mirzayeva', '+998 98 562 35 34', NULL, 'Davronov aka', 'instagram_ads', 'General', 'yangi', 'Malika', 'orta', NULL, NULL, NULL, 2004, NULL, NULL, now() - interval '40 hours'),
+('LID-90011', 'Jasur', 'Olimov', '+998 97 530 69 68', NULL, 'Tohirov aka', 'instagram_ads', 'General', 'yangi', 'Sardor', 'orta', NULL, NULL, NULL, 2013, NULL, NULL, now() - interval '40 hours'),
+('LID-90012', 'Marjona', 'Mahmudova', '+998 98 939 95 37', NULL, 'Sharipov aka', 'instagram_ads', 'IELTS', 'yangi', 'Aziza', 'orta', 'past', NULL, NULL, 2005, NULL, NULL, now() - interval '50 hours'),
+('LID-90013', 'Nilufar', 'Xasanova', '+998 93 430 90 47', '+998 93 600 35 22', 'Karimov aka', 'instagram_ads', 'IELTS', 'yangi', 'Bekzod', 'yuqori', NULL, NULL, NULL, 2008, NULL, NULL, now() - interval '40 hours'),
+('LID-90014', 'Yulduz', 'Umarova', '+998 94 874 90 27', NULL, NULL, 'instagram_ads', 'IELTS', 'yangi', 'Malika', 'orta', 'orta', NULL, NULL, 2005, NULL, NULL, now() - interval '5 hours'),
+('LID-90015', 'Mohira', 'Sharipova', '+998 90 847 33 21', NULL, 'Rustamov aka', 'instagram_ads', 'IELTS', 'yangi', 'Sardor', 'orta', NULL, NULL, NULL, 2004, NULL, NULL, now() - interval '30 hours'),
+('LID-90016', 'Farrux', 'Olimov', '+998 93 202 69 03', '+998 93 816 47 35', 'Tohirov aka', 'instagram_ads', 'General', 'yangi', 'Aziza', 'orta', NULL, NULL, NULL, 2009, NULL, NULL, now() - interval '20 hours'),
+('LID-90017', 'Sanjar', 'Salimov', '+998 90 806 88 17', '+998 90 671 53 95', NULL, 'instagram_ads', 'IELTS', 'yangi', 'Bekzod', 'orta', 'past', NULL, NULL, 2004, NULL, NULL, now() - interval '20 hours'),
+('LID-90018', 'Umida', 'Ismoilova', '+998 93 369 50 05', '+998 91 930 47 13', 'Ahmedov aka', 'instagram_ads', 'General', 'yangi', 'Malika', 'yuqori', NULL, NULL, NULL, 2010, NULL, NULL, now() - interval '5 hours'),
+('LID-90019', 'Umid', 'Mahmudov', '+998 97 327 15 85', NULL, NULL, 'instagram_ads', 'General', 'yangi', 'Sardor', 'orta', 'past', NULL, NULL, 2006, NULL, NULL, now() - interval '30 hours'),
+('LID-90020', 'Firdavs', 'Ergashev', '+998 93 123 30 78', NULL, 'Hamidov aka', 'instagram_ads', 'IELTS', 'yangi', 'Aziza', 'orta', NULL, NULL, NULL, 2009, NULL, NULL, now() - interval '10 hours'),
+('LID-90021', 'Rayhona', 'Umarova', '+998 97 459 31 12', NULL, NULL, 'instagram_ads', 'General', 'yangi', 'Bekzod', 'yuqori', NULL, NULL, NULL, 2011, NULL, NULL, now() - interval '30 hours'),
+('LID-90022', 'Xadicha', 'Raximova', '+998 97 451 57 12', NULL, 'Salimov aka', 'instagram_ads', 'General', 'yangi', 'Malika', 'past', NULL, NULL, NULL, 2009, NULL, NULL, now() - interval '20 hours'),
+('LID-90023', 'Sanjar', 'Yusupov', '+998 93 833 92 86', NULL, 'Tohirov aka', 'instagram_ads', 'General', 'yangi', 'Sardor', 'orta', 'orta', NULL, NULL, 2013, NULL, NULL, now() - interval '20 hours'),
+('LID-90024', 'Diyor', 'Toshmatov', '+998 91 826 70 02', NULL, 'Nazarov aka', 'instagram_ads', 'IELTS', 'yangi', 'Aziza', 'past', NULL, NULL, NULL, 2004, NULL, NULL, now() - interval '10 hours'),
+('LID-90025', 'Ozoda', 'Ahmedova', '+998 97 825 40 99', '+998 98 275 19 83', 'Sharipov aka', 'instagram_ads', 'IELTS', 'yangi', 'Bekzod', 'orta', NULL, NULL, NULL, 2007, NULL, NULL, now() - interval '5 hours'),
+('LID-90026', 'Dilrabo', 'Ganiyeva', '+998 93 107 54 84', NULL, 'Rustamov aka', 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Malika', 'past', NULL, now() - interval '70 hours', CURRENT_DATE - 3, 2008, NULL, NULL, now() - interval '1116 hours'),
+('LID-90027', 'Sherzod', 'Hamidov', '+998 90 290 22 89', NULL, 'Nazarov aka', 'instagram_ads', 'General', 'birinchi_aloqa', 'Sardor', 'past', NULL, now() - interval '84 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '522 hours'),
+('LID-90028', 'Sitora', 'Aliyeva', '+998 94 366 54 47', NULL, NULL, 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Aziza', 'past', 'orta', now() - interval '9 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '471 hours'),
+('LID-90029', 'Kamron', 'Yusupov', '+998 90 157 27 47', NULL, 'Qodirov aka', 'instagram_ads', 'Matematika', 'birinchi_aloqa', 'Bekzod', 'orta', NULL, now() - interval '71 hours', CURRENT_DATE - 2, 2004, NULL, NULL, now() - interval '646 hours'),
+('LID-90030', 'Farrux', 'Umarov', '+998 97 159 68 33', NULL, NULL, 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Malika', 'orta', 'orta', now() - interval '31 hours', CURRENT_DATE + 3, 2013, NULL, NULL, now() - interval '1058 hours'),
+('LID-90031', 'Shirin', 'Ganiyeva', '+998 91 359 98 38', NULL, NULL, 'instagram_ads', 'General', 'birinchi_aloqa', 'Sardor', 'orta', 'orta', now() - interval '94 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '870 hours'),
+('LID-90032', 'Zarina', 'Toshmatova', '+998 97 253 36 42', NULL, 'Raximov aka', 'instagram_ads', 'General', 'birinchi_aloqa', 'Aziza', 'orta', 'orta', now() - interval '16 hours', CURRENT_DATE - 1, 2010, NULL, NULL, now() - interval '652 hours'),
+('LID-90033', 'Nargiza', 'Davronova', '+998 97 102 54 39', '+998 93 852 80 08', 'Ismoilov aka', 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Bekzod', 'orta', NULL, now() - interval '15 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '776 hours'),
+('LID-90034', 'Sanjar', 'Rustamov', '+998 93 585 89 28', NULL, NULL, 'instagram_ads', 'Matematika', 'birinchi_aloqa', 'Malika', 'orta', 'past', now() - interval '65 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '257 hours'),
+('LID-90035', 'Jasmina', 'Sodiqova', '+998 93 459 38 16', NULL, NULL, 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Sardor', 'yuqori', 'orta', now() - interval '66 hours', CURRENT_DATE - 1, 2013, NULL, NULL, now() - interval '286 hours'),
+('LID-90036', 'Gulnora', 'Ahmedova', '+998 97 565 48 70', NULL, 'Sharipov aka', 'instagram_ads', 'General', 'birinchi_aloqa', 'Aziza', 'past', NULL, now() - interval '26 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '972 hours'),
+('LID-90037', 'Rayhona', 'Xasanova', '+998 90 998 08 39', NULL, NULL, 'instagram_ads', 'General', 'birinchi_aloqa', 'Bekzod', 'orta', NULL, now() - interval '12 hours', CURRENT_DATE + 5, 2014, NULL, NULL, now() - interval '1076 hours'),
+('LID-90038', 'Nozima', 'Tohirova', '+998 94 102 22 52', NULL, 'Ganiyev aka', 'instagram_ads', 'General', 'birinchi_aloqa', 'Malika', 'orta', NULL, now() - interval '49 hours', CURRENT_DATE - 1, 2007, NULL, NULL, now() - interval '420 hours'),
+('LID-90039', 'Aziz', 'Raximov', '+998 90 446 26 56', '+998 91 206 68 30', NULL, 'instagram_ads', 'General', 'birinchi_aloqa', 'Sardor', 'orta', NULL, now() - interval '10 hours', CURRENT_DATE + 3, 2008, NULL, NULL, now() - interval '1346 hours'),
+('LID-90040', 'Kamron', 'Xasanov', '+998 97 344 24 81', NULL, NULL, 'instagram_ads', 'General', 'birinchi_aloqa', 'Aziza', 'orta', 'past', now() - interval '31 hours', CURRENT_DATE - 2, 2007, NULL, NULL, now() - interval '868 hours'),
+('LID-90041', 'Abbos', 'Aliyev', '+998 90 623 24 83', '+998 91 133 86 03', NULL, 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Bekzod', 'orta', 'orta', now() - interval '40 hours', CURRENT_DATE + 2, 2007, NULL, NULL, now() - interval '780 hours'),
+('LID-90042', 'Bexruz', 'Karimov', '+998 91 909 85 50', '+998 98 608 51 26', NULL, 'instagram_ads', 'General', 'birinchi_aloqa', 'Malika', 'orta', NULL, now() - interval '43 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '619 hours'),
+('LID-90043', 'Dilrabo', 'Xasanova', '+998 97 609 52 67', NULL, NULL, 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Sardor', 'yuqori', NULL, now() - interval '76 hours', CURRENT_DATE - 3, 2009, NULL, NULL, now() - interval '519 hours'),
+('LID-90044', 'Marjona', 'Xasanova', '+998 97 346 77 53', NULL, 'Yusupov aka', 'instagram_ads', 'General', 'birinchi_aloqa', 'Aziza', 'orta', 'past', now() - interval '75 hours', CURRENT_DATE, 2014, NULL, NULL, now() - interval '141 hours'),
+('LID-90045', 'Bexruz', 'Ganiyev', '+998 90 520 01 25', NULL, 'Rustamov aka', 'instagram_ads', 'IELTS', 'birinchi_aloqa', 'Bekzod', 'past', 'orta', now() - interval '41 hours', CURRENT_DATE + 2, 2007, NULL, NULL, now() - interval '1008 hours'),
+('LID-90046', 'Farrux', 'Yusupov', '+998 93 873 07 18', NULL, 'Ergashev aka', 'instagram_ads', 'IELTS', 'boglanib_bolmadi', 'Malika', 'yuqori', NULL, now() - interval '46 hours', CURRENT_DATE + 1, 2014, NULL, NULL, now() - interval '361 hours'),
+('LID-90047', 'Bobur', 'Ismoilov', '+998 90 715 75 02', NULL, 'Karimov aka', 'instagram_ads', 'General', 'boglanib_bolmadi', 'Sardor', 'past', NULL, now() - interval '9 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '302 hours'),
+('LID-90048', 'Rayhona', 'Salimova', '+998 91 577 12 81', NULL, NULL, 'instagram_ads', 'Matematika', 'boglanib_bolmadi', 'Aziza', 'yuqori', 'orta', now() - interval '4 hours', CURRENT_DATE, 2012, NULL, NULL, now() - interval '655 hours'),
+('LID-90049', 'Madina', 'Karimova', '+998 98 223 73 81', NULL, 'Toshmatov aka', 'instagram_ads', 'General', 'boglanib_bolmadi', 'Bekzod', 'yuqori', 'past', now() - interval '63 hours', CURRENT_DATE - 1, 2010, NULL, NULL, now() - interval '170 hours'),
+('LID-90050', 'Nilufar', 'Aliyeva', '+998 97 995 01 12', '+998 98 398 46 84', 'Mirzayev aka', 'instagram_ads', 'General', 'boglanib_bolmadi', 'Malika', 'past', 'past', now() - interval '49 hours', CURRENT_DATE, 2014, NULL, NULL, now() - interval '382 hours'),
+('LID-90051', 'Shirin', 'Rustamova', '+998 94 837 80 18', NULL, 'Yusupov aka', 'instagram_ads', 'General', 'boglanib_bolmadi', 'Sardor', 'orta', 'orta', now() - interval '25 hours', CURRENT_DATE + 5, 2014, NULL, NULL, now() - interval '1416 hours'),
+('LID-90052', 'Sevinch', 'Ergasheva', '+998 94 752 73 06', NULL, 'Yusupov aka', 'instagram_ads', 'IELTS', 'boglanib_bolmadi', 'Aziza', 'orta', NULL, now() - interval '96 hours', CURRENT_DATE, 2005, NULL, NULL, now() - interval '772 hours'),
+('LID-90053', 'Umida', 'Olimova', '+998 90 679 74 00', NULL, 'Ganiyev aka', 'instagram_ads', 'General', 'boglanib_bolmadi', 'Bekzod', 'orta', NULL, now() - interval '11 hours', CURRENT_DATE - 3, 2005, NULL, NULL, now() - interval '49 hours'),
+('LID-90054', 'Umida', 'Berdiyeva', '+998 90 876 42 74', NULL, 'Sodiqov aka', 'instagram_ads', 'Matematika', 'boglanib_bolmadi', 'Malika', 'orta', NULL, now() - interval '22 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '1137 hours'),
+('LID-90055', 'Javohir', 'Mahmudov', '+998 90 153 23 18', NULL, 'Berdiyev aka', 'instagram_ads', 'IELTS', 'boglanib_bolmadi', 'Sardor', 'orta', NULL, now() - interval '26 hours', CURRENT_DATE + 5, 2008, NULL, NULL, now() - interval '463 hours'),
+('LID-90056', 'Javohir', 'Olimov', '+998 97 180 29 54', '+998 94 520 64 09', 'Tohirov aka', 'instagram_ads', 'IELTS', 'boglanib_bolmadi', 'Aziza', 'orta', 'past', now() - interval '5 hours', CURRENT_DATE, 2012, NULL, NULL, now() - interval '917 hours'),
+('LID-90057', 'Islom', 'Tohirov', '+998 91 819 97 53', NULL, NULL, 'instagram_ads', 'General', 'boglanib_bolmadi', 'Bekzod', 'orta', 'past', now() - interval '58 hours', CURRENT_DATE - 3, 2006, NULL, NULL, now() - interval '1013 hours'),
+('LID-90058', 'Aziz', 'Ismoilov', '+998 94 863 21 75', NULL, 'Ahmedov aka', 'instagram_ads', 'IELTS', 'boglanib_bolmadi', 'Malika', 'orta', NULL, now() - interval '90 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '824 hours'),
+('LID-90059', 'Robiya', 'Xasanova', '+998 93 359 26 79', NULL, NULL, 'instagram_ads', 'IELTS', 'boglanib_bolmadi', 'Sardor', 'orta', NULL, now() - interval '4 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '1051 hours'),
+('LID-90060', 'Malika', 'Qodirova', '+998 91 657 78 15', '+998 97 128 57 38', 'Olimov aka', 'instagram_ads', 'General', 'boglanib_bolmadi', 'Aziza', 'orta', NULL, now() - interval '73 hours', CURRENT_DATE - 2, 2009, NULL, NULL, now() - interval '876 hours'),
+('LID-90061', 'Gulbahor', 'Mirzayeva', '+998 98 745 97 54', NULL, 'Qodirov aka', 'telegram', 'General', 'aloqa_ornatildi', 'Bekzod', 'past', NULL, now() - interval '53 hours', CURRENT_DATE, 2008, NULL, NULL, now() - interval '775 hours'),
+('LID-90062', 'Gulbahor', 'Olimova', '+998 98 303 83 95', '+998 94 402 67 35', NULL, 'telegram', 'IELTS', 'aloqa_ornatildi', 'Malika', 'orta', NULL, now() - interval '87 hours', CURRENT_DATE - 2, 2004, NULL, NULL, now() - interval '752 hours'),
+('LID-90063', 'Otabek', 'Sattorov', '+998 98 176 24 59', NULL, NULL, 'telegram', 'General', 'aloqa_ornatildi', 'Sardor', 'past', 'past', now() - interval '48 hours', CURRENT_DATE - 2, 2006, NULL, NULL, now() - interval '711 hours'),
+('LID-90064', 'Rustam', 'Ahmedov', '+998 94 543 22 08', NULL, 'Nazarov aka', 'telegram', 'IELTS', 'aloqa_ornatildi', 'Aziza', 'orta', NULL, now() - interval '63 hours', CURRENT_DATE - 3, 2004, NULL, NULL, now() - interval '569 hours'),
+('LID-90065', 'Nargiza', 'Mirzayeva', '+998 90 599 87 12', NULL, NULL, 'telegram', 'General', 'aloqa_ornatildi', 'Bekzod', 'yuqori', 'orta', now() - interval '44 hours', CURRENT_DATE, 2010, NULL, NULL, now() - interval '268 hours'),
+('LID-90066', 'Alisher', 'Aliyev', '+998 97 698 11 96', NULL, 'Sattorov aka', 'telegram', 'IELTS', 'aloqa_ornatildi', 'Malika', 'past', NULL, now() - interval '69 hours', CURRENT_DATE - 4, 2010, NULL, NULL, now() - interval '981 hours'),
+('LID-90067', 'Malika', 'Ahmedova', '+998 98 287 10 47', '+998 93 829 80 77', 'Ahmedov aka', 'telegram', 'General', 'aloqa_ornatildi', 'Sardor', 'orta', 'orta', now() - interval '60 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '335 hours'),
+('LID-90068', 'Gulnora', 'Berdiyeva', '+998 98 688 77 68', NULL, 'Qodirov aka', 'telegram', 'General', 'aloqa_ornatildi', 'Aziza', 'past', NULL, now() - interval '91 hours', CURRENT_DATE - 1, 2014, NULL, NULL, now() - interval '505 hours'),
+('LID-90069', 'Shohruh', 'Karimov', '+998 91 447 65 28', NULL, NULL, 'telegram', 'General', 'aloqa_ornatildi', 'Bekzod', 'orta', NULL, now() - interval '66 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '271 hours'),
+('LID-90070', 'Firdavs', 'Olimov', '+998 94 977 41 57', '+998 98 466 93 64', 'Berdiyev aka', 'telegram', 'IELTS', 'aloqa_ornatildi', 'Malika', 'orta', NULL, now() - interval '28 hours', CURRENT_DATE, 2008, NULL, NULL, now() - interval '460 hours'),
+('LID-90071', 'Gulnora', 'Ganiyeva', '+998 91 302 57 87', NULL, 'Rustamov aka', 'telegram', 'General', 'aloqa_ornatildi', 'Sardor', 'orta', 'orta', now() - interval '67 hours', CURRENT_DATE + 4, 2010, NULL, NULL, now() - interval '946 hours'),
+('LID-90072', 'Doston', 'Salimov', '+998 94 288 99 58', NULL, NULL, 'telegram', 'General', 'aloqa_ornatildi', 'Aziza', 'past', 'past', now() - interval '55 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '728 hours'),
+('LID-90073', 'Dilshod', 'Toshmatov', '+998 98 383 23 10', NULL, 'Xasanov aka', 'telegram', 'General', 'aloqa_ornatildi', 'Bekzod', 'yuqori', 'past', now() - interval '31 hours', CURRENT_DATE - 4, 2014, NULL, NULL, now() - interval '1201 hours'),
+('LID-90074', 'Mohira', 'Karimova', '+998 98 210 24 12', NULL, 'Ergashev aka', 'telegram', 'General', 'aloqa_ornatildi', 'Malika', 'past', 'past', now() - interval '62 hours', CURRENT_DATE + 3, 2012, NULL, NULL, now() - interval '83 hours'),
+('LID-90075', 'Gulnora', 'Sodiqova', '+998 91 590 68 35', NULL, 'Nazarov aka', 'telegram', 'IELTS', 'aloqa_ornatildi', 'Sardor', 'yuqori', NULL, now() - interval '53 hours', CURRENT_DATE - 1, 2004, NULL, NULL, now() - interval '900 hours'),
+('LID-90076', 'Firdavs', 'Hamidov', '+998 98 764 46 58', NULL, 'Berdiyev aka', 'telegram', 'IELTS', 'aloqa_ornatildi', 'Aziza', 'orta', 'orta', now() - interval '53 hours', CURRENT_DATE + 3, 2004, NULL, NULL, now() - interval '72 hours'),
+('LID-90077', 'Mohira', 'Umarova', '+998 98 774 59 91', '+998 98 969 87 97', 'Karimov aka', 'telegram', 'IELTS', 'aloqa_ornatildi', 'Bekzod', 'orta', NULL, now() - interval '94 hours', CURRENT_DATE + 5, 2012, NULL, NULL, now() - interval '788 hours'),
+('LID-90078', 'Laylo', 'Karimova', '+998 91 313 16 03', NULL, 'Rustamov aka', 'telegram', 'General', 'aloqa_ornatildi', 'Malika', 'yuqori', 'orta', now() - interval '49 hours', CURRENT_DATE + 2, 2013, NULL, NULL, now() - interval '730 hours'),
+('LID-90079', 'Xadicha', 'Davronova', '+998 91 556 22 01', NULL, 'Aliyev aka', 'telegram', 'General', 'aloqa_ornatildi', 'Sardor', 'orta', 'orta', now() - interval '36 hours', CURRENT_DATE, 2010, NULL, NULL, now() - interval '1000 hours'),
+('LID-90080', 'Kamola', 'Salimova', '+998 98 205 14 96', NULL, NULL, 'telegram', 'General', 'aloqa_ornatildi', 'Aziza', 'past', NULL, now() - interval '24 hours', CURRENT_DATE - 1, 2012, NULL, NULL, now() - interval '530 hours'),
+('LID-90081', 'Shohruh', 'Karimov', '+998 97 231 59 50', NULL, NULL, 'telegram', 'IELTS', 'qiziqish_bildirdi', 'Bekzod', 'orta', 'orta', now() - interval '91 hours', CURRENT_DATE - 4, 2009, NULL, NULL, now() - interval '651 hours'),
+('LID-90082', 'Firdavs', 'Mahmudov', '+998 90 615 80 37', '+998 93 107 88 60', NULL, 'telegram', 'General', 'qiziqish_bildirdi', 'Malika', 'orta', 'yuqori', now() - interval '56 hours', CURRENT_DATE, 2005, NULL, NULL, now() - interval '698 hours'),
+('LID-90083', 'Kamola', 'Rustamova', '+998 94 956 36 17', NULL, 'Qodirov aka', 'telegram', 'Matematika', 'qiziqish_bildirdi', 'Sardor', 'orta', 'orta', now() - interval '49 hours', CURRENT_DATE - 2, 2009, NULL, NULL, now() - interval '931 hours'),
+('LID-90084', 'Eldor', 'Berdiyev', '+998 93 742 22 86', '+998 94 343 93 82', 'Ismoilov aka', 'telegram', 'IELTS', 'qiziqish_bildirdi', 'Aziza', 'orta', 'yuqori', now() - interval '88 hours', CURRENT_DATE - 3, 2007, NULL, NULL, now() - interval '653 hours'),
+('LID-90085', 'Iroda', 'Mahmudova', '+998 91 901 90 46', NULL, 'Ahmedov aka', 'telegram', 'IELTS', 'qiziqish_bildirdi', 'Bekzod', 'orta', 'orta', now() - interval '34 hours', CURRENT_DATE, 2014, NULL, NULL, now() - interval '1115 hours'),
+('LID-90086', 'Zafar', 'Hamidov', '+998 94 196 43 56', '+998 91 970 31 25', 'Karimov aka', 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Malika', 'past', 'yuqori', now() - interval '61 hours', CURRENT_DATE - 1, 2009, NULL, NULL, now() - interval '666 hours'),
+('LID-90087', 'Gulbahor', 'Toshmatova', '+998 91 575 80 56', NULL, 'Sharipov aka', 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Sardor', 'past', 'orta', now() - interval '49 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '892 hours'),
+('LID-90088', 'Sevinch', 'Tohirova', '+998 90 950 43 14', '+998 97 950 93 81', NULL, 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Aziza', 'orta', 'orta', now() - interval '42 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '646 hours'),
+('LID-90089', 'Bexruz', 'Xasanov', '+998 93 828 26 98', NULL, NULL, 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Bekzod', 'past', 'yuqori', now() - interval '54 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '213 hours'),
+('LID-90090', 'Yulduz', 'Sattorova', '+998 91 410 60 01', NULL, 'Hamidov aka', 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Malika', 'yuqori', 'yuqori', now() - interval '69 hours', CURRENT_DATE - 4, 2007, NULL, NULL, now() - interval '996 hours'),
+('LID-90091', 'Dilshod', 'Sharipov', '+998 90 266 99 36', NULL, NULL, 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Sardor', 'yuqori', 'yuqori', now() - interval '89 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '756 hours'),
+('LID-90092', 'Otabek', 'Berdiyev', '+998 91 984 26 69', '+998 94 255 27 83', 'Sattorov aka', 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Aziza', 'past', 'orta', now() - interval '24 hours', CURRENT_DATE, 2009, NULL, NULL, now() - interval '1010 hours'),
+('LID-90093', 'Akmal', 'Sharipov', '+998 90 873 78 98', NULL, 'Karimov aka', 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Bekzod', 'orta', 'orta', now() - interval '14 hours', CURRENT_DATE + 5, 2014, NULL, NULL, now() - interval '406 hours'),
+('LID-90094', 'Otabek', 'Raximov', '+998 98 315 55 77', NULL, NULL, 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Malika', 'orta', 'yuqori', now() - interval '66 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '868 hours'),
+('LID-90095', 'Iroda', 'Raximova', '+998 93 537 24 01', NULL, NULL, 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Sardor', 'yuqori', 'yuqori', now() - interval '60 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '163 hours'),
+('LID-90096', 'Anvar', 'Salimov', '+998 98 310 54 26', NULL, 'Umarov aka', 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Aziza', 'past', 'yuqori', now() - interval '64 hours', CURRENT_DATE + 4, 2008, NULL, NULL, now() - interval '1166 hours'),
+('LID-90097', 'Oysha', 'Xasanova', '+998 98 802 58 32', NULL, 'Ismoilov aka', 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Bekzod', 'orta', 'yuqori', now() - interval '41 hours', CURRENT_DATE + 3, 2005, NULL, NULL, now() - interval '250 hours'),
+('LID-90098', 'Munisa', 'Ergasheva', '+998 90 542 98 01', NULL, NULL, 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Malika', 'orta', 'yuqori', now() - interval '11 hours', CURRENT_DATE - 1, 2014, NULL, NULL, now() - interval '1065 hours'),
+('LID-90099', 'Botir', 'Ahmedov', '+998 94 978 80 50', NULL, 'Yusupov aka', 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Sardor', 'orta', 'yuqori', now() - interval '82 hours', CURRENT_DATE - 4, 2011, NULL, NULL, now() - interval '1358 hours'),
+('LID-90100', 'Doston', 'Salimov', '+998 94 201 05 41', NULL, NULL, 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Aziza', 'past', 'orta', now() - interval '7 hours', CURRENT_DATE, 2012, NULL, NULL, now() - interval '417 hours'),
+('LID-90101', 'Munisa', 'Sodiqova', '+998 98 708 89 81', NULL, 'Sodiqov aka', 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Bekzod', 'orta', 'yuqori', now() - interval '5 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '1410 hours'),
+('LID-90102', 'Nodir', 'Karimov', '+998 94 958 12 39', '+998 91 599 22 73', NULL, 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Malika', 'orta', 'yuqori', now() - interval '9 hours', CURRENT_DATE + 1, 2006, NULL, NULL, now() - interval '743 hours'),
+('LID-90103', 'Dilrabo', 'Ahmedova', '+998 93 685 33 52', '+998 90 698 31 17', 'Rustamov aka', 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Sardor', 'orta', 'orta', now() - interval '75 hours', CURRENT_DATE - 2, 2010, NULL, NULL, now() - interval '68 hours'),
+('LID-90104', 'Alisher', 'Umarov', '+998 97 360 99 95', '+998 97 302 99 35', 'Olimov aka', 'instagram_organic', 'IELTS', 'qiziqish_bildirdi', 'Aziza', 'orta', 'yuqori', now() - interval '49 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '1230 hours'),
+('LID-90105', 'Rayhona', 'Ganiyeva', '+998 91 482 32 32', NULL, 'Xasanov aka', 'instagram_organic', 'General', 'qiziqish_bildirdi', 'Bekzod', 'orta', 'orta', now() - interval '59 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '608 hours'),
+('LID-90106', 'Laylo', 'Nazarova', '+998 98 782 22 11', '+998 97 406 08 65', 'Hamidov aka', 'tavsiya', 'General', 'sinovga_yozildi', 'Malika', 'yuqori', 'yuqori', now() - interval '50 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '942 hours'),
+('LID-90107', 'Gulnora', 'Ahmedova', '+998 94 397 96 94', NULL, NULL, 'tavsiya', 'General', 'sinovga_yozildi', 'Sardor', 'orta', 'orta', now() - interval '24 hours', CURRENT_DATE, 2006, NULL, NULL, now() - interval '1024 hours'),
+('LID-90108', 'Laylo', 'Sattorova', '+998 90 154 59 11', NULL, NULL, 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Aziza', 'yuqori', 'yuqori', now() - interval '51 hours', CURRENT_DATE - 1, 2013, NULL, NULL, now() - interval '821 hours'),
+('LID-90109', 'Nozima', 'Berdiyeva', '+998 98 181 76 87', NULL, NULL, 'tavsiya', 'General', 'sinovga_yozildi', 'Bekzod', 'orta', 'yuqori', now() - interval '80 hours', CURRENT_DATE, 2009, NULL, NULL, now() - interval '1204 hours'),
+('LID-90110', 'Sitora', 'Hamidova', '+998 90 152 31 27', NULL, NULL, 'tavsiya', 'General', 'sinovga_yozildi', 'Malika', 'yuqori', 'yuqori', now() - interval '39 hours', CURRENT_DATE - 4, 2012, NULL, NULL, now() - interval '214 hours'),
+('LID-90111', 'Gulnora', 'Mahmudova', '+998 90 249 81 41', NULL, 'Berdiyev aka', 'tavsiya', 'General', 'sinovga_yozildi', 'Sardor', 'orta', 'yuqori', now() - interval '64 hours', CURRENT_DATE, 2012, NULL, NULL, now() - interval '894 hours'),
+('LID-90112', 'Feruza', 'Toshmatova', '+998 93 497 33 40', NULL, NULL, 'tavsiya', 'General', 'sinovga_yozildi', 'Aziza', 'orta', 'yuqori', now() - interval '12 hours', CURRENT_DATE, 2013, NULL, NULL, now() - interval '640 hours'),
+('LID-90113', 'Mohira', 'Xasanova', '+998 90 666 84 03', '+998 93 848 02 93', 'Qodirov aka', 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Bekzod', 'orta', 'yuqori', now() - interval '32 hours', CURRENT_DATE - 4, 2013, NULL, NULL, now() - interval '964 hours'),
+('LID-90114', 'Sitora', 'Salimova', '+998 94 625 78 98', '+998 94 790 20 40', 'Hamidov aka', 'tavsiya', 'General', 'sinovga_yozildi', 'Malika', 'orta', 'yuqori', now() - interval '50 hours', CURRENT_DATE + 2, 2008, NULL, NULL, now() - interval '37 hours'),
+('LID-90115', 'Sardor', 'Ismoilov', '+998 91 917 84 58', NULL, 'Nazarov aka', 'tavsiya', 'General', 'sinovga_yozildi', 'Sardor', 'orta', 'orta', now() - interval '16 hours', CURRENT_DATE - 1, 2014, NULL, NULL, now() - interval '1408 hours'),
+('LID-90116', 'Diyor', 'Yusupov', '+998 94 281 37 72', NULL, 'Sattorov aka', 'tavsiya', 'General', 'sinovga_yozildi', 'Aziza', 'past', 'yuqori', now() - interval '34 hours', CURRENT_DATE, 2014, NULL, NULL, now() - interval '1185 hours'),
+('LID-90117', 'Zarina', 'Ismoilova', '+998 93 289 76 35', NULL, 'Berdiyev aka', 'tavsiya', 'General', 'sinovga_yozildi', 'Bekzod', 'yuqori', 'yuqori', now() - interval '16 hours', CURRENT_DATE + 5, 2009, NULL, NULL, now() - interval '108 hours'),
+('LID-90118', 'Shirin', 'Umarova', '+998 94 886 04 91', NULL, 'Mirzayev aka', 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Malika', 'orta', 'orta', now() - interval '34 hours', CURRENT_DATE, 2004, NULL, NULL, now() - interval '813 hours'),
+('LID-90119', 'Xadicha', 'Ahmedova', '+998 98 811 87 92', NULL, 'Rustamov aka', 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Sardor', 'orta', 'yuqori', now() - interval '76 hours', CURRENT_DATE, 2007, NULL, NULL, now() - interval '861 hours'),
+('LID-90120', 'Zilola', 'Qodirova', '+998 94 805 57 97', NULL, 'Raximov aka', 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Aziza', 'orta', 'yuqori', now() - interval '71 hours', CURRENT_DATE + 3, 2011, NULL, NULL, now() - interval '649 hours'),
+('LID-90121', 'Shirin', 'Umarova', '+998 94 651 78 96', NULL, NULL, 'tavsiya', 'General', 'sinovga_yozildi', 'Bekzod', 'orta', 'orta', now() - interval '4 hours', CURRENT_DATE + 4, 2011, NULL, NULL, now() - interval '218 hours'),
+('LID-90122', 'Munisa', 'Rustamova', '+998 94 431 50 15', NULL, NULL, 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Malika', 'past', 'yuqori', now() - interval '33 hours', CURRENT_DATE - 3, 2009, NULL, NULL, now() - interval '766 hours'),
+('LID-90123', 'Zafar', 'Ahmedov', '+998 98 383 80 19', NULL, NULL, 'tavsiya', 'General', 'sinovga_yozildi', 'Sardor', 'past', 'yuqori', now() - interval '73 hours', CURRENT_DATE + 2, 2009, NULL, NULL, now() - interval '346 hours'),
+('LID-90124', 'Zilola', 'Sodiqova', '+998 93 409 61 98', NULL, 'Tohirov aka', 'tavsiya', 'IELTS', 'sinovga_yozildi', 'Aziza', 'orta', 'orta', now() - interval '78 hours', CURRENT_DATE + 4, 2010, NULL, NULL, now() - interval '1074 hours'),
+('LID-90125', 'Farrux', 'Umarov', '+998 90 827 09 62', NULL, 'Qodirov aka', 'tavsiya', 'Matematika', 'sinovga_yozildi', 'Bekzod', 'orta', 'yuqori', now() - interval '77 hours', CURRENT_DATE - 4, 2008, NULL, NULL, now() - interval '332 hours'),
+('LID-90126', 'Umida', 'Ganiyeva', '+998 97 585 44 05', NULL, 'Raximov aka', 'tavsiya', 'General', 'sinovga_keldi', 'Malika', 'orta', 'yuqori', now() - interval '12 hours', CURRENT_DATE - 2, 2008, NULL, NULL, now() - interval '360 hours'),
+('LID-90127', 'Dilrabo', 'Ahmedova', '+998 97 428 77 67', NULL, 'Ahmedov aka', 'tavsiya', 'General', 'sinovga_keldi', 'Sardor', 'orta', 'orta', now() - interval '78 hours', CURRENT_DATE, 2012, NULL, NULL, now() - interval '184 hours'),
+('LID-90128', 'Zafar', 'Qodirov', '+998 93 128 74 09', NULL, 'Mahmudov aka', 'tavsiya', 'General', 'sinovga_keldi', 'Aziza', 'past', 'yuqori', now() - interval '8 hours', CURRENT_DATE - 1, 2014, NULL, NULL, now() - interval '1002 hours'),
+('LID-90129', 'Sardor', 'Ahmedov', '+998 97 782 97 67', NULL, 'Hamidov aka', 'tavsiya', 'IELTS', 'sinovga_keldi', 'Bekzod', 'yuqori', 'yuqori', now() - interval '11 hours', CURRENT_DATE, 2008, NULL, NULL, now() - interval '832 hours'),
+('LID-90130', 'Sherzod', 'Mahmudov', '+998 94 932 57 69', NULL, 'Hamidov aka', 'tavsiya', 'IELTS', 'sinovga_keldi', 'Malika', 'yuqori', 'yuqori', now() - interval '90 hours', CURRENT_DATE, 2009, NULL, NULL, now() - interval '292 hours'),
+('LID-90131', 'Diyor', 'Nazarov', '+998 91 644 27 26', NULL, 'Salimov aka', 'tavsiya', 'General', 'sinovga_keldi', 'Sardor', 'orta', 'orta', now() - interval '78 hours', CURRENT_DATE, 2008, NULL, NULL, now() - interval '1166 hours'),
+('LID-90132', 'Kamola', 'Yusupova', '+998 98 950 02 33', NULL, 'Tohirov aka', 'tavsiya', 'IELTS', 'sinovga_keldi', 'Aziza', 'orta', 'orta', now() - interval '35 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '1180 hours'),
+('LID-90133', 'Shahzoda', 'Nazarova', '+998 93 655 99 36', NULL, NULL, 'tavsiya', 'IELTS', 'sinovga_keldi', 'Bekzod', 'orta', 'yuqori', now() - interval '89 hours', CURRENT_DATE, 2011, NULL, NULL, now() - interval '1184 hours'),
+('LID-90134', 'Umid', 'Yusupov', '+998 90 913 83 46', NULL, NULL, 'tavsiya', 'General', 'sinovga_keldi', 'Malika', 'past', 'yuqori', now() - interval '67 hours', CURRENT_DATE, 2004, NULL, NULL, now() - interval '1419 hours'),
+('LID-90135', 'Bexruz', 'Mirzayev', '+998 93 623 66 92', NULL, 'Raximov aka', 'tavsiya', 'General', 'sinovga_keldi', 'Sardor', 'yuqori', 'orta', now() - interval '68 hours', CURRENT_DATE + 2, 2010, NULL, NULL, now() - interval '1088 hours'),
+('LID-90136', 'Farrux', 'Xasanov', '+998 91 786 59 35', NULL, NULL, 'google_ads', 'General', 'sinovga_keldi', 'Aziza', 'orta', 'yuqori', now() - interval '70 hours', CURRENT_DATE, 2007, NULL, NULL, now() - interval '60 hours'),
+('LID-90137', 'Yulduz', 'Ahmedova', '+998 91 840 64 69', NULL, 'Ismoilov aka', 'google_ads', 'General', 'sinovga_keldi', 'Bekzod', 'yuqori', 'yuqori', now() - interval '86 hours', CURRENT_DATE + 3, 2010, NULL, NULL, now() - interval '1165 hours'),
+('LID-90138', 'Kamron', 'Tohirov', '+998 93 613 46 64', NULL, NULL, 'google_ads', 'General', 'sinovga_keldi', 'Malika', 'orta', 'yuqori', now() - interval '47 hours', CURRENT_DATE, 2012, NULL, NULL, now() - interval '810 hours'),
+('LID-90139', 'Jasmina', 'Sharipova', '+998 93 466 70 16', NULL, 'Tohirov aka', 'google_ads', 'General', 'sinovga_keldi', 'Sardor', 'orta', 'orta', now() - interval '12 hours', CURRENT_DATE - 3, 2006, NULL, NULL, now() - interval '334 hours'),
+('LID-90140', 'Islom', 'Sharipov', '+998 98 759 30 83', NULL, 'Sattorov aka', 'google_ads', 'General', 'sinovga_keldi', 'Aziza', 'yuqori', 'yuqori', now() - interval '93 hours', CURRENT_DATE - 1, 2014, NULL, NULL, now() - interval '819 hours'),
+('LID-90141', 'Ozoda', 'Tohirova', '+998 91 449 48 05', NULL, 'Rustamov aka', 'google_ads', 'IELTS', 'taklif_berildi', 'Bekzod', 'yuqori', 'orta', now() - interval '6 hours', CURRENT_DATE, 2010, NULL, NULL, now() - interval '897 hours'),
+('LID-90142', 'Sardor', 'Ismoilov', '+998 98 580 70 82', NULL, NULL, 'google_ads', 'General', 'taklif_berildi', 'Malika', 'orta', 'yuqori', now() - interval '39 hours', CURRENT_DATE, 2010, NULL, NULL, now() - interval '118 hours'),
+('LID-90143', 'Dildora', 'Hamidova', '+998 90 551 40 28', NULL, 'Salimov aka', 'google_ads', 'IELTS', 'taklif_berildi', 'Sardor', 'orta', 'yuqori', now() - interval '6 hours', CURRENT_DATE - 1, 2012, NULL, NULL, now() - interval '1130 hours'),
+('LID-90144', 'Shirin', 'Nazarova', '+998 97 556 22 80', '+998 90 833 86 43', NULL, 'google_ads', 'General', 'taklif_berildi', 'Aziza', 'past', 'yuqori', now() - interval '74 hours', CURRENT_DATE + 2, 2012, NULL, NULL, now() - interval '994 hours'),
+('LID-90145', 'Ulugbek', 'Sattorov', '+998 90 259 98 63', NULL, 'Xasanov aka', 'google_ads', 'IELTS', 'taklif_berildi', 'Bekzod', 'yuqori', 'orta', now() - interval '20 hours', CURRENT_DATE + 2, 2005, NULL, NULL, now() - interval '1091 hours'),
+('LID-90146', 'Malika', 'Raximova', '+998 97 725 27 37', NULL, NULL, 'google_ads', 'IELTS', 'taklif_berildi', 'Malika', 'orta', 'yuqori', now() - interval '29 hours', CURRENT_DATE - 1, 2004, NULL, NULL, now() - interval '820 hours'),
+('LID-90147', 'Dilshod', 'Mirzayev', '+998 93 390 66 91', NULL, 'Sodiqov aka', 'google_ads', 'General', 'taklif_berildi', 'Sardor', 'orta', 'yuqori', now() - interval '90 hours', CURRENT_DATE + 1, 2009, NULL, NULL, now() - interval '675 hours'),
+('LID-90148', 'Gulbahor', 'Umarova', '+998 93 425 98 65', NULL, NULL, 'google_ads', 'IELTS', 'taklif_berildi', 'Aziza', 'orta', 'orta', now() - interval '38 hours', CURRENT_DATE, 2005, NULL, NULL, now() - interval '138 hours'),
+('LID-90149', 'Munisa', 'Ahmedova', '+998 91 475 60 21', NULL, NULL, 'google_ads', 'General', 'taklif_berildi', 'Bekzod', 'orta', 'yuqori', now() - interval '18 hours', CURRENT_DATE - 4, 2010, NULL, NULL, now() - interval '828 hours'),
+('LID-90150', 'Ulugbek', 'Qodirov', '+998 93 254 55 43', NULL, NULL, 'google_ads', 'IELTS', 'taklif_berildi', 'Malika', 'past', 'orta', now() - interval '11 hours', CURRENT_DATE + 5, 2006, NULL, NULL, now() - interval '1136 hours'),
+('LID-90151', 'Abbos', 'Olimov', '+998 90 788 10 84', NULL, 'Sodiqov aka', 'google_ads', 'IELTS', 'taklif_berildi', 'Sardor', 'orta', 'yuqori', now() - interval '58 hours', CURRENT_DATE + 2, 2013, NULL, NULL, now() - interval '170 hours'),
+('LID-90152', 'Sitora', 'Sharipova', '+998 93 974 41 98', NULL, 'Rustamov aka', 'google_ads', 'IELTS', 'taklif_berildi', 'Aziza', 'orta', 'yuqori', now() - interval '42 hours', CURRENT_DATE + 5, 2004, NULL, NULL, now() - interval '154 hours'),
+('LID-90153', 'Zilola', 'Sharipova', '+998 98 593 26 63', '+998 97 566 67 12', NULL, 'google_ads', 'General', 'qaror_kutilmoqda', 'Bekzod', 'past', 'orta', now() - interval '41 hours', CURRENT_DATE, 2007, NULL, NULL, now() - interval '345 hours'),
+('LID-90154', 'Nozima', 'Mirzayeva', '+998 93 900 91 26', NULL, NULL, 'google_ads', 'IELTS', 'qaror_kutilmoqda', 'Malika', 'orta', 'orta', now() - interval '27 hours', CURRENT_DATE - 4, 2009, NULL, NULL, now() - interval '602 hours'),
+('LID-90155', 'Iroda', 'Ergasheva', '+998 91 879 51 88', '+998 91 645 03 26', 'Berdiyev aka', 'google_ads', 'General', 'qaror_kutilmoqda', 'Sardor', 'yuqori', 'yuqori', now() - interval '85 hours', CURRENT_DATE - 3, 2007, NULL, NULL, now() - interval '313 hours'),
+('LID-90156', 'Farrux', 'Karimov', '+998 94 423 54 45', NULL, NULL, 'facebook_ads', 'General', 'qaror_kutilmoqda', 'Aziza', 'orta', 'orta', now() - interval '77 hours', CURRENT_DATE + 5, 2012, NULL, NULL, now() - interval '1387 hours'),
+('LID-90157', 'Abbos', 'Qodirov', '+998 90 363 33 94', NULL, NULL, 'facebook_ads', 'General', 'qaror_kutilmoqda', 'Bekzod', 'yuqori', 'yuqori', now() - interval '59 hours', CURRENT_DATE, 2009, NULL, NULL, now() - interval '533 hours'),
+('LID-90158', 'Shohruh', 'Salimov', '+998 91 104 52 49', NULL, 'Nazarov aka', 'facebook_ads', 'IELTS', 'qaror_kutilmoqda', 'Malika', 'yuqori', 'orta', now() - interval '36 hours', CURRENT_DATE + 4, 2004, NULL, NULL, now() - interval '1321 hours'),
+('LID-90159', 'Shohruh', 'Yusupov', '+998 91 682 18 15', '+998 93 904 12 72', 'Mirzayev aka', 'facebook_ads', 'General', 'qaror_kutilmoqda', 'Sardor', 'orta', 'orta', now() - interval '40 hours', CURRENT_DATE, 2009, NULL, NULL, now() - interval '615 hours'),
+('LID-90160', 'Doston', 'Toshmatov', '+998 93 627 85 25', NULL, NULL, 'facebook_ads', 'IELTS', 'qaror_kutilmoqda', 'Aziza', 'orta', 'orta', now() - interval '74 hours', CURRENT_DATE, 2004, NULL, NULL, now() - interval '1254 hours'),
+('LID-90161', 'Sevinch', 'Nazarova', '+998 91 860 11 57', NULL, 'Yusupov aka', 'facebook_ads', 'General', 'qaror_kutilmoqda', 'Bekzod', 'orta', 'yuqori', now() - interval '32 hours', CURRENT_DATE, 2009, NULL, NULL, now() - interval '1225 hours'),
+('LID-90162', 'Yulduz', 'Hamidova', '+998 90 117 93 02', NULL, NULL, 'facebook_ads', 'General', 'qaror_kutilmoqda', 'Malika', 'orta', 'orta', now() - interval '66 hours', CURRENT_DATE + 3, 2005, NULL, NULL, now() - interval '965 hours'),
+('LID-90163', 'Zarina', 'Tohirova', '+998 97 960 93 61', NULL, 'Sattorov aka', 'facebook_ads', 'General', 'sotuv_yopildi', 'Sardor', 'orta', 'yuqori', now() - interval '64 hours', NULL, 2007, NULL, NULL, now() - interval '507 hours'),
+('LID-90164', 'Alisher', 'Ganiyev', '+998 94 700 04 12', '+998 91 643 55 30', 'Ahmedov aka', 'facebook_ads', 'General', 'sotuv_yopildi', 'Aziza', 'orta', 'orta', now() - interval '48 hours', NULL, 2005, NULL, NULL, now() - interval '1074 hours'),
+('LID-90165', 'Malika', 'Ganiyeva', '+998 93 946 19 06', NULL, NULL, 'facebook_ads', 'IELTS', 'sotuv_yopildi', 'Bekzod', 'past', 'yuqori', now() - interval '35 hours', NULL, 2008, NULL, NULL, now() - interval '105 hours'),
+('LID-90166', 'Umid', 'Raximov', '+998 97 663 50 38', NULL, NULL, 'facebook_ads', 'General', 'sotuv_yopildi', 'Malika', 'orta', 'yuqori', now() - interval '9 hours', NULL, 2013, NULL, NULL, now() - interval '1358 hours'),
+('LID-90167', 'Abbos', 'Mirzayev', '+998 97 664 24 33', NULL, 'Xasanov aka', 'facebook_ads', 'General', 'sotuv_yopildi', 'Sardor', 'orta', 'yuqori', now() - interval '90 hours', NULL, 2010, NULL, NULL, now() - interval '115 hours'),
+('LID-90168', 'Ulugbek', 'Yusupov', '+998 93 888 29 11', NULL, 'Ergashev aka', 'facebook_ads', 'General', 'sotuv_yopildi', 'Aziza', 'past', 'orta', now() - interval '16 hours', NULL, 2005, NULL, NULL, now() - interval '1428 hours'),
+('LID-90169', 'Gulnora', 'Sodiqova', '+998 94 903 09 19', NULL, 'Hamidov aka', 'facebook_ads', 'IELTS', 'sotuv_yopildi', 'Bekzod', 'past', 'orta', now() - interval '13 hours', NULL, 2013, NULL, NULL, now() - interval '53 hours'),
+('LID-90170', 'Umida', 'Berdiyeva', '+998 91 232 97 62', '+998 93 329 34 02', 'Yusupov aka', 'facebook_ads', 'General', 'sotuv_yopildi', 'Malika', 'orta', 'yuqori', now() - interval '71 hours', NULL, 2005, NULL, NULL, now() - interval '234 hours'),
+('LID-90171', 'Jasmina', 'Karimova', '+998 91 230 35 31', NULL, 'Mahmudov aka', 'website', 'General', 'sotuv_yopildi', 'Sardor', 'orta', 'yuqori', now() - interval '60 hours', NULL, 2009, NULL, NULL, now() - interval '1173 hours'),
+('LID-90172', 'Zilola', 'Sharipova', '+998 98 100 17 55', NULL, NULL, 'website', 'IELTS', 'sotuv_yopildi', 'Aziza', 'yuqori', 'orta', now() - interval '32 hours', NULL, 2008, NULL, NULL, now() - interval '353 hours'),
+('LID-90173', 'Akmal', 'Mirzayev', '+998 98 405 71 87', NULL, NULL, 'website', 'IELTS', 'sotuv_yopildi', 'Bekzod', 'orta', 'orta', now() - interval '37 hours', NULL, 2008, NULL, NULL, now() - interval '1053 hours'),
+('LID-90174', 'Bobur', 'Sharipov', '+998 90 242 52 01', '+998 94 255 00 20', 'Karimov aka', 'website', 'General', 'sotuv_yopildi', 'Malika', 'past', 'yuqori', now() - interval '66 hours', NULL, 2008, NULL, NULL, now() - interval '961 hours'),
+('LID-90175', 'Sevinch', 'Tohirova', '+998 94 172 59 99', '+998 90 102 86 00', 'Yusupov aka', 'website', 'IELTS', 'sotuv_yopildi', 'Sardor', 'orta', 'yuqori', now() - interval '9 hours', NULL, 2004, NULL, NULL, now() - interval '269 hours'),
+('LID-90176', 'Islom', 'Karimov', '+998 91 776 93 88', NULL, 'Ahmedov aka', 'website', 'General', 'sotuv_yopildi', 'Aziza', 'yuqori', 'orta', now() - interval '61 hours', NULL, 2005, NULL, NULL, now() - interval '1036 hours'),
+('LID-90177', 'Sevinch', 'Davronova', '+998 93 198 20 79', NULL, NULL, 'website', 'IELTS', 'sotuv_yopildi', 'Bekzod', 'orta', 'yuqori', now() - interval '4 hours', NULL, 2005, NULL, NULL, now() - interval '1222 hours'),
+('LID-90178', 'Javohir', 'Ganiyev', '+998 91 257 62 40', NULL, 'Raximov aka', 'website', 'General', 'sotuv_yopildi', 'Malika', 'past', 'yuqori', now() - interval '84 hours', NULL, 2004, NULL, NULL, now() - interval '216 hours'),
+('LID-90179', 'Aziz', 'Ergashev', '+998 98 302 71 29', NULL, 'Sharipov aka', 'website', 'General', 'sotuv_yopildi', 'Sardor', 'past', 'yuqori', now() - interval '94 hours', NULL, 2009, NULL, NULL, now() - interval '1136 hours'),
+('LID-90180', 'Sevinch', 'Olimova', '+998 98 129 70 95', '+998 90 315 01 90', NULL, 'website', 'General', 'sotuv_yopildi', 'Aziza', 'orta', 'yuqori', now() - interval '34 hours', NULL, 2008, NULL, NULL, now() - interval '158 hours'),
+('LID-90181', 'Botir', 'Ahmedov', '+998 97 285 58 10', NULL, NULL, 'telefon', 'IELTS', 'sotuv_yopildi', 'Bekzod', 'orta', 'yuqori', now() - interval '10 hours', NULL, 2007, NULL, NULL, now() - interval '849 hours'),
+('LID-90182', 'Doston', 'Mirzayev', '+998 98 467 89 08', NULL, 'Qodirov aka', 'telefon', 'IELTS', 'sotuv_yopildi', 'Malika', 'past', 'yuqori', now() - interval '61 hours', NULL, 2009, NULL, NULL, now() - interval '140 hours'),
+('LID-90183', 'Bexruz', 'Davronov', '+998 90 366 94 80', NULL, 'Toshmatov aka', 'telefon', 'General', 'sotuv_yopildi', 'Sardor', 'past', 'yuqori', now() - interval '46 hours', NULL, 2008, NULL, NULL, now() - interval '441 hours'),
+('LID-90184', 'Sevinch', 'Ergasheva', '+998 93 406 79 16', '+998 93 292 22 80', 'Toshmatov aka', 'telefon', 'General', 'sotuv_yopildi', 'Aziza', 'past', 'orta', now() - interval '63 hours', NULL, 2012, NULL, NULL, now() - interval '1415 hours'),
+('LID-90185', 'Malika', 'Yusupova', '+998 94 520 28 88', NULL, NULL, 'telefon', 'General', 'sotuv_yopildi', 'Bekzod', 'orta', 'orta', now() - interval '62 hours', NULL, 2007, NULL, NULL, now() - interval '140 hours'),
+('LID-90186', 'Zarina', 'Rustamova', '+998 93 871 98 97', NULL, NULL, 'telefon', 'IELTS', 'rad_etdi', 'Malika', 'orta', NULL, now() - interval '9 hours', NULL, 2011, 'narx_qimmat', NULL, now() - interval '111 hours'),
+('LID-90187', 'Dildora', 'Olimova', '+998 98 788 34 68', NULL, 'Rustamov aka', 'telefon', 'IELTS', 'rad_etdi', 'Sardor', 'yuqori', NULL, now() - interval '66 hours', NULL, 2005, 'aloqa_yoqolgan', NULL, now() - interval '376 hours'),
+('LID-90188', 'Nargiza', 'Salimova', '+998 94 635 30 79', NULL, 'Ganiyev aka', 'telefon', 'General', 'rad_etdi', 'Aziza', 'yuqori', NULL, now() - interval '7 hours', NULL, 2010, 'narx_qimmat', NULL, now() - interval '109 hours'),
+('LID-90189', 'Rayhona', 'Yusupova', '+998 93 545 39 68', '+998 91 574 46 36', NULL, 'offline', 'IELTS', 'rad_etdi', 'Bekzod', 'orta', NULL, now() - interval '45 hours', NULL, 2012, 'narx_qimmat', NULL, now() - interval '39 hours'),
+('LID-90190', 'Marjona', 'Sharipova', '+998 90 428 24 93', NULL, NULL, 'offline', 'IELTS', 'rad_etdi', 'Malika', 'orta', NULL, now() - interval '88 hours', NULL, 2004, 'boshqa_markaz', NULL, now() - interval '994 hours'),
+('LID-90191', 'Alisher', 'Umarov', '+998 91 691 61 39', '+998 98 885 47 68', NULL, 'offline', 'General', 'rad_etdi', 'Sardor', 'past', 'past', now() - interval '7 hours', NULL, 2009, 'boshqa_markaz', NULL, now() - interval '493 hours'),
+('LID-90192', 'Doston', 'Olimov', '+998 97 512 46 20', '+998 94 130 92 70', 'Mahmudov aka', 'offline', 'IELTS', 'rad_etdi', 'Aziza', 'orta', 'past', now() - interval '58 hours', NULL, 2009, 'boshqa_markaz', NULL, now() - interval '1013 hours'),
+('LID-90193', 'Otabek', 'Sharipov', '+998 93 790 51 55', NULL, NULL, 'offline', 'IELTS', 'rad_etdi', 'Bekzod', 'orta', NULL, now() - interval '66 hours', NULL, 2012, 'vaqt_mos_emas', NULL, now() - interval '430 hours'),
+('LID-90194', 'Nilufar', 'Karimova', '+998 98 766 93 00', NULL, 'Mirzayev aka', 'offline', 'General', 'rad_etdi', 'Malika', 'orta', NULL, now() - interval '48 hours', NULL, 2005, 'keyinroq', NULL, now() - interval '388 hours'),
+('LID-90195', 'Abbos', 'Karimov', '+998 97 595 71 91', NULL, NULL, 'hamkor', 'General', 'rad_etdi', 'Sardor', 'orta', 'orta', now() - interval '37 hours', NULL, 2004, 'aloqa_yoqolgan', NULL, now() - interval '677 hours'),
+('LID-90196', 'Xadicha', 'Raximova', '+998 91 423 94 70', NULL, 'Aliyev aka', 'hamkor', 'General', 'rad_etdi', 'Aziza', 'orta', 'past', now() - interval '78 hours', NULL, 2012, 'narx_qimmat', NULL, now() - interval '894 hours'),
+('LID-90197', 'Iroda', 'Ismoilova', '+998 93 286 61 06', NULL, 'Karimov aka', 'hamkor', 'General', 'rad_etdi', 'Bekzod', 'orta', 'past', now() - interval '20 hours', NULL, 2011, 'boshqa_markaz', NULL, now() - interval '896 hours'),
+('LID-90198', 'Farrux', 'Qodirov', '+998 91 811 25 85', NULL, 'Karimov aka', 'hamkor', 'Matematika', 'rad_etdi', 'Malika', 'yuqori', 'orta', now() - interval '61 hours', NULL, 2009, 'keyinroq', NULL, now() - interval '265 hours'),
+('LID-90199', 'Sevinch', 'Xasanova', '+998 91 721 64 13', NULL, NULL, 'boshqa', 'IELTS', 'rad_etdi', 'Sardor', 'yuqori', 'orta', now() - interval '65 hours', NULL, 2006, 'boshqa_markaz', NULL, now() - interval '422 hours'),
+('LID-90200', 'Diyor', 'Aliyev', '+998 93 224 38 87', NULL, 'Olimov aka', 'boshqa', 'Matematika', 'rad_etdi', 'Aziza', 'past', NULL, now() - interval '58 hours', NULL, 2005, 'aloqa_yoqolgan', NULL, now() - interval '843 hours')
+ON CONFLICT DO NOTHING;
+
+-- Sinov darslari (lidlarning sinov bosqichidagilariga)
+INSERT INTO trials (lead_id, group_id, teacher_id, trial_date, trial_time, status, noshow_reason, feedback) VALUES
+('LID-90106', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE + 1, '14:00', 'eslatma_yuborildi', NULL, NULL),
+('LID-90107', 'GRP-DEMO-14', 'TCH-907', CURRENT_DATE + 1, '10:30', 'eslatma_yuborildi', NULL, NULL),
+('LID-90108', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE + 0, '17:00', 'eslatma_yuborildi', NULL, NULL),
+('LID-90109', 'GRP-DEMO-25', 'TCH-904', CURRENT_DATE + 1, '15:30', 'yozildi', NULL, NULL),
+('LID-90110', 'GRP-DEMO-05', 'TCH-905', CURRENT_DATE + 0, '09:00', 'tasdiqlandi', NULL, NULL),
+('LID-90111', 'GRP-DEMO-21', 'TCH-907', CURRENT_DATE + 2, '14:00', 'yozildi', NULL, NULL),
+('LID-90112', 'GRP-DEMO-32', 'TCH-904', CURRENT_DATE + 1, '15:30', 'yozildi', NULL, NULL),
+('LID-90113', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE + 3, '17:00', 'tasdiqlandi', NULL, NULL),
+('LID-90114', 'GRP-DEMO-20', 'TCH-906', CURRENT_DATE + 2, '14:00', 'tasdiqlandi', NULL, NULL),
+('LID-90115', 'GRP-DEMO-28', 'TCH-907', CURRENT_DATE + 1, '15:30', 'yozildi', NULL, NULL),
+('LID-90116', 'GRP-DEMO-32', 'TCH-904', CURRENT_DATE + 3, '15:30', 'tasdiqlandi', NULL, NULL),
+('LID-90117', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE + 1, '14:00', 'tasdiqlandi', NULL, NULL),
+('LID-90118', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE + 0, '17:00', 'eslatma_yuborildi', NULL, NULL),
+('LID-90119', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE + 2, '17:00', 'tasdiqlandi', NULL, NULL),
+('LID-90120', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE + 3, '17:00', 'tasdiqlandi', NULL, NULL),
+('LID-90121', 'GRP-DEMO-05', 'TCH-905', CURRENT_DATE + 0, '09:00', 'yozildi', NULL, NULL),
+('LID-90122', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE + 2, '17:00', 'eslatma_yuborildi', NULL, NULL),
+('LID-90123', 'GRP-DEMO-09', 'TCH-902', CURRENT_DATE + 0, '10:30', 'yozildi', NULL, NULL),
+('LID-90124', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE + 0, '17:00', 'tasdiqlandi', NULL, NULL),
+('LID-90125', 'GRP-DEMO-24', 'TCH-903', CURRENT_DATE + 3, '14:00', 'eslatma_yuborildi', NULL, NULL),
+('LID-90126', 'GRP-DEMO-28', 'TCH-907', CURRENT_DATE - 3, '15:30', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90127', 'GRP-DEMO-13', 'TCH-906', CURRENT_DATE - 16, '10:30', 'muvaffaqiyatli', NULL, NULL),
+('LID-90128', 'GRP-DEMO-09', 'TCH-902', CURRENT_DATE - 10, '10:30', 'muvaffaqiyatli', NULL, NULL),
+('LID-90129', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 13, '17:00', 'muvaffaqiyatli', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90130', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 5, '17:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90131', 'GRP-DEMO-04', 'TCH-904', CURRENT_DATE - 12, '09:00', 'keldi', NULL, NULL),
+('LID-90132', 'GRP-DEMO-33', 'TCH-910', CURRENT_DATE - 13, '17:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90133', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE - 9, '17:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90134', 'GRP-DEMO-03', 'TCH-903', CURRENT_DATE - 16, '09:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90135', 'GRP-DEMO-13', 'TCH-906', CURRENT_DATE - 4, '10:30', 'muvaffaqiyatli', NULL, NULL),
+('LID-90136', 'GRP-DEMO-22', 'TCH-901', CURRENT_DATE - 9, '14:00', 'keldi', NULL, NULL),
+('LID-90137', 'GRP-DEMO-09', 'TCH-902', CURRENT_DATE - 15, '10:30', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90138', 'GRP-DEMO-05', 'TCH-905', CURRENT_DATE - 9, '09:00', 'keldi', NULL, NULL),
+('LID-90139', 'GRP-DEMO-20', 'TCH-906', CURRENT_DATE - 8, '14:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90140', 'GRP-DEMO-28', 'TCH-907', CURRENT_DATE - 15, '15:30', 'muvaffaqiyatli', NULL, NULL),
+('LID-90141', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE - 16, '17:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90142', 'GRP-DEMO-06', 'TCH-906', CURRENT_DATE - 17, '09:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90143', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 10, '17:00', 'keldi', NULL, NULL),
+('LID-90144', 'GRP-DEMO-03', 'TCH-903', CURRENT_DATE - 17, '09:00', 'keldi', NULL, NULL),
+('LID-90145', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 2, '17:00', 'muvaffaqiyatli', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90146', 'GRP-DEMO-33', 'TCH-910', CURRENT_DATE - 4, '17:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90147', 'GRP-DEMO-26', 'TCH-905', CURRENT_DATE - 17, '15:30', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90148', 'GRP-DEMO-33', 'TCH-910', CURRENT_DATE - 15, '17:00', 'muvaffaqiyatli', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90149', 'GRP-DEMO-07', 'TCH-907', CURRENT_DATE - 19, '09:00', 'keldi', NULL, NULL),
+('LID-90150', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 14, '17:00', 'keldi', NULL, NULL),
+('LID-90151', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE - 8, '17:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90152', 'GRP-DEMO-33', 'TCH-910', CURRENT_DATE - 17, '17:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90153', 'GRP-DEMO-05', 'TCH-905', CURRENT_DATE - 4, '09:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90154', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE - 9, '17:00', 'keldi', NULL, NULL),
+('LID-90155', 'GRP-DEMO-15', 'TCH-901', CURRENT_DATE - 7, '10:30', 'muvaffaqiyatli', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90156', 'GRP-DEMO-31', 'TCH-903', CURRENT_DATE - 11, '15:30', 'muvaffaqiyatli', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90157', 'GRP-DEMO-02', 'TCH-902', CURRENT_DATE - 8, '09:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90158', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 9, '17:00', 'muvaffaqiyatli', NULL, NULL),
+('LID-90159', 'GRP-DEMO-16', 'TCH-902', CURRENT_DATE - 9, '10:30', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90160', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE - 15, '17:00', 'keldi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90161', 'GRP-DEMO-25', 'TCH-904', CURRENT_DATE - 16, '15:30', 'keldi', NULL, NULL),
+('LID-90162', 'GRP-DEMO-28', 'TCH-907', CURRENT_DATE - 16, '15:30', 'muvaffaqiyatli', NULL, NULL),
+('LID-90163', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE - 3, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90164', 'GRP-DEMO-08', 'TCH-901', CURRENT_DATE - 4, '09:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90165', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 19, '17:00', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90166', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE - 15, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90167', 'GRP-DEMO-24', 'TCH-903', CURRENT_DATE - 12, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90168', 'GRP-DEMO-29', 'TCH-901', CURRENT_DATE - 19, '15:30', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90169', 'GRP-DEMO-33', 'TCH-910', CURRENT_DATE - 8, '17:00', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90170', 'GRP-DEMO-13', 'TCH-906', CURRENT_DATE - 18, '10:30', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90171', 'GRP-DEMO-10', 'TCH-903', CURRENT_DATE - 18, '10:30', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90172', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE - 10, '17:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90173', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE - 8, '17:00', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90174', 'GRP-DEMO-21', 'TCH-907', CURRENT_DATE - 3, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90175', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE - 14, '17:00', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90176', 'GRP-DEMO-28', 'TCH-907', CURRENT_DATE - 6, '15:30', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90177', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 20, '17:00', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90178', 'GRP-DEMO-16', 'TCH-902', CURRENT_DATE - 20, '10:30', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90179', 'GRP-DEMO-15', 'TCH-901', CURRENT_DATE - 20, '10:30', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90180', 'GRP-DEMO-32', 'TCH-904', CURRENT_DATE - 6, '15:30', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90181', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE - 2, '17:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90182', 'GRP-DEMO-36', 'TCH-910', CURRENT_DATE - 19, '17:00', 'sotuvga_otkazildi', NULL, 'Saviyasi mos, faol qatnashdi'),
+('LID-90183', 'GRP-DEMO-21', 'TCH-907', CURRENT_DATE - 14, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90184', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE - 10, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90185', 'GRP-DEMO-17', 'TCH-903', CURRENT_DATE - 10, '14:00', 'sotuvga_otkazildi', NULL, NULL),
+('LID-90186', 'GRP-DEMO-01', 'TCH-901', CURRENT_DATE - 22, '09:00', 'kelmadi', 'ota_ona_ruxsat_bermadi', NULL),
+('LID-90187', 'GRP-DEMO-24', 'TCH-903', CURRENT_DATE - 18, '14:00', 'kelmadi', 'unutgan', NULL),
+('LID-90188', 'GRP-DEMO-15', 'TCH-901', CURRENT_DATE - 12, '10:30', 'kelmadi', 'ota_ona_ruxsat_bermadi', NULL),
+('LID-90189', 'GRP-DEMO-06', 'TCH-906', CURRENT_DATE - 7, '09:00', 'kelmadi', 'unutgan', NULL),
+('LID-90190', 'GRP-DEMO-10', 'TCH-903', CURRENT_DATE - 6, '10:30', 'kelmadi', 'transport', NULL),
+('LID-90191', 'GRP-DEMO-21', 'TCH-907', CURRENT_DATE - 25, '14:00', 'kelmadi', 'ota_ona_ruxsat_bermadi', NULL),
+('LID-90192', 'GRP-DEMO-04', 'TCH-904', CURRENT_DATE - 22, '09:00', 'kelmadi', 'vaqt_mos_kelmadi', NULL),
+('LID-90193', 'GRP-DEMO-04', 'TCH-904', CURRENT_DATE - 4, '09:00', 'kelmadi', 'aloqa_bolmadi', NULL),
+('LID-90194', 'GRP-DEMO-27', 'TCH-906', CURRENT_DATE - 20, '15:30', 'kelmadi', 'vaqt_mos_kelmadi', NULL),
+('LID-90195', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE - 9, '14:00', 'kelmadi', 'vaqt_mos_kelmadi', NULL),
+('LID-90081', 'GRP-DEMO-34', 'TCH-908', CURRENT_DATE - 3, '17:00', 'kelmadi', 'narx_qimmat', NULL),
+('LID-90082', 'GRP-DEMO-21', 'TCH-907', CURRENT_DATE - 3, '14:00', 'kelmadi', 'transport', NULL),
+('LID-90083', 'GRP-DEMO-21', 'TCH-907', CURRENT_DATE - 11, '14:00', 'kelmadi', 'vaqt_mos_kelmadi', NULL),
+('LID-90084', 'GRP-DEMO-04', 'TCH-904', CURRENT_DATE - 11, '09:00', 'kelmadi', 'nomalum', NULL),
+('LID-90085', 'GRP-DEMO-32', 'TCH-904', CURRENT_DATE - 16, '15:30', 'kelmadi', 'transport', NULL),
+('LID-90086', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE - 3, '17:00', 'kelmadi', 'transport', NULL),
+('LID-90087', 'GRP-DEMO-31', 'TCH-903', CURRENT_DATE - 21, '15:30', 'kelmadi', 'ota_ona_ruxsat_bermadi', NULL),
+('LID-90088', 'GRP-DEMO-26', 'TCH-905', CURRENT_DATE - 10, '15:30', 'kelmadi', 'boshqa', NULL),
+('LID-90089', 'GRP-DEMO-02', 'TCH-902', CURRENT_DATE - 14, '09:00', 'kelmadi', 'vaqt_mos_kelmadi', NULL),
+('LID-90090', 'GRP-DEMO-35', 'TCH-909', CURRENT_DATE - 16, '17:00', 'kelmadi', 'ota_ona_ruxsat_bermadi', NULL),
+('LID-90091', 'GRP-DEMO-30', 'TCH-902', CURRENT_DATE - 5, '15:30', 'kelmadi', 'vaqt_mos_kelmadi', NULL),
+('LID-90092', 'GRP-DEMO-19', 'TCH-905', CURRENT_DATE - 14, '14:00', 'kelmadi', 'vaqt_mos_kelmadi', NULL)
+ON CONFLICT DO NOTHING;
+
+-- Sotuv yopilgan lidlar -> o'quvchi IDlari
+UPDATE leads SET student_id='STU-90001' WHERE id='LID-90163';
+UPDATE leads SET student_id='STU-90002' WHERE id='LID-90164';
+UPDATE leads SET student_id='STU-90003' WHERE id='LID-90165';
+UPDATE leads SET student_id='STU-90004' WHERE id='LID-90166';
+UPDATE leads SET student_id='STU-90005' WHERE id='LID-90167';
+UPDATE leads SET student_id='STU-90006' WHERE id='LID-90168';
+UPDATE leads SET student_id='STU-90007' WHERE id='LID-90169';
+UPDATE leads SET student_id='STU-90008' WHERE id='LID-90170';
+UPDATE leads SET student_id='STU-90009' WHERE id='LID-90171';
+UPDATE leads SET student_id='STU-90010' WHERE id='LID-90172';
+UPDATE leads SET student_id='STU-90011' WHERE id='LID-90173';
+UPDATE leads SET student_id='STU-90012' WHERE id='LID-90174';
+UPDATE leads SET student_id='STU-90013' WHERE id='LID-90175';
+UPDATE leads SET student_id='STU-90014' WHERE id='LID-90176';
+UPDATE leads SET student_id='STU-90015' WHERE id='LID-90177';
+UPDATE leads SET student_id='STU-90016' WHERE id='LID-90178';
+UPDATE leads SET student_id='STU-90017' WHERE id='LID-90179';
+UPDATE leads SET student_id='STU-90018' WHERE id='LID-90180';
+UPDATE leads SET student_id='STU-90019' WHERE id='LID-90181';
+UPDATE leads SET student_id='STU-90020' WHERE id='LID-90182';
+UPDATE leads SET student_id='STU-90021' WHERE id='LID-90183';
+UPDATE leads SET student_id='STU-90022' WHERE id='LID-90184';
+UPDATE leads SET student_id='STU-90023' WHERE id='LID-90185';
+
+-- Menejer qo'ng'iroqlari (birinchi javob vaqti tahlili uchun)
+INSERT INTO lead_events (lead_id, event_type, body, created_by, created_at) VALUES
+('LID-90026', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1108 hours'),
+('LID-90027', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '484 hours'),
+('LID-90027', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '482 hours'),
+('LID-90028', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '467 hours'),
+('LID-90029', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '644 hours'),
+('LID-90030', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1048 hours'),
+('LID-90031', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '845 hours'),
+('LID-90032', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '651 hours'),
+('LID-90033', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '772 hours'),
+('LID-90033', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '770 hours'),
+('LID-90034', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '248 hours'),
+('LID-90034', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '246 hours'),
+('LID-90035', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '264 hours'),
+('LID-90036', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '968 hours'),
+('LID-90036', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '966 hours'),
+('LID-90037', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1074 hours'),
+('LID-90037', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '1072 hours'),
+('LID-90038', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '411 hours'),
+('LID-90038', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '409 hours'),
+('LID-90039', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1315 hours'),
+('LID-90040', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '864 hours'),
+('LID-90041', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '772 hours'),
+('LID-90041', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '770 hours'),
+('LID-90042', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '602 hours'),
+('LID-90042', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '600 hours'),
+('LID-90043', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '479 hours'),
+('LID-90044', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '140 hours'),
+('LID-90044', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '138 hours'),
+('LID-90045', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1004 hours'),
+('LID-90046', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '351 hours'),
+('LID-90046', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '349 hours'),
+('LID-90047', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '276 hours'),
+('LID-90047', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '274 hours'),
+('LID-90048', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '651 hours'),
+('LID-90049', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '162 hours'),
+('LID-90050', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '368 hours'),
+('LID-90050', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '366 hours'),
+('LID-90051', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1382 hours'),
+('LID-90052', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '769 hours'),
+('LID-90053', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '47 hours'),
+('LID-90054', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1127 hours'),
+('LID-90055', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '437 hours'),
+('LID-90056', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '915 hours'),
+('LID-90057', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1007 hours'),
+('LID-90057', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '1005 hours'),
+('LID-90058', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '808 hours'),
+('LID-90059', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1029 hours'),
+('LID-90059', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '1027 hours'),
+('LID-90060', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '872 hours'),
+('LID-90061', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '765 hours'),
+('LID-90061', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '763 hours'),
+('LID-90062', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '736 hours'),
+('LID-90063', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '691 hours'),
+('LID-90064', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '568 hours'),
+('LID-90065', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '263 hours'),
+('LID-90066', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '965 hours'),
+('LID-90067', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '315 hours'),
+('LID-90068', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '504 hours'),
+('LID-90069', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '265 hours'),
+('LID-90070', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '453 hours'),
+('LID-90070', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '451 hours'),
+('LID-90071', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '917 hours'),
+('LID-90072', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '727 hours'),
+('LID-90073', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1193 hours'),
+('LID-90074', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '78 hours'),
+('LID-90074', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '76 hours'),
+('LID-90075', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '869 hours'),
+('LID-90076', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '70 hours'),
+('LID-90077', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '785 hours'),
+('LID-90078', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '716 hours'),
+('LID-90079', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '978 hours'),
+('LID-90080', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '529 hours'),
+('LID-90081', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '647 hours'),
+('LID-90082', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '694 hours'),
+('LID-90082', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '692 hours'),
+('LID-90083', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '909 hours'),
+('LID-90084', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '651 hours'),
+('LID-90085', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1106 hours'),
+('LID-90085', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '1104 hours'),
+('LID-90086', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '659 hours'),
+('LID-90087', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '857 hours'),
+('LID-90088', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '643 hours'),
+('LID-90089', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '204 hours'),
+('LID-90090', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '986 hours'),
+('LID-90090', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '984 hours'),
+('LID-90091', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '728 hours'),
+('LID-90092', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1006 hours'),
+('LID-90092', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '1004 hours'),
+('LID-90093', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '404 hours'),
+('LID-90094', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '854 hours'),
+('LID-90095', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '124 hours'),
+('LID-90096', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1162 hours'),
+('LID-90096', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '1160 hours'),
+('LID-90097', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '248 hours'),
+('LID-90097', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '246 hours'),
+('LID-90098', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1060 hours'),
+('LID-90099', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1319 hours'),
+('LID-90100', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '415 hours'),
+('LID-90100', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '413 hours'),
+('LID-90101', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1403 hours'),
+('LID-90102', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '732 hours'),
+('LID-90103', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '42 hours'),
+('LID-90104', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1229 hours'),
+('LID-90104', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '1227 hours'),
+('LID-90105', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '605 hours'),
+('LID-90105', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '603 hours'),
+('LID-90106', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '931 hours'),
+('LID-90107', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '986 hours'),
+('LID-90107', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '984 hours'),
+('LID-90108', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '817 hours'),
+('LID-90109', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1200 hours'),
+('LID-90109', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '1198 hours'),
+('LID-90110', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '200 hours'),
+('LID-90111', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '872 hours'),
+('LID-90111', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '870 hours'),
+('LID-90112', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '639 hours'),
+('LID-90113', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '954 hours'),
+('LID-90114', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '21 hours'),
+('LID-90114', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '19 hours'),
+('LID-90115', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1384 hours'),
+('LID-90115', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '1382 hours'),
+('LID-90116', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1182 hours'),
+('LID-90116', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '1180 hours'),
+('LID-90117', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '100 hours'),
+('LID-90118', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '805 hours'),
+('LID-90118', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '803 hours'),
+('LID-90119', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '821 hours'),
+('LID-90120', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '645 hours'),
+('LID-90121', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '212 hours'),
+('LID-90122', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '752 hours'),
+('LID-90122', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '750 hours'),
+('LID-90123', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '325 hours'),
+('LID-90124', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1073 hours'),
+('LID-90125', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '327 hours'),
+('LID-90125', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '325 hours'),
+('LID-90126', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '344 hours'),
+('LID-90126', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '342 hours'),
+('LID-90127', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '148 hours'),
+('LID-90128', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1000 hours'),
+('LID-90128', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '998 hours'),
+('LID-90129', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '830 hours'),
+('LID-90130', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '275 hours'),
+('LID-90130', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '273 hours'),
+('LID-90131', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1128 hours'),
+('LID-90131', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '1126 hours'),
+('LID-90132', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1179 hours'),
+('LID-90133', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1181 hours'),
+('LID-90134', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1411 hours'),
+('LID-90135', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1054 hours'),
+('LID-90136', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '59 hours'),
+('LID-90136', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '57 hours'),
+('LID-90137', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1158 hours'),
+('LID-90138', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '802 hours'),
+('LID-90138', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '800 hours'),
+('LID-90139', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '314 hours'),
+('LID-90140', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '816 hours'),
+('LID-90141', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '893 hours'),
+('LID-90141', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '891 hours'),
+('LID-90142', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '105 hours'),
+('LID-90143', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1098 hours'),
+('LID-90144', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '991 hours'),
+('LID-90145', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1089 hours'),
+('LID-90145', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '1087 hours'),
+('LID-90146', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '807 hours'),
+('LID-90147', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '641 hours'),
+('LID-90148', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '135 hours'),
+('LID-90149', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '825 hours'),
+('LID-90149', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '823 hours'),
+('LID-90150', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1128 hours'),
+('LID-90151', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '147 hours'),
+('LID-90152', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '152 hours'),
+('LID-90152', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '150 hours'),
+('LID-90153', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '337 hours'),
+('LID-90154', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '593 hours'),
+('LID-90155', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '278 hours'),
+('LID-90156', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1385 hours'),
+('LID-90157', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '531 hours'),
+('LID-90158', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1317 hours'),
+('LID-90159', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '583 hours'),
+('LID-90159', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '581 hours'),
+('LID-90160', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1250 hours'),
+('LID-90161', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1220 hours'),
+('LID-90161', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '1218 hours'),
+('LID-90162', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '956 hours'),
+('LID-90162', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '954 hours'),
+('LID-90163', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '480 hours'),
+('LID-90164', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1073 hours'),
+('LID-90165', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '103 hours'),
+('LID-90165', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '101 hours'),
+('LID-90166', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '1345 hours'),
+('LID-90166', 'sms', 'Narxlar va jadval SMS qilindi', 'Malika', now() - interval '1343 hours'),
+('LID-90167', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '88 hours'),
+('LID-90167', 'sms', 'Narxlar va jadval SMS qilindi', 'Sardor', now() - interval '86 hours'),
+('LID-90168', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '1424 hours'),
+('LID-90168', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '1422 hours'),
+('LID-90169', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '43 hours'),
+('LID-90169', 'sms', 'Narxlar va jadval SMS qilindi', 'Bekzod', now() - interval '41 hours'),
+('LID-90170', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '218 hours'),
+('LID-90171', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '1151 hours'),
+('LID-90172', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Aziza', now() - interval '352 hours'),
+('LID-90172', 'sms', 'Narxlar va jadval SMS qilindi', 'Aziza', now() - interval '350 hours'),
+('LID-90173', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Bekzod', now() - interval '1043 hours'),
+('LID-90174', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Malika', now() - interval '955 hours'),
+('LID-90175', 'qongiroq', 'Birinchi qo''ng''iroq qilindi', 'Sardor', now() - interval '245 hours');
+
+-- Progress Test natijalari (10-haftalik guruhlar uchun)
+INSERT INTO assessment_results (student_id, group_id, assessment_code, taken_at, score_pct, passed) VALUES
+('STU-90003', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 25, 67, false),
+('STU-90035', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 23, 92, false),
+('STU-90067', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 21, 75, false),
+('STU-90099', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 29, 71, false),
+('STU-90131', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 23, 63, false),
+('STU-90163', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 29, 80, false),
+('STU-90195', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 35, 95, false),
+('STU-90227', 'GRP-DEMO-03', 'BEG-PT1', CURRENT_DATE - 32, 84, false),
+('STU-90005', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 32, 94, false),
+('STU-90037', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 34, 57, false),
+('STU-90069', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 27, 61, false),
+('STU-90101', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 22, 92, false),
+('STU-90133', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 28, 83, false),
+('STU-90165', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 25, 86, false),
+('STU-90197', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 28, 64, false),
+('STU-90229', 'GRP-DEMO-06', 'BEG-PT1', CURRENT_DATE - 28, 60, false),
+('STU-90007', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 21, 62, false),
+('STU-90039', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 25, 83, false),
+('STU-90071', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 32, 95, false),
+('STU-90103', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 35, 96, false),
+('STU-90135', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 31, 83, false),
+('STU-90167', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 28, 79, false),
+('STU-90199', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 22, 93, false),
+('STU-90231', 'GRP-DEMO-08', 'BEG-PT1', CURRENT_DATE - 26, 92, false),
+('STU-90008', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 23, 95, false),
+('STU-90040', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 23, 66, false),
+('STU-90072', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 32, 63, false),
+('STU-90104', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 30, 59, false),
+('STU-90136', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 28, 84, false),
+('STU-90168', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 22, 81, false),
+('STU-90200', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 35, 79, false),
+('STU-90232', 'GRP-DEMO-09', 'BEG-PT1', CURRENT_DATE - 33, 79, false),
+('STU-90010', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 22, 79, false),
+('STU-90042', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 26, 59, false),
+('STU-90074', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 22, 67, false),
+('STU-90106', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 21, 71, false),
+('STU-90138', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 21, 88, false),
+('STU-90170', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 34, 58, false),
+('STU-90202', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 28, 70, false),
+('STU-90234', 'GRP-DEMO-11', 'ELE-PT1', CURRENT_DATE - 28, 63, false),
+('STU-90011', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 24, 61, false),
+('STU-90043', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 35, 71, false),
+('STU-90075', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 22, 82, false),
+('STU-90107', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 26, 90, false),
+('STU-90139', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 21, 88, false),
+('STU-90171', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 21, 80, false),
+('STU-90203', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 30, 55, false),
+('STU-90235', 'GRP-DEMO-13', 'ELE-PT1', CURRENT_DATE - 21, 80, false),
+('STU-90012', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 20, 73, false),
+('STU-90044', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 29, 95, false),
+('STU-90076', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 31, 88, false),
+('STU-90108', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 28, 62, false),
+('STU-90140', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 22, 61, false),
+('STU-90172', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 20, 82, false),
+('STU-90204', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 28, 92, false),
+('STU-90236', 'GRP-DEMO-14', 'ELE-PT1', CURRENT_DATE - 20, 55, false),
+('STU-90013', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 29, 96, false),
+('STU-90045', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 34, 92, false),
+('STU-90077', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 34, 71, false),
+('STU-90109', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 23, 71, false),
+('STU-90141', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 23, 68, false),
+('STU-90173', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 24, 64, false),
+('STU-90205', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 21, 97, false),
+('STU-90237', 'GRP-DEMO-16', 'ELE-PT1', CURRENT_DATE - 28, 88, false),
+('STU-90022', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 33, 61, false),
+('STU-90054', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 34, 96, false),
+('STU-90086', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 35, 72, false),
+('STU-90118', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 32, 61, false),
+('STU-90150', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 31, 75, false),
+('STU-90182', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 23, 71, false),
+('STU-90214', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 23, 61, false),
+('STU-90246', 'GRP-DEMO-25', 'INT-PT1', CURRENT_DATE - 23, 82, false),
+('STU-90024', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 24, 68, false),
+('STU-90056', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 32, 70, false),
+('STU-90088', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 20, 57, false),
+('STU-90120', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 33, 80, false),
+('STU-90152', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 20, 87, false),
+('STU-90184', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 20, 88, false),
+('STU-90216', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 22, 58, false),
+('STU-90248', 'GRP-DEMO-27', 'UPP-PT1', CURRENT_DATE - 20, 79, false),
+('STU-90030', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 25, 86, false),
+('STU-90062', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 34, 59, false),
+('STU-90094', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 20, 98, false),
+('STU-90126', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 24, 81, false),
+('STU-90158', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 31, 68, false),
+('STU-90190', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 24, 62, false),
+('STU-90222', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 31, 67, false),
+('STU-90254', 'GRP-DEMO-34', 'IEL-PT1', CURRENT_DATE - 33, 62, false),
+('STU-90031', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 20, 85, false),
+('STU-90063', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 30, 84, false),
+('STU-90095', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 26, 61, false),
+('STU-90127', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 35, 82, false),
+('STU-90159', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 32, 73, false),
+('STU-90191', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 33, 60, false),
+('STU-90223', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 34, 67, false),
+('STU-90255', 'GRP-DEMO-35', 'IEL-PT1', CURRENT_DATE - 30, 69, false);
+
+SELECT
+ (SELECT count(*) FROM students WHERE id LIKE 'STU-9%') AS oquvchilar,
+ (SELECT count(*) FROM students WHERE id LIKE 'STU-9%' AND status='faol') AS faol,
+ (SELECT count(*) FROM students WHERE id LIKE 'STU-9%' AND status='ketgan') AS ketgan,
+ (SELECT count(*) FROM enrollments WHERE status='chetlashtirildi') AS avto_chetlashtirilgan,
+ (SELECT count(*) FROM leads WHERE id LIKE 'LID-9%') AS lidlar,
+ (SELECT count(*) FROM trials) AS sinovlar,
+ (SELECT count(*) FROM groups WHERE id LIKE 'GRP-DEMO%') AS guruhlar,
+ (SELECT count(*) FROM sessions WHERE group_id LIKE 'GRP-DEMO%') AS darslar,
+ (SELECT count(*) FROM attendance WHERE student_id LIKE 'STU-9%') AS davomat,
+ (SELECT count(*) FROM payments WHERE id LIKE 'PAY-9%') AS tolovlar,
+ (SELECT count(*) FROM v_student_risk WHERE score < 40) AS xavfda,
+ (SELECT count(*) FROM v_student_risk WHERE score >= 40 AND score < 70) AS etibor,
+ (SELECT count(*) FROM lead_events) AS timeline;

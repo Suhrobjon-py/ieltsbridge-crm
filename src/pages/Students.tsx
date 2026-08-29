@@ -85,12 +85,12 @@ export default function Students() {
 
       <div className="tabs">
         <button className={tab === 'faol' ? 'tab on' : 'tab'} onClick={() => setTab('faol')}>O'quvchilar ({rows.filter((r) => r.status !== 'ketgan').length})</button>
-        <button className={tab === 'ketgan' ? 'tab on' : 'tab'} onClick={() => setTab('ketgan')}>Ketganlar / Win-back ({ketganlar.length})</button>
+        <button className={tab === 'ketgan' ? 'tab on' : 'tab'} onClick={() => setTab('ketgan')}>Ketganlar / Qaytarish ({ketganlar.length})</button>
       </div>
 
       {tab === 'ketgan' && ketganlar.length > 0 && (
         <div className="stat-row" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
-          <div className="stat-card"><div className="stat-n">{ketganlar.length}</div><div className="stat-t">Ketganlar (Churned)</div></div>
+          <div className="stat-card"><div className="stat-n">{ketganlar.length}</div><div className="stat-t">Ketganlar</div></div>
           <div className="stat-card"><div className="stat-n">{winStat.aloqa}</div><div className="stat-t">Aloqa qilingan</div></div>
           <div className="stat-card"><div className="stat-n">{winStat.qiziqdi}</div><div className="stat-t">Qiziqqan</div></div>
           <div className="stat-card"><div className="stat-n" style={{ color: '#22c55e' }}>{winStat.qaytdi}</div><div className="stat-t">Qaytgan · {ketganlar.length ? Math.round((100 * winStat.qaytdi) / ketganlar.length) : 0}%</div></div>
@@ -101,7 +101,7 @@ export default function Students() {
         <table>
           {tab === 'faol' ? (
             <>
-              <thead><tr><th>ID</th><th>Ism-familiya</th><th>Telefon</th><th>Bosqich</th><th>Holat</th><th>Risk Score</th><th>Kelgan</th></tr></thead>
+              <thead><tr><th>ID</th><th>Ism-familiya</th><th>Telefon</th><th>Bosqich</th><th>Holat</th><th>Xavf bali</th><th>Kelgan</th></tr></thead>
               <tbody>
                 {filtrlangan.map((r) => {
                   const rk = riskMap[r.id];
@@ -129,7 +129,7 @@ export default function Students() {
             </>
           ) : (
             <>
-              <thead><tr><th>ID</th><th>Ism-familiya</th><th>Telefon</th><th>Ketgan sana</th><th>Sabab</th><th>Win-back bosqichi</th></tr></thead>
+              <thead><tr><th>ID</th><th>Ism-familiya</th><th>Telefon</th><th>Ketgan sana</th><th>Sabab</th><th>Qaytarish bosqichi</th></tr></thead>
               <tbody>
                 {filtrlangan.map((r) => (
                   <tr key={r.id}>

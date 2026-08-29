@@ -155,8 +155,8 @@ export default function GroupDetail() {
       </div>
       <div className="card group-info">
         <div className="kv"><span>Bosqich</span><b>{g.levels?.name}</b></div>
-        <div className="kv"><span>O'qituvchi (Main)</span><b>{g.teachers?.full_name}</b></div>
-        <div className="kv"><span>Yordamchi (Support)</span><b>{g.support?.full_name ?? '—'}</b></div>
+        <div className="kv"><span>Asosiy o'qituvchi</span><b>{g.teachers?.full_name}</b></div>
+        <div className="kv"><span>Yordamchi o'qituvchi</span><b>{g.support?.full_name ?? '—'}</b></div>
         <div className="kv"><span>Jadval</span><b>{KUNLAR[g.days_pattern]} · {String(g.start_time).slice(0, 5)}</b></div>
         <div className="kv"><span>Davr</span><b>{sana(g.start_date)} — {sana(g.end_date_planned)}</b></div>
         <div className="kv"><span>Narx</span><b>{som(g.monthly_fee)}/oy</b></div>
@@ -242,12 +242,12 @@ export default function GroupDetail() {
       {sozModal && sf && (
         <Modal title={`Guruh sozlamalari — ${g.id}`} onClose={() => setSozModal(false)}>
           <form onSubmit={sozSaqla} className="form-grid">
-            <label>Asosiy o'qituvchi (Main)
+            <label>Asosiy o'qituvchi
               <select value={sf.teacher_id} onChange={(e) => setSf({ ...sf, teacher_id: e.target.value })}>
                 {teachers.filter((t) => t.degree !== 'support' || t.id === sf.teacher_id).map((t) => <option key={t.id} value={t.id}>{t.full_name}</option>)}
               </select>
             </label>
-            <label>Yordamchi (Support)
+            <label>Yordamchi o'qituvchi
               <select value={sf.support_id} onChange={(e) => setSf({ ...sf, support_id: e.target.value })}>
                 <option value="">— Yo'q —</option>
                 {teachers.filter((t) => t.degree === 'support').map((t) => <option key={t.id} value={t.id}>{t.full_name}</option>)}
