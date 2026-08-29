@@ -28,7 +28,7 @@ export const HOLAT_UZ: Record<string, string> = {
   faol: 'Faol', pauza: 'Pauza', bitirgan: 'Bitirgan', ketgan: 'Ketgan',
   // lead
   yangi: 'Yangi', aloqa_qilindi: 'Aloqaga chiqildi', sinov_belgilandi: 'Sinov belgilandi',
-  sinovga_keldi: 'Sinovga keldi', yozildi: 'Yozildi', yoqotildi: "Yo'qotildi",
+  sinovga_keldi: 'Sinovga keldi', yozildi: 'Yozildi', yoqotildi: "Yo'qotildi", kelmaydi: 'Kelmaydi',
   // guruh
   rejada: 'Rejada', imtihon: 'Imtihon', yakunlangan: 'Yakunlangan', bekor: 'Bekor',
   // sessiya

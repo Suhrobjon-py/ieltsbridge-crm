@@ -23,6 +23,7 @@ export default function GroupDetail() {
   const [davomat, setDavomat] = useState<Record<string, string>>({});
   const [xato, setXato] = useState('');
   const [teachers, setTeachers] = useState<any[]>([]);
+  const [rooms, setRooms] = useState<any[]>([]);
   const [ruxsat, setRuxsat] = useState<Record<string, any>>({});
   const [sozModal, setSozModal] = useState(false);
   const [sf, setSf] = useState<any>(null);
@@ -47,6 +48,7 @@ export default function GroupDetail() {
     for (const p of pr.data ?? []) pm[p.student_id] = p;
     setProgress(pm);
     setTeachers(tc.data ?? []);
+    supabase.from('rooms').select('id,name').order('id').then(({ data }) => setRooms(data ?? []));
     const rm: Record<string, any> = {};
     for (const r of rx.data ?? []) rm[r.student_id] = r;
     setRuxsat(rm);
@@ -78,16 +80,11 @@ export default function GroupDetail() {
   async function sozSaqla(e: React.FormEvent) {
     e.preventDefault();
     setSXato('');
-    let room = null;
-    if (String(sf.room_id).trim()) {
-      room = String(sf.room_id).trim().toUpperCase();
-      await supabase.from('rooms').upsert({ id: room, name: room }, { onConflict: 'id' });
-    }
     const jadvalOzgardi = sf.days_pattern !== g.days_pattern || sf.start_date !== g.start_date;
     const { error } = await supabase.from('groups').update({
       teacher_id: sf.teacher_id,
       support_teacher_id: sf.support_id || null,
-      room_id: room,
+      room_id: sf.room_id || null,
       days_pattern: sf.days_pattern,
       start_time: sf.start_time,
       start_date: sf.start_date,
@@ -257,7 +254,10 @@ export default function GroupDetail() {
               </select>
             </label>
             <label>Xona
-              <input value={sf.room_id} onChange={(e) => setSf({ ...sf, room_id: e.target.value })} placeholder="XONA-1" />
+              <select value={sf.room_id} onChange={(e) => setSf({ ...sf, room_id: e.target.value })}>
+                <option value="">— Tanlanmagan —</option>
+                {rooms.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
+              </select>
             </label>
             <label>Dars kunlari
               <select value={sf.days_pattern} onChange={(e) => setSf({ ...sf, days_pattern: e.target.value })}>

@@ -22,10 +22,12 @@ export default function Groups() {
       .order('start_date', { ascending: false });
     setRows(data ?? []);
   }
+  const [rooms, setRooms] = useState<any[]>([]);
   useEffect(() => {
     load();
     supabase.from('levels').select('code,name').order('sort_order').then(({ data }) => setLevels(data ?? []));
     supabase.from('teachers').select('id,full_name,degree').eq('status', 'faol').order('id').then(({ data }) => setTeachers(data ?? []));
+    supabase.from('rooms').select('id,name').order('id').then(({ data }) => setRooms(data ?? []));
   }, []);
 
   const mains = teachers.filter((t) => t.degree !== 'support');
@@ -40,17 +42,12 @@ export default function Groups() {
     try {
       const { data: gid, error: e1 } = await supabase.rpc('make_group_id', { p_level: f.level_code, p_start: f.start_date });
       if (e1) throw e1;
-      let room = null;
-      if (f.room_id.trim()) {
-        room = f.room_id.trim().toUpperCase();
-        await supabase.from('rooms').upsert({ id: room, name: room }, { onConflict: 'id' });
-      }
       const { error: e2 } = await supabase.from('groups').insert({
         id: gid,
         level_code: f.level_code,
         teacher_id: f.teacher_id,
         support_teacher_id: f.support_id || null,
-        room_id: room,
+        room_id: f.room_id || null,
         days_pattern: f.days_pattern,
         start_time: f.start_time,
         start_date: f.start_date,
@@ -141,7 +138,10 @@ export default function Groups() {
               <input type="number" value={f.capacity} onChange={(e) => setF({ ...f, capacity: Number(e.target.value) })} min="1" max="30" />
             </label>
             <label>Xona (ixtiyoriy)
-              <input value={f.room_id} onChange={(e) => setF({ ...f, room_id: e.target.value })} placeholder="XONA-1" />
+              <select value={f.room_id} onChange={(e) => setF({ ...f, room_id: e.target.value })}>
+                <option value="">— Tanlanmagan —</option>
+                {rooms.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
+              </select>
             </label>
             {xato && <div className="err span2">{xato}</div>}
             <button className="btn span2" disabled={saqlanmoqda}>{saqlanmoqda ? 'Yaratilmoqda…' : 'Guruhni yaratish'}</button>

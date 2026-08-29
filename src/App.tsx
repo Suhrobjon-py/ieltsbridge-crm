@@ -15,6 +15,7 @@ import GroupDetail from './pages/GroupDetail';
 import Payments from './pages/Payments';
 import Expenses from './pages/Expenses';
 import Reports from './pages/Reports';
+import Rooms from './pages/Rooms';
 
 export default function App() {
   if (!configured) return <Setup />;
@@ -52,6 +53,7 @@ function AuthedApp() {
             <NavLink to="/lidlar">Lidlar</NavLink>
             <NavLink to="/oquvchilar">O'quvchilar</NavLink>
             <NavLink to="/guruhlar">Guruhlar</NavLink>
+            <NavLink to="/xonalar">Xonalar</NavLink>
             <NavLink to="/tolovlar">To'lovlar</NavLink>
             <NavLink to="/oqituvchilar">O'qituvchilar</NavLink>
             <NavLink to="/xarajatlar">Xarajatlar</NavLink>
@@ -77,6 +79,7 @@ function AuthedApp() {
             <Route path="/oquvchilar/:id" element={<StudentDetail />} />
             <Route path="/guruhlar" element={<Groups />} />
             <Route path="/guruhlar/:id" element={<GroupDetail />} />
+            <Route path="/xonalar" element={<Rooms />} />
             <Route path="/tolovlar" element={<Payments />} />
             <Route path="/oqituvchilar" element={<Teachers />} />
             <Route path="/oqituvchilar/:id" element={<TeacherDetail />} />
