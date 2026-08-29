@@ -146,6 +146,34 @@ Object.assign(HOLAT_UZ, LUGAT_QOSHIMCHA, {
   past: 'Past', orta: "O'rta", yuqori: 'Yuqori',
 });
 
+export const BOLIMLAR: [string, string][] = [
+  ['boshqaruv', 'Boshqaruv'],
+  ['lidlar', 'Lidlar'],
+  ['sinovlar', 'Sinov darslari'],
+  ['muammolar', 'Muammolar'],
+  ['oquvchilar', "O'quvchilar"],
+  ['guruhlar', 'Guruhlar'],
+  ['xonalar', 'Xonalar'],
+  ['oqituvchilar', "O'qituvchilar"],
+  ['tolovlar', "To'lovlar"],
+  ['xarajatlar', 'Xarajatlar'],
+  ['hisobotlar', 'Hisobotlar'],
+  ['sozlamalar', 'Sozlamalar'],
+];
+
+export const ROLLAR: [string, string][] = [
+  ['admin', 'Admin'],
+  ['reseption', 'Resepshn'],
+  ['call_markaz', 'Call-markaz'],
+  ['oqituvchi', "O'qituvchi"],
+];
+
+Object.assign(HOLAT_UZ, {
+  superadmin: 'Bosh admin', admin: 'Admin', reseption: 'Resepshn',
+  call_markaz: 'Call-markaz', oqituvchi: "O'qituvchi",
+  korish: "Ko'rish", tahrirlash: 'Tahrirlash', ochirish: "O'chirish",
+});
+
 export function riskHolat(score: number): { label: string; rang: string } {
   if (score >= 70) return { label: 'Faol', rang: 'green' };
   if (score >= 40) return { label: "E'tibor kerak", rang: 'amber' };

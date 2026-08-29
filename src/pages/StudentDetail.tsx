@@ -10,7 +10,8 @@ import { useRole } from '../lib/role';
 export default function StudentDetail() {
   const { id } = useParams();
   const nav = useNavigate();
-  const { superadmin } = useRole();
+  const { canDelete } = useRole();
+  const superadmin = canDelete('oquvchilar');
   const [ochirTasdiq, setOchirTasdiq] = useState(false);
   const [s, setS] = useState<any>(null);
   const [azolik, setAzolik] = useState<any[]>([]);

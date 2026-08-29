@@ -5,6 +5,7 @@ import { som, sana, KUNLAR, bugunISO, holat } from '../lib/format';
 import Modal from '../components/Modal';
 import Badge from '../components/Badge';
 import TimeSelect from '../components/TimeSelect';
+import { useRole } from '../lib/role';
 
 const DAVOMAT = ['keldi', 'kechikdi', 'kelmadi', 'sababli'];
 
@@ -30,6 +31,11 @@ export default function GroupDetail() {
   const [sXato, setSXato] = useState('');
 
   const [davHolat, setDavHolat] = useState<Record<string, any>>({});
+  const { teacherId, canEdit } = useRole();
+  const [bahoModal, setBahoModal] = useState(false);
+  const [bahoList, setBahoList] = useState<any[]>([]);
+  const [bf, setBf] = useState<any>({ student_id: '', assessment_code: '', score: '' });
+  const [bXato, setBXato] = useState('');
 
   async function load() {
     const [gr, en, se, pr, tc, rx, dh] = await Promise.all([
@@ -58,8 +64,33 @@ export default function GroupDetail() {
   }
   useEffect(() => { load(); }, [id]);
 
-  // Test natijalari CRM'da kiritilmaydi — o'qituvchi mobil ilovasi assessment_results ga
-  // yozadi, hukmni (o'tdi/qayta/takrorlaydi) bazadagi trg_natija triggeri chiqaradi.
+  // Baho kiritish: o'qituvchi (o'z guruhida) yoki guruhlar bo'limiga tahrirlash
+  // huquqi borlar. Hukmni (o'tdi/qayta/takrorlaydi) bazadagi trg_natija chiqaradi.
+  async function bahoOch() {
+    setBXato('');
+    setBf({ student_id: '', assessment_code: '', score: '' });
+    const { data } = await supabase.from('assessments').select('code, title, a_type').eq('level_code', g.level_code).order('code');
+    const tartib: Record<string, number> = { final: 0, progress: 1, mock: 2, mini: 3 };
+    setBahoList((data ?? []).sort((a, b) => (tartib[a.a_type] ?? 9) - (tartib[b.a_type] ?? 9) || a.code.localeCompare(b.code)));
+    setBahoModal(true);
+  }
+
+  async function bahoSaqla(e: React.FormEvent) {
+    e.preventDefault();
+    setBXato('');
+    if (!bf.student_id || !bf.assessment_code || bf.score === '') return setBXato("Barcha maydonlarni to'ldiring");
+    const { data, error } = await supabase.from('assessment_results').insert({
+      student_id: bf.student_id, group_id: id, assessment_code: bf.assessment_code,
+      score_pct: Number(bf.score), passed: false,
+    }).select('passed, next_action, attempt_no').single();
+    if (error) return setBXato(error.code === '42501' ? "Huquq yo'q" : error.message);
+    let xulosa = data.passed ? "O'TDI ✅" : "O'tmadi";
+    if (data.next_action === 'qayta_topshiradi') xulosa += ' — qayta topshirish huquqi bor';
+    if (data.next_action === 'bosqich_takrorlaydi') xulosa += ' — bosqichni takrorlaydi';
+    alert(`Natija: ${bf.score}% (${data.attempt_no}-urinish) → ${xulosa}`);
+    setBahoModal(false);
+    load();
+  }
 
   function sozOch() {
     setSXato('');
@@ -150,7 +181,8 @@ export default function GroupDetail() {
         <h1 className="mono">{g.id}</h1>
         <div className="row-gap">
           <Badge s={g.status} />
-          <button className="btn-sm" onClick={sozOch}>⚙ Sozlamalar</button>
+          {(teacherId || canEdit('guruhlar')) && <button className="btn-sm" onClick={bahoOch}>📝 Baho kiritish</button>}
+          {canEdit('guruhlar') && <button className="btn-sm" onClick={sozOch}>⚙ Sozlamalar</button>}
         </div>
       </div>
       <div className="card group-info">
@@ -237,6 +269,33 @@ export default function GroupDetail() {
             </tbody>
           </table>
         </div>
+      )}
+
+      {bahoModal && (
+        <Modal title={`Baho kiritish — ${g.id}`} onClose={() => setBahoModal(false)}>
+          <form onSubmit={bahoSaqla} className="form-grid">
+            <label className="span2">O'quvchi
+              <select value={bf.student_id} onChange={(e) => setBf({ ...bf, student_id: e.target.value })} required>
+                <option value="">— Tanlang —</option>
+                {faolAzolar.map((a) => <option key={a.student_id} value={a.student_id}>{a.students?.first_name} {a.students?.last_name} ({a.student_id})</option>)}
+              </select>
+            </label>
+            <label>Baholash
+              <select value={bf.assessment_code} onChange={(e) => setBf({ ...bf, assessment_code: e.target.value })} required>
+                <option value="">— Tanlang —</option>
+                {bahoList.map((b) => <option key={b.code} value={b.code}>{b.title} ({b.code})</option>)}
+              </select>
+            </label>
+            <label>Natija (%)
+              <input type="number" value={bf.score} onChange={(e) => setBf({ ...bf, score: e.target.value })} min="0" max="100" step="1" required />
+            </label>
+            <p className="muted small span2">
+              O'tish avtomatik: Final 1-urinish 90%+ · 65-89% qayta · 2-urinish 80%+; Progress Test 70%+.
+            </p>
+            {bXato && <div className="err span2">{bXato}</div>}
+            <button className="btn span2">Saqlash</button>
+          </form>
+        </Modal>
       )}
 
       {sozModal && sf && (

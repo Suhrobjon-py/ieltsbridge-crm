@@ -29,7 +29,8 @@ function tugashVaqti(s: number): string {
 
 export default function Rooms() {
   const nav = useNavigate();
-  const { superadmin } = useRole();
+  const { canDelete } = useRole();
+  const superadmin = canDelete('xonalar');
   const [rooms, setRooms] = useState<any[]>([]);
   const [groups, setGroups] = useState<any[]>([]);
   const [modal, setModal] = useState<null | { id?: string }>(null);

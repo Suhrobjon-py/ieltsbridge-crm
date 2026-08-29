@@ -9,7 +9,8 @@ import { useRole } from '../lib/role';
 const BOSH = { full_name: '', phone: '', fanlar: ['General'] as string[], degree: 'main', hire_date: '' };
 
 export default function Teachers() {
-  const { superadmin } = useRole();
+  const { canDelete } = useRole();
+  const superadmin = canDelete('oqituvchilar');
   const [rows, setRows] = useState<any[]>([]);
   const [fanRoyxat, setFanRoyxat] = useState<string[]>(['General', 'IELTS']);
   const [modal, setModal] = useState<null | { id?: string }>(null);

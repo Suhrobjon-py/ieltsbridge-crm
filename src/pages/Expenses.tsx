@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 import { som, sana, joriyDavr } from '../lib/format';
 import Modal from '../components/Modal';
 import Confirm from '../components/Confirm';
+import { useRole } from '../lib/role';
 
 function keyingiOy(davr: string): string {
   const [y, m] = davr.split('-').map(Number);
@@ -11,6 +12,7 @@ function keyingiOy(davr: string): string {
 }
 
 export default function Expenses() {
+  const { canDelete } = useRole();
   const [davr, setDavr] = useState(joriyDavr());
   const [rows, setRows] = useState<any[]>([]);
   const [maoshlar, setMaoshlar] = useState<any[]>([]);
@@ -133,7 +135,7 @@ export default function Expenses() {
             </label>
             {xato && <div className="err span2">{xato}</div>}
             <div className="row-between span2">
-              {modal.id ? <button type="button" className="btn-sm btn-danger" onClick={() => setOchirTasdiq(true)}>O'chirish</button> : <span />}
+              {modal.id && canDelete('xarajatlar') ? <button type="button" className="btn-sm btn-danger" onClick={() => setOchirTasdiq(true)}>O'chirish</button> : <span />}
               <button className="btn">Saqlash</button>
             </div>
           </form>

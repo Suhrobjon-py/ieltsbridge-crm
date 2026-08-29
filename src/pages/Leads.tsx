@@ -24,7 +24,8 @@ function signal(l: any): string {
 }
 
 export default function Leads() {
-  const { superadmin } = useRole();
+  const { canDelete } = useRole();
+  const superadmin = canDelete('lidlar');
   const [rows, setRows] = useState<any[]>([]);
   const [korinish, setKorinish] = useState<'kanban' | 'jadval'>('kanban');
   const [qidiruv, setQidiruv] = useState('');

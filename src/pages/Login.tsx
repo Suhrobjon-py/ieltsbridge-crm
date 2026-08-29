@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase, loginToEmail } from '../lib/supabase';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,9 +11,9 @@ export default function Login() {
     e.preventDefault();
     setXato('');
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password: parol });
+    const { error } = await supabase.auth.signInWithPassword({ email: loginToEmail(email), password: parol });
     setLoading(false);
-    if (error) setXato("Kirish muvaffaqiyatsiz: email yoki parol noto'g'ri");
+    if (error) setXato("Kirish muvaffaqiyatsiz: login yoki parol noto'g'ri");
   }
 
   return (
@@ -21,8 +21,8 @@ export default function Login() {
       <form className="card login-card" onSubmit={kirish}>
         <div className="logo-big">IELTS<span>Bridge</span> CRM</div>
         <p className="muted">Xodimlar uchun boshqaruv tizimi</p>
-        <label>Email
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
+        <label>Login yoki email
+          <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="masalan: aziza" required autoFocus />
         </label>
         <label>Parol
           <input type="password" value={parol} onChange={(e) => setParol(e.target.value)} required />
