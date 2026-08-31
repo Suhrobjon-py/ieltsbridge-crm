@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase, signupClient, loginToEmail, LOGIN_DOMEN } from '../lib/supabase';
+import { supabase, signupClient, loginToEmail, LOGIN_DOMEN, LOKAL } from '../lib/supabase';
 import { holat, BOLIMLAR, ROLLAR } from '../lib/format';
 import Modal from '../components/Modal';
 import Confirm from '../components/Confirm';
@@ -237,8 +237,19 @@ export default function Settings() {
           <div className="kv"><span>O'qituvchi</span><b>Faqat o'z guruhlari: davomat + baho</b></div>
           <p className="muted small" style={{ marginTop: 10 }}>
             Yangi xodimning logini: <span className="mono">login@{LOGIN_DOMEN}</span> ko'rinishida saqlanadi —
-            kirishda faqat loginni yozish kifoya. Parolni tiklash: Supabase → Authentication → Users.
+            kirishda faqat loginni yozish kifoya. {LOKAL ? '' : 'Parolni tiklash: Supabase → Authentication → Users.'}
           </p>
+          {LOKAL && superadmin && (
+            <button className="btn-sm" style={{ marginTop: 8 }} onClick={async () => {
+              const r = await fetch('/api/zaxira', { headers: { 'x-token': localStorage.getItem('lokal_token') ?? '' } });
+              const blob = await r.blob();
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(blob);
+              a.download = `crm_zaxira_${new Date().toISOString().slice(0, 10)}.json`;
+              a.click();
+              URL.revokeObjectURL(a.href);
+            }}>💾 Zaxira nusxa yuklab olish (lokal baza)</button>
+          )}
         </div>
       </div>
 

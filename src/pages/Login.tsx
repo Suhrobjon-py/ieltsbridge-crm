@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { supabase, loginToEmail } from '../lib/supabase';
+import { supabase, loginToEmail, LOKAL } from '../lib/supabase';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -20,7 +20,8 @@ export default function Login() {
     <div className="center-wrap">
       <form className="card login-card" onSubmit={kirish}>
         <div className="logo-big">IELTS<span>Bridge</span> CRM</div>
-        <p className="muted">Xodimlar uchun boshqaruv tizimi</p>
+        <p className="muted">Xodimlar uchun boshqaruv tizimi{LOKAL ? ' · LOKAL rejim (internetsiz)' : ''}</p>
+        {LOKAL && <p className="muted small">Birinchi kirish: <b className="mono">admin</b> / <b className="mono">admin123</b> — keyin parolni almashtiring</p>}
         <label>Login yoki email
           <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="masalan: aziza" required autoFocus />
         </label>

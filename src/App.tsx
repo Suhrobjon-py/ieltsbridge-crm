@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
-import { supabase, configured } from './lib/supabase';
+import { supabase, configured, LOKAL } from './lib/supabase';
 import { RoleContext, StaffInfo, BOSH_STAFF } from './lib/role';
 import TeacherDetail from './pages/TeacherDetail';
 import Setup from './pages/Setup';
@@ -95,7 +95,7 @@ function AuthedApp() {
             {(koradi('sozlamalar') || staff.canManage) && <NavLink to="/sozlamalar">Sozlamalar</NavLink>}
           </nav>
           <div className="sidebar-foot">
-            <div className="muted small">{staff.fullName || session.user?.email} · {holatRol(staff.role)}</div>
+            <div className="muted small">{staff.fullName || session.user?.email} · {holatRol(staff.role)}{LOKAL ? ' · LOKAL' : ''}</div>
             <button className="btn-ghost logout" onClick={() => supabase.auth.signOut()}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
