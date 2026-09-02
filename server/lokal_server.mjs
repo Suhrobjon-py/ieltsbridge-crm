@@ -262,6 +262,8 @@ const server = http.createServer(async (req, res) => {
     const email = emailTop(req);
     if (url.pathname.startsWith('/api/') && !email) return json(res, 401, { error: 'Kirish kerak' });
 
+    if (url.pathname === '/api/men') return json(res, 200, { email });
+
     if (url.pathname === '/api/sorov' && req.method === 'POST') {
       const b = await tanaOqi(req);
       try {

@@ -3,12 +3,25 @@
 
 type Filtr = { turi: string; ustun?: string; qiymat?: any };
 
+function sessiyaniTozala() {
+  localStorage.removeItem('lokal_token');
+  localStorage.removeItem('lokal_email');
+  tinglovchilar.forEach((cb) => cb('SIGNED_OUT', null));
+}
+
 async function api(yol: string, body?: any, method = 'POST'): Promise<any> {
+  const yuborilganToken = localStorage.getItem('lokal_token') ?? '';
   const r = await fetch(yol, {
     method,
-    headers: { 'Content-Type': 'application/json', 'x-token': localStorage.getItem('lokal_token') ?? '' },
+    headers: { 'Content-Type': 'application/json', 'x-token': yuborilganToken },
     body: body ? JSON.stringify(body) : undefined,
   });
+  // server qayta ishga tushgan bo'lsa eski token yaroqsiz — login sahifasiga qaytamiz.
+  // Faqat AYNAN shu (eski) token hali ham joriy bo'lsa tozalaymiz — yangi kirishni buzmaslik uchun.
+  if (r.status === 401 && yol !== '/api/kirish') {
+    if (localStorage.getItem('lokal_token') === yuborilganToken) sessiyaniTozala();
+    return { error: { message: 'Sessiya tugadi — qayta kiring', code: '401' } };
+  }
   return r.json();
 }
 
@@ -85,7 +98,14 @@ export const lokalKlient: any = {
   },
 
   auth: {
-    async getSession() { return { data: { session: sessiyaOl() } }; },
+    async getSession() {
+      const s = sessiyaOl();
+      if (!s) return { data: { session: null } };
+      // token hali serverda amal qiladimi? (server qayta yoqilgan bo'lishi mumkin)
+      const r = await api('/api/men');
+      if (r.error) return { data: { session: null } };
+      return { data: { session: s } };
+    },
     onAuthStateChange(cb: Tinglovchi) {
       tinglovchilar.add(cb);
       return { data: { subscription: { unsubscribe: () => tinglovchilar.delete(cb) } } };
